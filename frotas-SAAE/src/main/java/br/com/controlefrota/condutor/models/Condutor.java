@@ -1,4 +1,4 @@
-package br.com.controlefrota.models;
+package br.com.controlefrota.condutor.models;
 
 import java.io.Serializable;
 
@@ -8,18 +8,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
 @Entity
 @Table(name="TB_CONDUTOR")
-public class Condutor implements Serializable {
+public class Condutor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+	@NotNull
 	private String nome;
+	@NotNull
 	private String CNH;
+	@NotNull
+	private String CPF;
 	
 	public Long getId() {
 		return id;
@@ -39,5 +44,10 @@ public class Condutor implements Serializable {
 	public void setCNH(String cNH) {
 		CNH = cNH;
 	}
-	
+	public String getCPF() {
+		return CPF;
+	}
+	public void setCPF(String cPF) {
+		CPF = cPF;
+	}
 }
