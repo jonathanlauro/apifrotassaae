@@ -32,7 +32,7 @@ public class CondutorController {
 	}
 	@GetMapping("/condutor/{cnh}/cnh")
 	public Condutor listaUnicoCondutorPorCNH(@PathVariable(value="cnh") String cnh ){
-		return condutorRepository.findByCNH(cnh); 
+		return condutorRepository.findByCNH(cnh);
 	}
 
 	@PostMapping("/condutor")
