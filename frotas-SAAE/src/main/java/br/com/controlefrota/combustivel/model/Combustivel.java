@@ -1,4 +1,4 @@
-package br.com.controlefrota.condutor.models;
+package br.com.controlefrota.combustivel.model;
 
 import java.io.Serializable;
 
@@ -6,14 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name="TB_CONDUTOR")
-public class Condutor implements Serializable{
+@Table(name="TB_COMBUSTIVEL")
+public class Combustivel implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,11 +20,10 @@ public class Condutor implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@NotNull
+	private int tipo;
+	@NotNull
 	private String nome;
-	@NotNull
-	private String CNH;
-	@NotNull
-	private String CPF;
+	
 	
 	public Long getId() {
 		return id;
@@ -33,22 +31,18 @@ public class Condutor implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public int getTipo() {
+		return tipo;
+	}
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCNH() {
-		return CNH;
-	}
-	public void setCNH(String cNH) {
-		CNH = cNH;
-	}
-	public String getCPF() {
-		return CPF;
-	}
-	public void setCPF(String cPF) {
-		CPF = cPF;
-	}
+	
+	
 }
