@@ -28,7 +28,7 @@ public class EmpresaController {
 	EmpresaService empresaService;
 
 	@GetMapping
-	public List<Empresa> listaEmpresa() {
+	public List<Empresa> listaEmpresas() {
 		return empresaRepository.findAll();
 	}
 

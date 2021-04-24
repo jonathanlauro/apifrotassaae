@@ -1,4 +1,4 @@
-package br.com.controlefrota.combustivel.controller;
+package br.com.controlefrota.controller;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.controlefrota.combustivel.model.Combustivel;
-import br.com.controlefrota.combustivel.repository.CombustivelRepository;
+import br.com.controlefrota.model.Combustivel;
+import br.com.controlefrota.repository.CombustivelRepository;
 
 @RestController
 @RequestMapping(value="/")

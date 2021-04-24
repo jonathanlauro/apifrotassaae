@@ -1,8 +1,8 @@
-package br.com.controlefrota.combustivel.repository;
+package br.com.controlefrota.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.controlefrota.combustivel.model.Combustivel;
+import br.com.controlefrota.model.Combustivel;
 
 public interface CombustivelRepository extends JpaRepository<Combustivel, Long> {
 	

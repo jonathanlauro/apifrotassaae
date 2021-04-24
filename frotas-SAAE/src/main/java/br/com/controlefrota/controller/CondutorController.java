@@ -32,8 +32,9 @@ public class CondutorController {
 	public Optional<Condutor> listaUnicoCondutorPorId(@PathVariable(value = "id") Long id) {
 		return condutorRepository.findById(id);
 	}
-	@GetMapping("/condutor/{cnh}/cnh")
-	public Condutor listaUnicoCondutorPorCNH(@PathVariable(value="cnh") String cnh ){
+
+	@GetMapping("/{cnh}/cnh")
+	public Condutor listaUnicoCondutorPorCNH(@PathVariable(value = "cnh") String cnh) {
 		return condutorRepository.findByCNH(cnh);
 	}
 

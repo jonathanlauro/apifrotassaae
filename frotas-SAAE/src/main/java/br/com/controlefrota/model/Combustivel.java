@@ -1,4 +1,4 @@
-package br.com.controlefrota.combustivel.model;
+package br.com.controlefrota.model;
 
 import java.io.Serializable;
 
