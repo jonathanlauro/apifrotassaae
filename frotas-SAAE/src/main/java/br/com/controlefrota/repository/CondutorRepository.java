@@ -1,12 +1,12 @@
-package br.com.controlefrota.condutor.repository;
+package br.com.controlefrota.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.controlefrota.condutor.models.Condutor;
+import br.com.controlefrota.model.Condutor;
 
 public interface CondutorRepository extends JpaRepository<Condutor, Long> {
  
-	Condutor findById(long id);
+	Optional<Condutor> findById(Long id);
 }
