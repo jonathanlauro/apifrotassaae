@@ -1,4 +1,4 @@
-package br.com.controlefrota.condutor.models;
+package br.com.controlefrota.model;
 
 import java.io.Serializable;
 
@@ -17,7 +17,7 @@ public class Condutor implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	@NotNull
 	private String nome;
