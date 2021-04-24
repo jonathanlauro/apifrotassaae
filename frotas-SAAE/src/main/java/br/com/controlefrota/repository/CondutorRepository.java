@@ -8,5 +8,7 @@ import br.com.controlefrota.model.Condutor;
 
 public interface CondutorRepository extends JpaRepository<Condutor, Long> {
  
-	Optional<Condutor> findById(Long id);
+
+	Condutor findById(long id);
+	Condutor findByCNH(String CNH);
 }
