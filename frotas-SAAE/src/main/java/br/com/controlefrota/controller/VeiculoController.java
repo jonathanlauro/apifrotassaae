@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.controlefrota.model.Veiculo;
 import br.com.controlefrota.repository.VeiculoRepository;
+import br.com.controlefrota.service.VeiculoService;
 
 @RestController
 @RequestMapping("/veiculos")
@@ -24,6 +25,9 @@ public class VeiculoController {
 
 	@Autowired
 	VeiculoRepository veiculoRepository;
+	
+	@Autowired
+	VeiculoService veiculoService;
 
 	@GetMapping
 	public List<Veiculo> listarVeiculos() {
@@ -39,7 +43,7 @@ public class VeiculoController {
 	public Veiculo procurarPorPlaca(@PathVariable String placa) {
 		return veiculoRepository.findByPlaca(placa);
 	}
-
+ 
 	@GetMapping("/{renavam}")
 	public Veiculo procurarPorRenavam(@PathVariable String renavam) {
 		return veiculoRepository.findByRenavam(renavam);
@@ -53,14 +57,15 @@ public class VeiculoController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> cadastrarVeiculo(@RequestBody Veiculo veiculo) {
-
-		veiculoRepository.save(veiculo);
+	public ResponseEntity<?> cadastrarVeiculo(@RequestBody Veiculo veiculo) throws Exception {
+	
+		veiculoService.criar(veiculo);
 		return ResponseEntity.status(HttpStatus.OK).body("Veículo cadastrado com sucesso!");
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletarVeiculo(@PathVariable Long id) {
+		veiculoRepository.deleteById(id);
 
 		return ResponseEntity.status(HttpStatus.OK).body("Veículo deletado com sucesso!");
 	}

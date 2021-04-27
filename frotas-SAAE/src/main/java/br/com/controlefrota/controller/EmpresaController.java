@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -43,8 +45,11 @@ public class EmpresaController {
 	}
 
 	@PatchMapping
-	public Empresa atualizarEmpresa(@RequestBody Empresa empresa) {
-		return empresaRepository.save(empresa);
+	public ResponseEntity<?> atualizarEmpresa(@RequestBody Empresa empresa) {
+		
+			empresaRepository.save(empresa);
+			return ResponseEntity.status(HttpStatus.OK).body("Atualizado com sucesso.");
+		
 	}
 
 	@DeleteMapping("/{id}")

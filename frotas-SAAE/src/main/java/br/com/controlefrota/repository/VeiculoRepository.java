@@ -10,7 +10,7 @@ import br.com.controlefrota.model.Veiculo;
 @Repository
 public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 
-	Optional<Veiculo> findById(Long id);
+	Veiculo findById(long id);
 
 	Veiculo findByPlaca(String placa);
 

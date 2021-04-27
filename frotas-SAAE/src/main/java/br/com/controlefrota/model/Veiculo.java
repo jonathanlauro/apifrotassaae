@@ -2,13 +2,18 @@ package br.com.controlefrota.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -18,8 +23,16 @@ public class Veiculo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long idVeiculo;
-	@ManyToOne
+	@NotNull
+	private  String modelo;
+	@NotNull
+	private String status;
+	
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JsonBackReference
+	@JoinColumn(name = "empresa_id")	
 	private Empresa empresa;
+	
 	@NotNull
 	private String renavam;
 	@NotNull
@@ -34,6 +47,8 @@ public class Veiculo {
 	private Float mediaConsumoCidade;
 	@NotNull
 	private Float mediaConsumoEstrada;
+	
+//	private Trabalho trabalho;
 
 	public Long getIdVeiculo() {
 		return idVeiculo;
@@ -42,7 +57,7 @@ public class Veiculo {
 	public void setIdVeiculo(Long idVeiculo) {
 		this.idVeiculo = idVeiculo;
 	}
-
+//	@JsonIgnore
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -106,5 +121,22 @@ public class Veiculo {
 	public void setMediaConsumoEstrada(Float mediaConsumoEstrada) {
 		this.mediaConsumoEstrada = mediaConsumoEstrada;
 	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 }

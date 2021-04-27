@@ -2,10 +2,12 @@ package br.com.controlefrota.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,6 +19,7 @@ public class Trabalho {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idTrabalho;
 	@OneToOne
+	@JoinColumn(name = "condutor_id", referencedColumnName="id")
 	private Condutor condutor;
 	@OneToOne
 	private Veiculo veiculo;
@@ -24,7 +27,7 @@ public class Trabalho {
 	private LocalDate DataFimVigencia;
 
 	public Long getIdTrabalho() {
-		return idTrabalho;
+		return idTrabalho; 
 	}
 
 	public void setIdTrabalho(Long idTrabalho) {
