@@ -28,8 +28,7 @@ public class Veiculo {
 	@NotNull
 	private String status;
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	@JsonBackReference
+	@ManyToOne
 	@JoinColumn(name = "empresa_id")	
 	private Empresa empresa;
 	

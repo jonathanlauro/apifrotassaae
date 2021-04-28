@@ -2,6 +2,7 @@ package br.com.controlefrota.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.controlefrota.model.Condutor;
+import br.com.controlefrota.model.Trabalho;
 import br.com.controlefrota.repository.CondutorRepository;
 
 @RestController
@@ -25,6 +27,13 @@ public class CondutorController {
 
 	@GetMapping
 	public List<Condutor> listaCondutor() {
+//		var condutor = condutorRepository.findAll();
+	
+//		return condutor
+//				.stream()
+//				.map((c)-> Condutor.trabalhoConverte(c))
+//				.collect(Collectors.toList());
+//		
 		return condutorRepository.findAll();
 	}
 

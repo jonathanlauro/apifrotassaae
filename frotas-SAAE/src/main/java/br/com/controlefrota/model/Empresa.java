@@ -25,10 +25,8 @@ public class Empresa {
 	private String CNPJ;
 	@NotNull
 	private String nome;
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "empresa",orphanRemoval = true)
-	private List<Veiculo> Veiculos = new ArrayList<Veiculo>();
-
-
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "empresa")
+	private List<Veiculo> Veiculos;
 
 
 	public Long getId() {
@@ -55,13 +53,6 @@ public class Empresa {
 		this.nome = nome;
 	}
 	
-	public List<Veiculo> getVeiculos() {
-		return Veiculos;
-	}
-
-	public void setVeiculos(List<Veiculo> veiculos) {
-		Veiculos = veiculos;
-	}
 
 
 }

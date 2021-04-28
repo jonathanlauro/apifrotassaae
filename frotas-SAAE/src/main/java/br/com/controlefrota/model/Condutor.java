@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -29,18 +30,10 @@ public class Condutor implements Serializable{
 	@NotNull
 	private String CPF;
 	@OneToOne
-	@JoinColumn(name = "trabalho_id", referencedColumnName="idTrabalho")
+//	@JsonBackReference
+//	@JoinColumn(name = "trabalho_id", referencedColumnName="idTrabalho")
 	private Trabalho trabalho;
 	
-	public Trabalho getTrabalho() {
-		return trabalho;
-	}
-//	public Long getTrabalho() {
-//		return trabalho.getIdTrabalho();
-//	}
-	public void setTrabalho(Trabalho trabalho) {
-		this.trabalho = trabalho;
-	}
 	public Long getId() {
 		return id;
 	}
