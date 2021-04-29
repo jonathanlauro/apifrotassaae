@@ -10,5 +10,5 @@ import br.com.controlefrota.model.Consumo;
 @Repository
 public interface ConsumoRepository extends JpaRepository<Consumo, Long>{
 
-	Optional<Consumo> findById(Long id);
+	Consumo findById(long id);
 }

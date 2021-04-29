@@ -32,7 +32,8 @@ public class CombustivelController {
 	}
 	@PostMapping("/combustivel")
 	public Combustivel cadastraCombustivel(@RequestBody Combustivel combustivel ) {
-		return combustivel;
+		
+		return combustivelRepository.save(combustivel);
 	}
 	@PatchMapping("/combustivel")
 	public Combustivel updateCombustivel(@RequestBody Combustivel combustivel ) {

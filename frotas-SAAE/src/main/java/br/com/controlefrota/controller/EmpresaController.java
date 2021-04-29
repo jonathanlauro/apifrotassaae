@@ -3,6 +3,7 @@ package br.com.controlefrota.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +41,13 @@ public class EmpresaController {
 	}
 
 	@PostMapping
-	public Empresa salvaEmpresa(@RequestBody Empresa empresa) {
-		return empresaRepository.save(empresa);
+	public ResponseEntity<?> salvaEmpresa(@RequestBody Empresa empresa) {
+		try {
+			empresaService.cadastrarEmpresa(empresa);
+			return ResponseEntity.status(HttpStatus.OK).body("Empresa cadastrada com sucesso");
+		}catch(ServiceException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar empresa!");
+		}
 	}
 
 	@PatchMapping

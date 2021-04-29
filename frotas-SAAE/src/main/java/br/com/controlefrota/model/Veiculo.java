@@ -2,9 +2,7 @@ package br.com.controlefrota.model;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -21,7 +18,7 @@ import com.sun.istack.NotNull;
 public class Veiculo {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idVeiculo;
 	@NotNull
 	private  String modelo;
@@ -46,8 +43,8 @@ public class Veiculo {
 	private Float mediaConsumoCidade;
 	@NotNull
 	private Float mediaConsumoEstrada;
-	
-//	private Trabalho trabalho;
+	@OneToOne(mappedBy = "veiculo")
+	private Consumo consumo;
 
 	public Long getIdVeiculo() {
 		return idVeiculo;

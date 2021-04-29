@@ -3,6 +3,7 @@ package br.com.controlefrota.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,9 +40,12 @@ public class TrabalhoController {
 
 	@PostMapping
 	public ResponseEntity<?> salvatrabalho(@RequestBody Trabalho trabalho) {
-		
-		trabalhoService.criar(trabalho);
-		return ResponseEntity.status(HttpStatus.OK).body("Cadastrado com sucesso");
+		try {			
+			trabalhoService.criar(trabalho);
+			return ResponseEntity.status(HttpStatus.OK).body("Cadastrado com sucesso");
+		}catch(ServiceException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar trabalho! Verifique Condutor ou Veículo.");
+		}
 	}
 
 	@PatchMapping

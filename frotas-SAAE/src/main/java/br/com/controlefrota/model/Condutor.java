@@ -1,17 +1,15 @@
 package br.com.controlefrota.model;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -21,7 +19,7 @@ public class Condutor implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@NotNull
 	private String nome;
@@ -29,10 +27,9 @@ public class Condutor implements Serializable{
 	private String CNH;
 	@NotNull
 	private String CPF;
-	@OneToOne
-//	@JsonBackReference
-//	@JoinColumn(name = "trabalho_id", referencedColumnName="idTrabalho")
-	private Trabalho trabalho;
+	
+	@OneToMany(mappedBy = "condutor")
+	private List<Consumo> consumo;
 	
 	public Long getId() {
 		return id;

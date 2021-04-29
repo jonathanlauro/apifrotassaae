@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.controlefrota.model.Condutor;
@@ -28,8 +30,19 @@ public class TrabalhoService {
 	public Trabalho  criar(Trabalho trabalho) {
 		Condutor condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCNH());
 		Veiculo veiculo = veiculoRepository.findByPlaca(trabalho.getVeiculo().getPlaca());
-		if(1==1) {
-			 throw new ServiceException("Deu ruim! Veiculo ocupado");
+		
+		Trabalho validaCondutor = trabalhoRepository.findByCondutor(condutor);
+		Trabalho validaVeiculo = trabalhoRepository.findByVeiculo(veiculo);
+		if(veiculo == null) {
+			throw new ServiceException("Veículo não encontrado");
+		}
+		if(validaCondutor != null || validaVeiculo != null) {
+			if(validaCondutor != null) {
+				throw new ServiceException("Condutor em trabalho ativo");
+			}else {
+				throw new ServiceException("Veículo em trabalho ativo");
+			}
+			
 		}
 		trabalho.setCondutor(condutor);
 		trabalho.setVeiculo(veiculo);
