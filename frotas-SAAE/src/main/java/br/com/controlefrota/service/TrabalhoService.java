@@ -32,11 +32,14 @@ public class TrabalhoService {
 		Veiculo veiculo = veiculoRepository.findByPlaca(trabalho.getVeiculo().getPlaca());
 		
 		Trabalho validaCondutor = trabalhoRepository.findByCondutor(condutor);
-		Trabalho validaVeiculo = trabalhoRepository.findByVeiculo(veiculo);
 		if(veiculo == null) {
-			throw new ServiceException("Veículo não encontrado");
+			throw new ServiceException("Veículo não encontrado!");
 		}
-		if(validaCondutor != null || validaVeiculo != null) {
+		if(condutor == null) {
+			throw new ServiceException("Condutor não encontrado!");
+		}
+		
+		if(validaCondutor != null || veiculo.getStatus().equals("Ocupado")) {
 			if(validaCondutor != null) {
 				throw new ServiceException("Condutor em trabalho ativo");
 			}else {

@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
 @Entity
 @Table(name = "TB_TRABALHO")
 public class Trabalho {
@@ -17,6 +19,7 @@ public class Trabalho {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idTrabalho;
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "condutor_id", referencedColumnName="id")
 	private Condutor condutor;

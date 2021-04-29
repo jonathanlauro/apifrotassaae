@@ -44,7 +44,7 @@ public class TrabalhoController {
 			trabalhoService.criar(trabalho);
 			return ResponseEntity.status(HttpStatus.OK).body("Cadastrado com sucesso");
 		}catch(ServiceException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar trabalho! Verifique Condutor ou Veículo.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar trabalho! " + e);
 		}
 	}
 
