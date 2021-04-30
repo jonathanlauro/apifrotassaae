@@ -29,5 +29,23 @@ public class EmpresaService {
 
 		return empresaRepository.save(empresa);
 	}
+	public Empresa findById(long id) {
+		Empresa empresa = empresaRepository.findById(id);
+		
+		if(empresa == null) {
+			throw new ServiceException("Empresa não encontrada.");
+		}
+		
+		return empresa;
+	}
+	public Empresa findByCNPJ(String cnpj) {
+		Empresa empresa = empresaRepository.findByCNPJ(cnpj);
+		
+		if(empresa == null) {
+			throw new ServiceException("Empresa não encontrada.");
+		}
+		
+		return empresa;
+	}
 
 }

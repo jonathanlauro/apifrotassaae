@@ -24,7 +24,7 @@ public class ConsumoService {
 	@Autowired
 	CombustivelRepository combustivelRepository;
 	
-	public Consumo criar(Consumo consumo) {
+	public void criar(Consumo consumo) {
 		Condutor condutor = condutorRepository.findById(Long.valueOf(consumo.getCondutor().getId()).longValue());
 		Veiculo veiculo = veiculoRepository.findByPlaca(consumo.getVeiculo().getPlaca());
 		Combustivel combustivel = combustivelRepository.findById(Long.valueOf(consumo.getCombustivel().getId()).longValue());
@@ -33,6 +33,6 @@ public class ConsumoService {
 		consumo.setCondutor(condutor);
 		consumo.setVeiculo(veiculo);
 		
-		return consumoRepository.save(consumo);
+		consumoRepository.save(consumo);
 	}
 }

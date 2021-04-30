@@ -1,7 +1,6 @@
 package br.com.controlefrota.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,13 @@ public class TrabalhoController {
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Trabalho> listaUnicotrabalhoPorId(@PathVariable Long id) {
-		return trabalhoRepository.findById(id);
+	public ResponseEntity<?> listaUnicotrabalhoPorId(@PathVariable(value="id") long id) {
+
+		try {
+			return new ResponseEntity<Trabalho>(trabalhoService.findById(id), HttpStatus.OK);
+		}catch(ServiceException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+e);
+		}
 	}
 
 	@PostMapping
@@ -47,7 +51,20 @@ public class TrabalhoController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar trabalho! " + e);
 		}
 	}
-
+	@GetMapping("/encerrarTrabalho/{idTrabalho}")
+	public ResponseEntity<?> encerrarTrabalho(@PathVariable(value="idTrabalho") Long id){
+		try {
+			trabalhoService.encerrarTrabalho(id);
+			return ResponseEntity.status(HttpStatus.OK).body("Trabalho Encerrado");
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao encerrar trabalho! " + e);
+		}
+		
+	}
+	@GetMapping("/{status}/status-trabalho")
+	public List<Trabalho> listarPorStatus(@PathVariable(value="status") String status){
+		return trabalhoRepository.findByStatusTrabalho(status);
+	}
 	@PatchMapping
 	public Trabalho atualizartrabalho(@RequestBody Trabalho trabalho) {
 		return trabalhoRepository.save(trabalho);

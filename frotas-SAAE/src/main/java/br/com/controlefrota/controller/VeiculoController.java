@@ -1,8 +1,8 @@
 package br.com.controlefrota.controller;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,18 +35,30 @@ public class VeiculoController {
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Veiculo> procurarPorId(@PathVariable Long id) {
-		return veiculoRepository.findById(id);
+	public ResponseEntity<?> procurarPorId(@PathVariable(value="id") long id) {
+		try {
+			return new ResponseEntity<Veiculo>(veiculoService.findById(id), HttpStatus.OK);
+		}catch(ServiceException e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+ e);
+		}
 	}
 
-	@GetMapping("/{placa}")
-	public Veiculo procurarPorPlaca(@PathVariable String placa) {
-		return veiculoRepository.findByPlaca(placa);
+	@GetMapping("/{placa}/placa")
+	public ResponseEntity<?> procurarPorPlaca(@PathVariable String placa) {
+		try {
+			return new ResponseEntity<Veiculo>(veiculoService.findByPlaca(placa), HttpStatus.OK);
+		}catch(ServiceException e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+ e);
+		}
 	}
  
-	@GetMapping("/{renavam}")
-	public Veiculo procurarPorRenavam(@PathVariable String renavam) {
-		return veiculoRepository.findByRenavam(renavam);
+	@GetMapping("/{renavam}/renavam")
+	public ResponseEntity<?> procurarPorRenavam(@PathVariable String renavam) {
+		try {
+			return new ResponseEntity<Veiculo>(veiculoService.findByPlaca(renavam), HttpStatus.OK);
+		}catch(ServiceException e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+ e);
+		}
 	}
 
 	@PatchMapping
@@ -58,16 +70,25 @@ public class VeiculoController {
 
 	@PostMapping
 	public ResponseEntity<?> cadastrarVeiculo(@RequestBody Veiculo veiculo) throws Exception {
-	
-		veiculoService.criar(veiculo);
-		return ResponseEntity.status(HttpStatus.OK).body("Veículo cadastrado com sucesso!");
+		try {
+			
+			veiculoService.criar(veiculo);
+			return ResponseEntity.status(HttpStatus.OK).body("Veículo cadastrado com sucesso!");
+		}catch(ServiceException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar! "+e);
+		}
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletarVeiculo(@PathVariable Long id) {
-		veiculoRepository.deleteById(id);
+	public ResponseEntity<?> deletarVeiculo(@PathVariable long id) {
+		
+		try {
+			veiculoService.deletar(id);
+			return ResponseEntity.status(HttpStatus.OK).body("Veículo deletado com sucesso!");
+		}catch(ServiceException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar veículo! "+ e);
+		}
 
-		return ResponseEntity.status(HttpStatus.OK).body("Veículo deletado com sucesso!");
 	}
 
 }

@@ -1,12 +1,9 @@
 package br.com.controlefrota.service;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.controlefrota.model.Condutor;
@@ -31,7 +28,6 @@ public class TrabalhoService {
 		Condutor condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCNH());
 		Veiculo veiculo = veiculoRepository.findByPlaca(trabalho.getVeiculo().getPlaca());
 		
-		Trabalho validaCondutor = trabalhoRepository.findByCondutor(condutor);
 		if(veiculo == null) {
 			throw new ServiceException("Veículo não encontrado!");
 		}
@@ -39,8 +35,8 @@ public class TrabalhoService {
 			throw new ServiceException("Condutor não encontrado!");
 		}
 		
-		if(validaCondutor != null || veiculo.getStatus().equals("Ocupado")) {
-			if(validaCondutor != null) {
+		if(condutor.getStatus().equals("Em trabalho") || veiculo.getStatus().equals("Ocupado")) {
+			if(condutor.getStatus().equals("Em trabalho")) {
 				throw new ServiceException("Condutor em trabalho ativo");
 			}else {
 				throw new ServiceException("Veículo em trabalho ativo");
@@ -51,8 +47,48 @@ public class TrabalhoService {
 		trabalho.setVeiculo(veiculo);
 		trabalho.setDataInicioVigencia(LocalDate.now());
 		veiculo.setStatus("Ocupado");
+		condutor.setStatus("Em_trabalho");
 		
 		return trabalhoRepository.save(trabalho);
+	}
+	public Trabalho findById(long id) {
+		Trabalho trabalho = trabalhoRepository.findById(id);
+		
+		if(trabalho == null) {
+			throw new ServiceException("Trabalho não encontrado.");
+		}
+		return trabalho;
+	}
+	
+	public void encerrarTrabalho(long idTrabalho) {
+		Trabalho trabalho = trabalhoRepository.findById(idTrabalho);
+		Condutor condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCNH());
+		Veiculo veiculo = veiculoRepository.findByPlaca(trabalho.getVeiculo().getPlaca());
+		
+		if(trabalho.getStatusTrabalho().equals("Encerrado")) {
+			throw new ServiceException("Trabalho já foi encerrado!");
+		}
+		if(trabalho == null) {
+			
+			throw new ServiceException("Trabalho não encontrado");
+		}
+		if(condutor == null) {
+			
+			throw new ServiceException("Trabalho não encontrado");
+		}
+		if(veiculo == null) {
+			
+			throw new ServiceException("Trabalho não encontrado");
+		}
+		
+		condutor.setStatus("Disponivel");
+		veiculo.setStatus("Disponivel");
+		trabalho.setDataFimVigencia(LocalDate.now());
+		trabalho.setStatusTrabalho("Encerrado");
+		
+		condutorRepository.save(condutor);
+		veiculoRepository.save(veiculo);
+		trabalhoRepository.save(trabalho);
 	}
 	
 }

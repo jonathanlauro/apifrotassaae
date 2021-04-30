@@ -1,7 +1,6 @@
 package br.com.controlefrota.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +35,21 @@ public class EmpresaController {
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Empresa> listaUnicoEmpresaPorId(@PathVariable Long id) {
-		return empresaRepository.findById(id);
+	public ResponseEntity<?> listaUnicoEmpresaPorId(@PathVariable Long id) {
+		try {
+			return new ResponseEntity<Empresa>(empresaService.findById(id), HttpStatus.OK);
+		}catch(ServiceException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+e);
+		}	
+	}
+	@GetMapping("/{cnpj}/cnpj")
+	public ResponseEntity<?> listaUnicoEmpresaPorCNPJ(@PathVariable(value="cnpj") String cnpj) {
+		try {
+			return new ResponseEntity<Empresa>(empresaService.findByCNPJ(cnpj), HttpStatus.OK);
+		}catch(ServiceException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+e);
+		}
+		
 	}
 
 	@PostMapping

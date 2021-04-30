@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
@@ -43,8 +42,8 @@ public class Veiculo {
 	private Float mediaConsumoCidade;
 	@NotNull
 	private Float mediaConsumoEstrada;
-	@OneToOne(mappedBy = "veiculo")
-	private Consumo consumo;
+//	@OneToOne(mappedBy = "veiculo")
+//	private Consumo consumo;
 
 	public Long getIdVeiculo() {
 		return idVeiculo;
@@ -53,7 +52,7 @@ public class Veiculo {
 	public void setIdVeiculo(Long idVeiculo) {
 		this.idVeiculo = idVeiculo;
 	}
-//	@JsonIgnore
+
 	public Empresa getEmpresa() {
 		return empresa;
 	}

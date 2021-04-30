@@ -3,6 +3,7 @@ package br.com.controlefrota.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,10 +28,19 @@ public class Condutor implements Serializable{
 	private String CNH;
 	@NotNull
 	private String CPF;
+	@NotNull
+	private String status = "Disponivel";
 	
-	@OneToMany(mappedBy = "condutor")
+	@OneToMany(mappedBy = "condutor",cascade = CascadeType.ALL)
 	private List<Consumo> consumo;
 	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public Long getId() {
 		return id;
 	}

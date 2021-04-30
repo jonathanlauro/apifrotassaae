@@ -1,10 +1,11 @@
 package br.com.controlefrota.controller;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.controlefrota.model.Condutor;
-import br.com.controlefrota.model.Trabalho;
 import br.com.controlefrota.repository.CondutorRepository;
+import br.com.controlefrota.service.CondutorService;
 
 @RestController
 @RequestMapping("/condutores")
@@ -24,32 +25,45 @@ public class CondutorController {
 
 	@Autowired
 	CondutorRepository condutorRepository;
-
+	@Autowired
+	CondutorService condutorService;
+	
 	@GetMapping
 	public List<Condutor> listaCondutor() {
-//		var condutor = condutorRepository.findAll();
 	
-//		return condutor
-//				.stream()
-//				.map((c)-> Condutor.trabalhoConverte(c))
-//				.collect(Collectors.toList());
-//		
 		return condutorRepository.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Condutor> listaUnicoCondutorPorId(@PathVariable(value = "id") Long id) {
-		return condutorRepository.findById(id);
+	public ResponseEntity<?> listaUnicoCondutorPorId(@PathVariable(value = "id") long id) {
+		try {
+			
+			return new ResponseEntity<Condutor>( condutorService.findById(id), HttpStatus.OK);
+		}catch(ServiceException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found! Condutor não encontrado ");
+		}
 	}
 
 	@GetMapping("/{cnh}/cnh")
-	public Condutor listaUnicoCondutorPorCNH(@PathVariable(value = "cnh") String cnh) {
-		return condutorRepository.findByCNH(cnh);
+	public ResponseEntity<?> listaUnicoCondutorPorCNH(@PathVariable(value = "cnh") String cnh) {
+	try {
+			
+			return new ResponseEntity<Condutor>( condutorService.findByCnh(cnh), HttpStatus.OK);
+		}catch(ServiceException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found! Condutor não encontrado ");
+		}
 	}
 
 	@PostMapping
-	public Condutor salvaCondutor(@RequestBody Condutor condutor) {
-		return condutorRepository.save(condutor);
+	public ResponseEntity<?> salvaCondutor(@RequestBody Condutor condutor) {
+		try {
+			
+			condutorService.criar(condutor);
+			return ResponseEntity.status(HttpStatus.OK).body("Condutor cadastrado com sucesso");
+		}catch( ServiceException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar condutor! " + e);
+		}
+		
 	}
 
 	@PatchMapping
@@ -58,7 +72,13 @@ public class CondutorController {
 	}
 
 	@DeleteMapping("/{id}")
-	public void deletarCondutor(@PathVariable(value = "id") long id) {
-		condutorRepository.deleteById(id);
+	public ResponseEntity<?> deletarCondutor(@PathVariable(value = "id") long id) {
+		try {
+			
+			condutorService.deletar(id);
+			return ResponseEntity.status(HttpStatus.OK).body("Condutor excluído com sucesso");
+		}catch(ServiceException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar condutor! "+e);
+		}
 	}
 }

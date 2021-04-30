@@ -19,12 +19,15 @@ public class Trabalho {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idTrabalho;
+	private String statusTrabalho = "Em_vigência";
 	@NotNull
 	@OneToOne
 	@JoinColumn(name = "condutor_id", referencedColumnName="id")
 	private Condutor condutor;
+	@NotNull
 	@OneToOne 
 	private Veiculo veiculo;
+	@NotNull
 	private LocalDate DataInicioVigencia;
 	private LocalDate DataFimVigencia;
 
@@ -68,4 +71,12 @@ public class Trabalho {
 		DataFimVigencia = dataFimVigencia;
 	}
 
+	public String getStatusTrabalho() {
+		return statusTrabalho;
+	}
+
+	public void setStatusTrabalho(String statusTrabalho) {
+		this.statusTrabalho = statusTrabalho;
+	}
+	
 }
