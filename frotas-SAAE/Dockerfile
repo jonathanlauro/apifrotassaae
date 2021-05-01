@@ -1,4 +1,6 @@
-FROM java:8
+FROM openjdk:latest
+
+COPY /target/frotas-SAAE-0.0.1-SNAPSHOT.jar /home/frotas-SAAE-0.0.1-SNAPSHOT.jar
 EXPOSE 8080
-ADD /target/frotas-SAAE-0.0.1-SNAPSHOT.jar frotas-SAAE-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","frotas-SAAE-0.0.1-SNAPSHOT.jar"]
+
+CMD ["java","-jar","/home/frotas-SAAE-0.0.1-SNAPSHOT.jar"]
