@@ -1,15 +1,4 @@
-FROM openjdk
-
-WORKDIR /opt/spring_boot
-
-ENV  APP_NAME=apifrotassaae.jar
-
-
-COPY /target/${APP_NAME} /opt/spring_boot
-
-SHELL ["/bin/sh", "c"]
-
-
-EXPOSE 8081
-
-CMD ["java", "-jar", "/app/apifrotassaae.jar"]
+FROM java:8
+EXPOSE 8080
+ADD /target/frotas-SAAE-0.0.1-SNAPSHOT.jar frotas-SAAE-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","frotas-SAAE-0.0.1-SNAPSHOT.jar"]
