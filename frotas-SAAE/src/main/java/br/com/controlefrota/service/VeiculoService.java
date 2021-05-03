@@ -46,6 +46,7 @@ public class VeiculoService {
 		if (veiculo.getStatus().equals("Ocupado")) {
 			throw new ServiceException("Veículo em trabalho.");
 		}
+		veiculoRepository.deleteById(id);
 	}
 
 	public Veiculo findById(long id) {
