@@ -36,14 +36,10 @@ public class Veiculo {
 	private LocalDate dataInicioVigencia;
 	@NotNull
 	private LocalDate dataFimVigencia;
+	
 	@NotNull
-	private String motorizacao;
-	@NotNull
-	private Float mediaConsumoCidade;
-	@NotNull
-	private Float mediaConsumoEstrada;
-//	@OneToOne(mappedBy = "veiculo")
-//	private Consumo consumo;
+	private String Km;
+
 
 	public Long getIdVeiculo() {
 		return idVeiculo;
@@ -92,30 +88,7 @@ public class Veiculo {
 	public void setDataFimVigencia(LocalDate dataFimVigencia) {
 		this.dataFimVigencia = dataFimVigencia;
 	}
-
-	public String getMotorizacao() {
-		return motorizacao;
-	}
-
-	public void setMotorizacao(String motorizacao) {
-		this.motorizacao = motorizacao;
-	}
-
-	public Float getMediaConsumoCidade() {
-		return mediaConsumoCidade;
-	}
-
-	public void setMediaConsumoCidade(Float mediaConsumoCidade) {
-		this.mediaConsumoCidade = mediaConsumoCidade;
-	}
-
-	public Float getMediaConsumoEstrada() {
-		return mediaConsumoEstrada;
-	}
-
-	public void setMediaConsumoEstrada(Float mediaConsumoEstrada) {
-		this.mediaConsumoEstrada = mediaConsumoEstrada;
-	}
+	
 
 	public String getModelo() {
 		return modelo;
@@ -132,6 +105,16 @@ public class Veiculo {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getKm() {
+		return Km;
+	}
+
+	public void setKm(String km) {
+		Km = km;
+	}
+	
+	
 
 
 }

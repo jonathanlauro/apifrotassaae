@@ -28,6 +28,9 @@ public class Trabalho {
 	@OneToOne 
 	private Veiculo veiculo;
 	@NotNull
+	private String KmInicial;
+	private String kmFinal;
+	@NotNull
 	private LocalDate DataInicioVigencia;
 	private LocalDate DataFimVigencia;
 
@@ -78,5 +81,22 @@ public class Trabalho {
 	public void setStatusTrabalho(String statusTrabalho) {
 		this.statusTrabalho = statusTrabalho;
 	}
+
+	public String getKmInicial() {
+		return KmInicial;
+	}
+
+	public void setKmInicial(String kmInicial) {
+		KmInicial = kmInicial;
+	}
+
+	public String getKmFinal() {
+		return kmFinal;
+	}
+
+	public void setKmFinal(String kmFinal) {
+		this.kmFinal = kmFinal;
+	}
+	
 	
 }

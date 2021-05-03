@@ -21,7 +21,7 @@ public class VeiculoService {
 		Empresa empresa = empresaRepository.findById(veiculo.getEmpresa().getId())
 				.orElseThrow(() -> new Exception("Cliente nao encontrado"));
 		veiculo.setEmpresa(empresa);
-
+		veiculo.setStatus("Disponivel");
 		Veiculo v = veiculoRepository.findByPlaca(veiculo.getPlaca());
 
 		if (v != null) {

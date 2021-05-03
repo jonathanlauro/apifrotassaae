@@ -51,10 +51,10 @@ public class TrabalhoController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar trabalho! " + e);
 		}
 	}
-	@GetMapping("/encerrarTrabalho/{idTrabalho}")
-	public ResponseEntity<?> encerrarTrabalho(@PathVariable(value="idTrabalho") Long id){
+	@GetMapping("/encerrarTrabalho/{idTrabalho}/{kmFinal}")
+	public ResponseEntity<?> encerrarTrabalho(@PathVariable(value="idTrabalho") Long id,@PathVariable(value="kmFinal") String kmFinal){
 		try {
-			trabalhoService.encerrarTrabalho(id);
+			trabalhoService.encerrarTrabalho(id, kmFinal);
 			return ResponseEntity.status(HttpStatus.OK).body("Trabalho Encerrado");
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao encerrar trabalho! " + e);

@@ -43,6 +43,7 @@ public class TrabalhoService {
 			}
 			
 		}
+		trabalho.setKmInicial(veiculo.getKm());
 		trabalho.setCondutor(condutor);
 		trabalho.setVeiculo(veiculo);
 		trabalho.setDataInicioVigencia(LocalDate.now());
@@ -60,7 +61,7 @@ public class TrabalhoService {
 		return trabalho;
 	}
 	
-	public void encerrarTrabalho(long idTrabalho) {
+	public void encerrarTrabalho(long idTrabalho, String KmFinal) {
 		Trabalho trabalho = trabalhoRepository.findById(idTrabalho);
 		Condutor condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCNH());
 		Veiculo veiculo = veiculoRepository.findByPlaca(trabalho.getVeiculo().getPlaca());
@@ -83,8 +84,10 @@ public class TrabalhoService {
 		
 		condutor.setStatus("Disponivel");
 		veiculo.setStatus("Disponivel");
+		veiculo.setKm(KmFinal);
 		trabalho.setDataFimVigencia(LocalDate.now());
 		trabalho.setStatusTrabalho("Encerrado");
+		trabalho.setKmFinal(KmFinal);
 		
 		condutorRepository.save(condutor);
 		veiculoRepository.save(veiculo);

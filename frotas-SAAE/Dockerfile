@@ -1,6 +1,6 @@
 FROM openjdk:latest
 
-COPY /target/frotas-SAAE-0.0.1-SNAPSHOT.jar /home/frotas-SAAE-0.0.1-SNAPSHOT.jar
+COPY /target/frotas-SAAE-0.0.1-SNAPSHOT.jar /home/frotas-SAAE.jar
 EXPOSE 8080
 
-CMD ["java","-jar","/home/frotas-SAAE-0.0.1-SNAPSHOT.jar"]
+CMD ["java","-jar","/home/frotas-SAAE.jar"]
