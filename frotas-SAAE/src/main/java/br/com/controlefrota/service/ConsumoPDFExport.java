@@ -24,20 +24,22 @@ import br.com.controlefrota.model.RelatorioConsumos;
 import br.com.controlefrota.repository.ConsumoRepository;
 public class ConsumoPDFExport {
 
-	private List <Consumo> RelatorioConsumos;
+	private List <Consumo> relatorioConsumos;
 	
 	private RelatorioConsumos rel;
 	
 	private int totalNotas;
-	private Float totalConsumosEmReais;
-	private Float totalLitrosAbastecidos = (float) 0.0;
+	private float totalConsumosEmReais;
+	private float totalLitrosAbastecidos;
 	
 	@Autowired
 	ConsumoRepository consumoRepository;
+	@Autowired
+	RelatorioService relatorioService;
 	
 	
 	public ConsumoPDFExport(List<Consumo> relatorioConsumos) {
-		this.RelatorioConsumos = relatorioConsumos;
+		this.relatorioConsumos = relatorioConsumos;
 	}
 	
 	private void writerTableHeader(PdfPTable table) {
@@ -45,6 +47,7 @@ public class ConsumoPDFExport {
 		cell.setBackgroundColor(Color.BLUE);
 		Font font = FontFactory.getFont(FontFactory.HELVETICA);
 		font.setColor(Color.WHITE);
+		font.setSize(14);
 		cell.setPadding(5);
 		
 		cell.setPhrase(new Phrase("Total de notas fiscais",font));
@@ -58,9 +61,17 @@ public class ConsumoPDFExport {
 	}
 	private void writeTableData(PdfPTable table) {
 
+		for(Consumo consumo:relatorioConsumos) {
+			this.totalNotas += 1;
+			this.totalLitrosAbastecidos += consumo.getLitros();
+			this.totalConsumosEmReais += consumo.getValor();
+		}
+		
+		
+		
 		table.addCell(String.valueOf(this.totalNotas));
 		table.addCell(String.valueOf(this.totalLitrosAbastecidos));
-		table.addCell(String.valueOf(this.totalConsumosEmReais));
+		table.addCell("R$ "+String.valueOf(this.totalConsumosEmReais));
 	} 
 	public void export(HttpServletResponse response) throws DocumentException, IOException {
 		Document document = new Document(PageSize.A4);
@@ -70,7 +81,7 @@ public class ConsumoPDFExport {
 		document.open();
 		Font font = FontFactory.getFont(FontFactory.HELVETICA);
 		font.setSize(26);
-		document.add(new Paragraph("Consumos:",font));
+		document.add(new Paragraph("Total de consumos:",font));
 		
 		PdfPTable table = new PdfPTable(3);
 		table.setWidthPercentage(100);
@@ -80,6 +91,21 @@ public class ConsumoPDFExport {
 		writeTableData(table);
 		
 		document.add(table);
+		
+		
+//		Caso eu precise gerar duas tabelas eu uso o codigo abaixo
+		
+//		document.add(new Paragraph("Totalzinho:",font));
+//		PdfPTable table2 = new PdfPTable(3);
+//		table2.setWidthPercentage(100);
+//		table2.setSpacingBefore(15);
+//		table2.setSpacingAfter(10);
+//		
+//		writerTableHeader(table2);
+//		writeTableData(table2);
+//		
+//		document.add(table2);
+		
 		
 		document.close();
 	}

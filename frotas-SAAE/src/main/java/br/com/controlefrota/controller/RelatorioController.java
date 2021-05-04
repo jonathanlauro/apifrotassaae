@@ -56,7 +56,6 @@ public class RelatorioController {
 		response.setHeader(headerKey, headerValue);
 
 		List<Consumo> consumos = consumoRepository.findAll();
-//		RelatorioConsumos consumosA = relatorioService.gerarRelarotioConsumo();
 
 		ConsumoPDFExport consumoExport = new ConsumoPDFExport(consumos);
 		consumoExport.export(response);

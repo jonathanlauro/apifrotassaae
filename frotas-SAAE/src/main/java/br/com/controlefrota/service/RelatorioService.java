@@ -14,9 +14,9 @@ public class RelatorioService {
 
 	@Autowired
 	ConsumoRepository consumoRepository;
-	private int totalNotas;
-	private Float totalConsumosEmReais;
-	private Float totalLitrosAbastecidos = (float) 0.0;
+	private int totalNotas = 0;
+	private float totalConsumosEmReais =  (float) 0.0;
+	private float totalLitrosAbastecidos = (float) 0.0;
 	
 	
 	public RelatorioConsumos gerarRelarotioConsumo() {
