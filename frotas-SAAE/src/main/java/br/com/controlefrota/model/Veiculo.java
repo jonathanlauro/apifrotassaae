@@ -39,6 +39,8 @@ public class Veiculo {
 	
 	@NotNull
 	private String Km;
+	
+	private LocalDate dataCriacao;
 
 
 	public Long getIdVeiculo() {
@@ -113,6 +115,15 @@ public class Veiculo {
 	public void setKm(String km) {
 		Km = km;
 	}
+
+	public LocalDate getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(LocalDate dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	
 	
 	
 

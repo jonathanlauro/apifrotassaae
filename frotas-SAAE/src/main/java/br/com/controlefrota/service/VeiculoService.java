@@ -1,5 +1,7 @@
 package br.com.controlefrota.service;
 
+import java.time.LocalDate;
+
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ public class VeiculoService {
 				.orElseThrow(() -> new Exception("Cliente nao encontrado"));
 		veiculo.setEmpresa(empresa);
 		veiculo.setStatus("Disponivel");
+		veiculo.setDataCriacao(LocalDate.now());
 		Veiculo v = veiculoRepository.findByPlaca(veiculo.getPlaca());
 
 		if (v != null) {

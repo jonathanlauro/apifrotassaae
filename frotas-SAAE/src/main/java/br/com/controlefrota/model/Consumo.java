@@ -44,6 +44,8 @@ public class Consumo implements Serializable {
 	private Float valor;
 	private String numNotaFiscal;
 	
+	private LocalDate dataDeCriacao;
+	
 	public Long getIdConsumo() {
 		return idConsumo;
 	}
@@ -99,6 +101,13 @@ public class Consumo implements Serializable {
 	public void setNumNotaFiscal(String numNotaFiscal) {
 		this.numNotaFiscal = numNotaFiscal;
 	}
+	public LocalDate getDataDeCriacao() {
+		return dataDeCriacao;
+	}
+	public void setDataDeCriacao(LocalDate dataDeCriacao) {
+		this.dataDeCriacao = dataDeCriacao;
+	}
+	
 
 
 }

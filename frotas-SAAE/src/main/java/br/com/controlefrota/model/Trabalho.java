@@ -33,6 +33,8 @@ public class Trabalho {
 	@NotNull
 	private LocalDate DataInicioVigencia;
 	private LocalDate DataFimVigencia;
+	
+	private LocalDate dataDeCriacao;
 
 	public Long getIdTrabalho() {
 		return idTrabalho; 
@@ -96,6 +98,14 @@ public class Trabalho {
 
 	public void setKmFinal(String kmFinal) {
 		this.kmFinal = kmFinal;
+	}
+
+	public LocalDate getDataDeCriacao() {
+		return dataDeCriacao;
+	}
+
+	public void setDataDeCriacao(LocalDate dataDeCriacao) {
+		this.dataDeCriacao = dataDeCriacao;
 	}
 	
 	

@@ -1,6 +1,7 @@
 package br.com.controlefrota.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,6 +35,7 @@ public class Condutor implements Serializable{
 	@OneToMany(mappedBy = "condutor",cascade = CascadeType.ALL)
 	private List<Consumo> consumo;
 	
+	private LocalDate dataDeCriacao;
 	
 	public String getStatus() {
 		return status;
@@ -65,4 +67,11 @@ public class Condutor implements Serializable{
 	public void setCPF(String cPF) {
 		CPF = cPF;
 	}
+	public LocalDate getDataDeCriacao() {
+		return dataDeCriacao;
+	}
+	public void setDataDeCriacao(LocalDate dataDeCriacao) {
+		this.dataDeCriacao = dataDeCriacao;
+	}
+	
 }

@@ -1,5 +1,7 @@
 package br.com.controlefrota.service;
 
+import java.time.LocalDate;
+
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,7 @@ public class CondutorService {
 			
 			throw new ServiceException("CNH inválido");
 		}
+		condutor.setDataDeCriacao(LocalDate.now());
 			return condutorRepository.save(condutor);
 		
 	}

@@ -1,5 +1,7 @@
 package br.com.controlefrota.service;
 
+import java.time.LocalDate;
+
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,7 @@ public class EmpresaService {
 			
 			throw new ServiceException("CNPJ inválido");
 		}
-
+		empresa.setDataDeCriacao(LocalDate.now());
 		return empresaRepository.save(empresa);
 	}
 	public Empresa findById(long id) {

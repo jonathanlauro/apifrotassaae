@@ -47,6 +47,7 @@ public class TrabalhoService {
 		trabalho.setCondutor(condutor);
 		trabalho.setVeiculo(veiculo);
 		trabalho.setDataInicioVigencia(LocalDate.now());
+		trabalho.setDataDeCriacao(LocalDate.now());
 		veiculo.setStatus("Ocupado");
 		condutor.setStatus("Em_trabalho");
 		

@@ -1,6 +1,6 @@
 package br.com.controlefrota.model;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -28,6 +27,7 @@ public class Empresa {
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "empresa")
 	private List<Veiculo> Veiculos;
 
+	private LocalDate dataDeCriacao;
 
 	public Long getId() {
 		return id;
@@ -51,6 +51,14 @@ public class Empresa {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public LocalDate getDataDeCriacao() {
+		return dataDeCriacao;
+	}
+
+	public void setDataDeCriacao(LocalDate dataDeCriacao) {
+		this.dataDeCriacao = dataDeCriacao;
 	}
 	
 

@@ -1,5 +1,7 @@
 package br.com.controlefrota.service;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,7 @@ public class ConsumoService {
 		consumo.setCombustivel(combustivel);
 		consumo.setCondutor(condutor);
 		consumo.setVeiculo(veiculo);
+		consumo.setDataDeCriacao(LocalDate.now());
 		
 		consumoRepository.save(consumo);
 	}
