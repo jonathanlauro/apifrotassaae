@@ -20,36 +20,57 @@ public class VeiculoService {
 	VeiculoRepository veiculoRepository;
 
 	public Veiculo criar(Veiculo veiculo) throws Exception {
-		Empresa empresa = empresaRepository.findById(veiculo.getEmpresa().getId())
-				.orElseThrow(() -> new Exception("Cliente nao encontrado"));
-		veiculo.setEmpresa(empresa);
-		veiculo.setStatus("Disponivel");
-		veiculo.setDataCriacao(LocalDate.now());
 		Veiculo v = veiculoRepository.findByPlaca(veiculo.getPlaca());
-
-		if (v != null) {
-			throw new ServiceException("Veiculo ja cadastrado");
+		if (v.getStatus().equals("Ocupado")) {
+			throw new ServiceException("Veículo ja cadastrado e em trabalho.");
 		}
-		if (veiculo.getRenavam().equals("000000000") || veiculo.getRenavam().equals("111111111")
-				|| veiculo.getRenavam().equals("222222222") || veiculo.getRenavam().equals("333333333")
-				|| veiculo.getRenavam().equals("444444444") || veiculo.getRenavam().equals("555555555")
-				|| veiculo.getRenavam().equals("666666666") || veiculo.getRenavam().equals("777777777")
-				|| veiculo.getRenavam().equals("888888888") || veiculo.getRenavam().equals("999999999")
-				|| veiculo.getRenavam().length() != 9) {
-
-			throw new ServiceException("Renavam inválido");
+		
+		if(v !=  null && v.getPlaca().equals(veiculo.getPlaca())) {
+			veiculo.setIdVeiculo(v.getIdVeiculo());
+			veiculo.setStatus("Disponivel");
+			veiculo.setDeleted(false);
+			veiculo.setDataCriacao(v.getDataCriacao());
+			veiculo.setDataInicioVigencia(LocalDate.now());
+			
+			return veiculoRepository.save(veiculo);
+		}else {
+			
+			Empresa empresa = empresaRepository.findById(veiculo.getEmpresa().getId())
+					.orElseThrow(() -> new Exception("Empresa nao encontrado"));
+			veiculo.setEmpresa(empresa);
+			veiculo.setStatus("Disponivel");
+			veiculo.setDeleted(false);
+			veiculo.setDataCriacao(LocalDate.now());
+			veiculo.setDataInicioVigencia(LocalDate.now());
+			
+			
+			if (veiculo.getRenavam().equals("000000000") || veiculo.getRenavam().equals("111111111")
+					|| veiculo.getRenavam().equals("222222222") || veiculo.getRenavam().equals("333333333")
+					|| veiculo.getRenavam().equals("444444444") || veiculo.getRenavam().equals("555555555")
+					|| veiculo.getRenavam().equals("666666666") || veiculo.getRenavam().equals("777777777")
+					|| veiculo.getRenavam().equals("888888888") || veiculo.getRenavam().equals("999999999")
+					|| veiculo.getRenavam().length() != 9) {
+				
+				throw new ServiceException("Renavam inválido");
+			}
+			
+			return veiculoRepository.save(veiculo);
 		}
-
-		return veiculoRepository.save(veiculo);
+		
 	}
 
 	public void deletar(long id) {
 		Veiculo veiculo = veiculoRepository.findById(id);
 
+		if (veiculo == null) {
+			throw new ServiceException("Veículo não encontrado.");
+		}
 		if (veiculo.getStatus().equals("Ocupado")) {
 			throw new ServiceException("Veículo em trabalho.");
 		}
-		veiculoRepository.deleteById(id);
+		veiculo.setDataFimVigencia(LocalDate.now());
+		veiculo.setDeleted(true);
+		veiculoRepository.save(veiculo);
 	}
 
 	public Veiculo findById(long id) {
