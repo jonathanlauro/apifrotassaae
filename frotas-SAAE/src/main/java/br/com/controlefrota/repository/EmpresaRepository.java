@@ -3,13 +3,13 @@ package br.com.controlefrota.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.controlefrota.model.Empresa;
+import br.com.controlefrota.model.EmpresaModel;
 
 @Repository
-public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
+public interface EmpresaRepository extends JpaRepository<EmpresaModel, Long> {
 
-	Empresa findById(long id);
-	Empresa findByCNPJ(String cnpj);
+	EmpresaModel findById(long id);
+	EmpresaModel findByCNPJ(String cnpj);
 
 
 }

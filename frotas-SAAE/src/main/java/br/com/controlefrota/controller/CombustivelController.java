@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.controlefrota.model.Combustivel;
+import br.com.controlefrota.model.CombustivelModel;
 import br.com.controlefrota.repository.CombustivelRepository;
 import br.com.controlefrota.service.CombustivelService;
 
@@ -29,20 +29,20 @@ public class CombustivelController {
 	CombustivelService combustivelService;
 	
 	@GetMapping("/combustivel")
-	public List<Combustivel> listaCombustivel(){
+	public List<CombustivelModel> listaCombustivel(){
 		return combustivelRepository.findAll();
 	}
 	@GetMapping("/combustivel/{id}")
 	public ResponseEntity<?> listaUnicoCombustivel(@PathVariable(value="id") long id ){
 
 		try {
-			return new ResponseEntity<Combustivel>(combustivelService.findById(id),HttpStatus.OK);
+			return new ResponseEntity<CombustivelModel>(combustivelService.findById(id),HttpStatus.OK);
 		}catch(ServiceException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found! "+e);
 		}
 	}
 	@PostMapping("/combustivel")
-	public ResponseEntity<?> cadastraCombustivel(@RequestBody Combustivel combustivel ) {
+	public ResponseEntity<?> cadastraCombustivel(@RequestBody CombustivelModel combustivel ) {
 		try {
 			
 			combustivelService.cadastrar(combustivel);
@@ -52,7 +52,7 @@ public class CombustivelController {
 		}
 	}
 	@PatchMapping("/combustivel")
-	public Combustivel updateCombustivel(@RequestBody Combustivel combustivel ) {
+	public CombustivelModel updateCombustivel(@RequestBody CombustivelModel combustivel ) {
 		return combustivel;
 	}
 	@DeleteMapping("/combustivel/{id}")

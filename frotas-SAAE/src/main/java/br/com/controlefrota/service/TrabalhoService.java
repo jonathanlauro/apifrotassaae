@@ -6,9 +6,9 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.controlefrota.model.Condutor;
-import br.com.controlefrota.model.Trabalho;
-import br.com.controlefrota.model.Veiculo;
+import br.com.controlefrota.model.CondutorModel;
+import br.com.controlefrota.model.TrabalhoModel;
+import br.com.controlefrota.model.VeiculoModel;
 import br.com.controlefrota.repository.CondutorRepository;
 import br.com.controlefrota.repository.TrabalhoRepository;
 import br.com.controlefrota.repository.VeiculoRepository;
@@ -24,9 +24,9 @@ public class TrabalhoService {
 	@Autowired
 	VeiculoRepository veiculoRepository;
 	
-	public Trabalho  criar(Trabalho trabalho) {
-		Condutor condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCNH());
-		Veiculo veiculo = veiculoRepository.findByPlaca(trabalho.getVeiculo().getPlaca());
+	public TrabalhoModel  criar(TrabalhoModel trabalho) {
+		CondutorModel condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCNH());
+		VeiculoModel veiculo = veiculoRepository.findByPlaca(trabalho.getVeiculo().getPlaca());
 		
 		if(veiculo == null) {
 			throw new ServiceException("Veículo não encontrado!");
@@ -53,8 +53,8 @@ public class TrabalhoService {
 		
 		return trabalhoRepository.save(trabalho);
 	}
-	public Trabalho findById(long id) {
-		Trabalho trabalho = trabalhoRepository.findById(id);
+	public TrabalhoModel findById(long id) {
+		TrabalhoModel trabalho = trabalhoRepository.findById(id);
 		
 		if(trabalho == null) {
 			throw new ServiceException("Trabalho não encontrado.");
@@ -63,9 +63,9 @@ public class TrabalhoService {
 	}
 	
 	public void encerrarTrabalho(long idTrabalho, String KmFinal) {
-		Trabalho trabalho = trabalhoRepository.findById(idTrabalho);
-		Condutor condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCNH());
-		Veiculo veiculo = veiculoRepository.findByPlaca(trabalho.getVeiculo().getPlaca());
+		TrabalhoModel trabalho = trabalhoRepository.findById(idTrabalho);
+		CondutorModel condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCNH());
+		VeiculoModel veiculo = veiculoRepository.findByPlaca(trabalho.getVeiculo().getPlaca());
 		
 		if(trabalho.getStatusTrabalho().equals("Encerrado")) {
 			throw new ServiceException("Trabalho já foi encerrado!");

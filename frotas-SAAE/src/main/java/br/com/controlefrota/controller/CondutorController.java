@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.controlefrota.model.Condutor;
+import br.com.controlefrota.model.CondutorModel;
 import br.com.controlefrota.repository.CondutorRepository;
 import br.com.controlefrota.service.CondutorService;
 
@@ -29,7 +29,7 @@ public class CondutorController {
 	CondutorService condutorService;
 	
 	@GetMapping
-	public List<Condutor> listaCondutor() {
+	public List<CondutorModel> listaCondutor() {
 
 		return condutorService.findAll();
 	}
@@ -38,7 +38,7 @@ public class CondutorController {
 	public ResponseEntity<?> listaUnicoCondutorPorId(@PathVariable(value = "id") long id) {
 		try {
 			
-			return new ResponseEntity<Condutor>( condutorService.findById(id), HttpStatus.OK);
+			return new ResponseEntity<CondutorModel>( condutorService.findById(id), HttpStatus.OK);
 		}catch(ServiceException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found! Condutor não encontrado ");
 		}
@@ -48,14 +48,14 @@ public class CondutorController {
 	public ResponseEntity<?> listaUnicoCondutorPorCNH(@PathVariable(value = "cnh") String cnh) {
 	try {
 			
-			return new ResponseEntity<Condutor>( condutorService.findByCnh(cnh), HttpStatus.OK);
+			return new ResponseEntity<CondutorModel>( condutorService.findByCnh(cnh), HttpStatus.OK);
 		}catch(ServiceException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found! Condutor não encontrado ");
 		}
 	}
 
 	@PostMapping
-	public ResponseEntity<?> salvaCondutor(@RequestBody Condutor condutor) {
+	public ResponseEntity<?> salvaCondutor(@RequestBody CondutorModel condutor) {
 		try {
 			
 			condutorService.criar(condutor);
@@ -67,7 +67,7 @@ public class CondutorController {
 	}
 
 	@PatchMapping
-	public Condutor atualizarCondutor(@RequestBody Condutor condutor) {
+	public CondutorModel atualizarCondutor(@RequestBody CondutorModel condutor) {
 		return condutorRepository.save(condutor);
 	}
 

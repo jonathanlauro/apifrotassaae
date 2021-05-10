@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.controlefrota.model.Condutor;
+import br.com.controlefrota.model.CondutorModel;
 
 @Repository
-public interface CondutorRepository extends JpaRepository<Condutor, Long> {
+public interface CondutorRepository extends JpaRepository<CondutorModel, Long> {
 
-	Condutor findById(long id);
+	CondutorModel findById(long id);
 
-	Condutor findByCNH(String CNH);
+	CondutorModel findByCNH(String CNH);
 	
-	List<Condutor> findByDeleted(boolean deleted);
+	List<CondutorModel> findByDeleted(boolean deleted);
 }

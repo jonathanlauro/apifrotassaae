@@ -14,7 +14,7 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "TB_VEICULO")
-public class Veiculo {
+public class VeiculoModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,7 @@ public class Veiculo {
 
 	@ManyToOne
 	@JoinColumn(name = "empresa_id")
-	private Empresa empresa;
+	private EmpresaModel empresa;
 
 	@NotNull
 	private String renavam;
@@ -80,11 +80,11 @@ public class Veiculo {
 		this.idVeiculo = idVeiculo;
 	}
 
-	public Empresa getEmpresa() {
+	public EmpresaModel getEmpresa() {
 		return empresa;
 	}
 
-	public void setEmpresa(Empresa empresa) {
+	public void setEmpresa(EmpresaModel empresa) {
 		this.empresa = empresa;
 	}
 

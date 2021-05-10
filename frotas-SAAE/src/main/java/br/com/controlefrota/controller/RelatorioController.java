@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lowagie.text.DocumentException;
 
-import br.com.controlefrota.model.Consumo;
-import br.com.controlefrota.model.RelatorioConsumos;
+import br.com.controlefrota.model.ConsumoModel;
+import br.com.controlefrota.model.RelatorioConsumosModel;
 import br.com.controlefrota.repository.ConsumoRepository;
 import br.com.controlefrota.service.ConsumoPDFExport;
 import br.com.controlefrota.service.RelatorioService;
@@ -55,7 +55,7 @@ public class RelatorioController {
 
 		response.setHeader(headerKey, headerValue);
 
-		List<Consumo> consumos = consumoRepository.findAll();
+		List<ConsumoModel> consumos = consumoRepository.findAll();
 
 		ConsumoPDFExport consumoExport = new ConsumoPDFExport(consumos);
 		consumoExport.export(response);

@@ -6,7 +6,7 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.controlefrota.model.Empresa;
+import br.com.controlefrota.model.EmpresaModel;
 import br.com.controlefrota.repository.EmpresaRepository;
 
 @Service
@@ -14,7 +14,7 @@ public class EmpresaService {
 	@Autowired
 	EmpresaRepository empresaRepository;
 
-	public Empresa cadastrarEmpresa(Empresa empresa) {
+	public EmpresaModel cadastrarEmpresa(EmpresaModel empresa) {
 		
 
 		
@@ -31,8 +31,8 @@ public class EmpresaService {
 		empresa.setDataDeCriacao(LocalDate.now());
 		return empresaRepository.save(empresa);
 	}
-	public Empresa findById(long id) {
-		Empresa empresa = empresaRepository.findById(id);
+	public EmpresaModel findById(long id) {
+		EmpresaModel empresa = empresaRepository.findById(id);
 		
 		if(empresa == null) {
 			throw new ServiceException("Empresa não encontrada.");
@@ -40,8 +40,8 @@ public class EmpresaService {
 		
 		return empresa;
 	}
-	public Empresa findByCNPJ(String cnpj) {
-		Empresa empresa = empresaRepository.findByCNPJ(cnpj);
+	public EmpresaModel findByCNPJ(String cnpj) {
+		EmpresaModel empresa = empresaRepository.findByCNPJ(cnpj);
 		
 		if(empresa == null) {
 			throw new ServiceException("Empresa não encontrada.");

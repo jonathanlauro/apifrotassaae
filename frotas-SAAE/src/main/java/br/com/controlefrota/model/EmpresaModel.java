@@ -15,7 +15,7 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "TB_EMPRESA")
-public class Empresa {
+public class EmpresaModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -25,7 +25,7 @@ public class Empresa {
 	@NotNull
 	private String nome;
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "empresa")
-	private List<Veiculo> Veiculos;
+	private List<VeiculoModel> Veiculos;
 
 	private LocalDate dataDeCriacao;
 

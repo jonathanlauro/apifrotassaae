@@ -19,14 +19,14 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import br.com.controlefrota.model.Consumo;
-import br.com.controlefrota.model.RelatorioConsumos;
+import br.com.controlefrota.model.ConsumoModel;
+import br.com.controlefrota.model.RelatorioConsumosModel;
 import br.com.controlefrota.repository.ConsumoRepository;
 public class ConsumoPDFExport {
 
-	private List <Consumo> relatorioConsumos;
+	private List <ConsumoModel> relatorioConsumos;
 	
-	private RelatorioConsumos rel;
+	private RelatorioConsumosModel rel;
 	
 	private int totalNotas;
 	private float totalConsumosEmReais;
@@ -38,7 +38,7 @@ public class ConsumoPDFExport {
 	RelatorioService relatorioService;
 	
 	
-	public ConsumoPDFExport(List<Consumo> relatorioConsumos) {
+	public ConsumoPDFExport(List<ConsumoModel> relatorioConsumos) {
 		this.relatorioConsumos = relatorioConsumos;
 	}
 	
@@ -61,7 +61,7 @@ public class ConsumoPDFExport {
 	}
 	private void writeTableData(PdfPTable table) {
 
-		for(Consumo consumo:relatorioConsumos) {
+		for(ConsumoModel consumo:relatorioConsumos) {
 			this.totalNotas += 1;
 			this.totalLitrosAbastecidos += consumo.getLitros();
 			this.totalConsumosEmReais += consumo.getValor();

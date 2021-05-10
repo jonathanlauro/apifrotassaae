@@ -1,6 +1,6 @@
 package br.com.controlefrota.model;
 
-public class RelatorioConsumos {
+public class RelatorioConsumosModel {
 
 	private Float totalConsumosEmReais;
 	private Float totalLitrosAbastecidos;

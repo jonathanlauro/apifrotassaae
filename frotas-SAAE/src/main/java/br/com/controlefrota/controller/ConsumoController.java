@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.controlefrota.model.Consumo;
+import br.com.controlefrota.model.ConsumoModel;
 import br.com.controlefrota.repository.ConsumoRepository;
 import br.com.controlefrota.service.ConsumoService;
 
@@ -28,17 +28,17 @@ public class ConsumoController {
 	ConsumoService consumoService;
 
 	@GetMapping
-	public List<Consumo> listaConsumos() {
+	public List<ConsumoModel> listaConsumos() {
 		return consumoRepository.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Consumo> listaUnicoConsumoPorId(@PathVariable(value="id") Long id) {
+	public Optional<ConsumoModel> listaUnicoConsumoPorId(@PathVariable(value="id") Long id) {
 		return consumoRepository.findById(id);
 	}
 
 	@PostMapping
-	public ResponseEntity<?> salvaconsumo(@RequestBody Consumo consumo) {
+	public ResponseEntity<?> salvaconsumo(@RequestBody ConsumoModel consumo) {
 			try {
 				
 				consumoService.criar(consumo);
@@ -50,7 +50,7 @@ public class ConsumoController {
 	}
 
 	@PatchMapping
-	public Consumo atualizarConsumo(@RequestBody Consumo consumo) {
+	public ConsumoModel atualizarConsumo(@RequestBody ConsumoModel consumo) {
 		return consumoRepository.save(consumo);
 	}
 

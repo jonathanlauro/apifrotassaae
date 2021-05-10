@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.controlefrota.model.Trabalho;
+import br.com.controlefrota.model.TrabalhoModel;
 import br.com.controlefrota.repository.TrabalhoRepository;
 import br.com.controlefrota.service.TrabalhoService;
 
@@ -28,7 +28,7 @@ public class TrabalhoController {
 	TrabalhoService trabalhoService;
 
 	@GetMapping
-	public List<Trabalho> listatrabalhos() {
+	public List<TrabalhoModel> listatrabalhos() {
 		return trabalhoRepository.findAll();
 	}
 
@@ -36,14 +36,14 @@ public class TrabalhoController {
 	public ResponseEntity<?> listaUnicotrabalhoPorId(@PathVariable(value="id") long id) {
 
 		try {
-			return new ResponseEntity<Trabalho>(trabalhoService.findById(id), HttpStatus.OK);
+			return new ResponseEntity<TrabalhoModel>(trabalhoService.findById(id), HttpStatus.OK);
 		}catch(ServiceException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+e);
 		}
 	}
 
 	@PostMapping
-	public ResponseEntity<?> salvatrabalho(@RequestBody Trabalho trabalho) {
+	public ResponseEntity<?> salvatrabalho(@RequestBody TrabalhoModel trabalho) {
 		try {			
 			trabalhoService.criar(trabalho);
 			return ResponseEntity.status(HttpStatus.OK).body("Cadastrado com sucesso");
@@ -62,11 +62,11 @@ public class TrabalhoController {
 		
 	}
 	@GetMapping("/{status}/status-trabalho")
-	public List<Trabalho> listarPorStatus(@PathVariable(value="status") String status){
+	public List<TrabalhoModel> listarPorStatus(@PathVariable(value="status") String status){
 		return trabalhoRepository.findByStatusTrabalho(status);
 	}
 	@PatchMapping
-	public Trabalho atualizartrabalho(@RequestBody Trabalho trabalho) {
+	public TrabalhoModel atualizartrabalho(@RequestBody TrabalhoModel trabalho) {
 		return trabalhoRepository.save(trabalho);
 	}
 

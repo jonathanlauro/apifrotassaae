@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.controlefrota.model.Empresa;
+import br.com.controlefrota.model.EmpresaModel;
 import br.com.controlefrota.repository.EmpresaRepository;
 import br.com.controlefrota.service.EmpresaService;
 
@@ -30,14 +30,14 @@ public class EmpresaController {
 	EmpresaService empresaService;
 
 	@GetMapping
-	public List<Empresa> listaEmpresas() {
+	public List<EmpresaModel> listaEmpresas() {
 		return empresaRepository.findAll();
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> listaUnicoEmpresaPorId(@PathVariable Long id) {
 		try {
-			return new ResponseEntity<Empresa>(empresaService.findById(id), HttpStatus.OK);
+			return new ResponseEntity<EmpresaModel>(empresaService.findById(id), HttpStatus.OK);
 		}catch(ServiceException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+e);
 		}	
@@ -45,7 +45,7 @@ public class EmpresaController {
 	@GetMapping("/{cnpj}/cnpj")
 	public ResponseEntity<?> listaUnicoEmpresaPorCNPJ(@PathVariable(value="cnpj") String cnpj) {
 		try {
-			return new ResponseEntity<Empresa>(empresaService.findByCNPJ(cnpj), HttpStatus.OK);
+			return new ResponseEntity<EmpresaModel>(empresaService.findByCNPJ(cnpj), HttpStatus.OK);
 		}catch(ServiceException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+e);
 		}
@@ -53,7 +53,7 @@ public class EmpresaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> salvaEmpresa(@RequestBody Empresa empresa) {
+	public ResponseEntity<?> salvaEmpresa(@RequestBody EmpresaModel empresa) {
 		try {
 			empresaService.cadastrarEmpresa(empresa);
 			return ResponseEntity.status(HttpStatus.OK).body("Empresa cadastrada com sucesso");
@@ -63,7 +63,7 @@ public class EmpresaController {
 	}
 
 	@PatchMapping
-	public ResponseEntity<?> atualizarEmpresa(@RequestBody Empresa empresa) {
+	public ResponseEntity<?> atualizarEmpresa(@RequestBody EmpresaModel empresa) {
 		
 			empresaRepository.save(empresa);
 			return ResponseEntity.status(HttpStatus.OK).body("Atualizado com sucesso.");

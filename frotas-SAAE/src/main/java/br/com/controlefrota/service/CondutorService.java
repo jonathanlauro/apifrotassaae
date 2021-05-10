@@ -7,7 +7,7 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.controlefrota.model.Condutor;
+import br.com.controlefrota.model.CondutorModel;
 import br.com.controlefrota.repository.CondutorRepository;
 
 @Service
@@ -17,8 +17,8 @@ public class CondutorService {
 	CondutorRepository condutorRepository;
 
 	
-	public Condutor criar(Condutor condutor) {
-		Condutor condutorA = condutorRepository.findByCNH(condutor.getCNH());
+	public CondutorModel criar(CondutorModel condutor) {
+		CondutorModel condutorA = condutorRepository.findByCNH(condutor.getCNH());
 		if (condutor.getNome() == null || condutor.getCPF() == null || condutor.getCNH() == null) {
 			throw new ServiceException("Por favor, preencha todos os campos");
 		}
@@ -63,8 +63,8 @@ public class CondutorService {
 
 	}
 
-	public Condutor findById(long id) {
-		Condutor condutor = condutorRepository.findById(id);
+	public CondutorModel findById(long id) {
+		CondutorModel condutor = condutorRepository.findById(id);
 
 		if (condutor == null) {
 			throw new ServiceException("condutor não encontrado");
@@ -73,8 +73,8 @@ public class CondutorService {
 
 	}
 
-	public Condutor findByCnh(String cnh) {
-		Condutor condutor = condutorRepository.findByCNH(cnh);
+	public CondutorModel findByCnh(String cnh) {
+		CondutorModel condutor = condutorRepository.findByCNH(cnh);
 
 		if (condutor == null) {
 			throw new ServiceException("condutor não encontrado");
@@ -82,12 +82,12 @@ public class CondutorService {
 		return condutor;
 	}
 	
-	public List<Condutor> findAll(){
+	public List<CondutorModel> findAll(){
 		return condutorRepository.findByDeleted(false);
 	}
 
 	public void deletar(long id) {
-		Condutor condutor = condutorRepository.findById(id);
+		CondutorModel condutor = condutorRepository.findById(id);
 
 		if (condutor.getStatus().equals("Em_trabalho")) {
 			throw new ServiceException("Condutor não pode ser excluido pois está em trabalho.");
