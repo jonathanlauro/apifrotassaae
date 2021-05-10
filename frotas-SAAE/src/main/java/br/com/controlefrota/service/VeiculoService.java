@@ -1,6 +1,7 @@
 package br.com.controlefrota.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,9 @@ public class VeiculoService {
 		veiculo.setDataFimVigencia(LocalDate.now());
 		veiculo.setDeleted(true);
 		veiculoRepository.save(veiculo);
+	}
+	public List<Veiculo> findAll(){
+		return veiculoRepository.findByDeleted(false);
 	}
 
 	public Veiculo findById(long id) {

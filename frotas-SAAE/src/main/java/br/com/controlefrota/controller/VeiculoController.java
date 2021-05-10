@@ -31,7 +31,7 @@ public class VeiculoController {
 
 	@GetMapping
 	public List<Veiculo> listarVeiculos() {
-		return veiculoRepository.findAll();
+		return veiculoService.findAll();
 	}
 
 	@GetMapping("/{id}")

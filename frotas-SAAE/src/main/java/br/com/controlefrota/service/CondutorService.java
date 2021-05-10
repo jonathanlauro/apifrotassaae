@@ -1,6 +1,7 @@
 package br.com.controlefrota.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,10 @@ public class CondutorService {
 			throw new ServiceException("condutor não encontrado");
 		}
 		return condutor;
+	}
+	
+	public List<Condutor> findAll(){
+		return condutorRepository.findByDeleted(false);
 	}
 
 	public void deletar(long id) {

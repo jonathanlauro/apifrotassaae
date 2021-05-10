@@ -30,8 +30,8 @@ public class CondutorController {
 	
 	@GetMapping
 	public List<Condutor> listaCondutor() {
-	
-		return condutorRepository.findAll();
+
+		return condutorService.findAll();
 	}
 
 	@GetMapping("/{id}")
