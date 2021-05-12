@@ -74,7 +74,7 @@ public class VeiculoController {
 			
 			veiculoService.criar(veiculo);
 			return ResponseEntity.status(HttpStatus.OK).body("Veículo cadastrado com sucesso!");
-		}catch(ServiceException e) {
+		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar! "+e);
 		}
 	}

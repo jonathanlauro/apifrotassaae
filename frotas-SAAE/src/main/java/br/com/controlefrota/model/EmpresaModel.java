@@ -28,6 +28,7 @@ public class EmpresaModel {
 	private List<VeiculoModel> Veiculos;
 
 	private LocalDate dataDeCriacao;
+	private boolean deleted = false;
 
 	public Long getId() {
 		return id;
@@ -59,6 +60,14 @@ public class EmpresaModel {
 
 	public void setDataDeCriacao(LocalDate dataDeCriacao) {
 		this.dataDeCriacao = dataDeCriacao;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 

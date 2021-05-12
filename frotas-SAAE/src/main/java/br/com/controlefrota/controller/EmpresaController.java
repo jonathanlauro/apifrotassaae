@@ -31,7 +31,7 @@ public class EmpresaController {
 
 	@GetMapping
 	public List<EmpresaModel> listaEmpresas() {
-		return empresaRepository.findAll();
+		return empresaService.findAll();
 	}
 
 	@GetMapping("/{id}")
@@ -55,10 +55,15 @@ public class EmpresaController {
 	@PostMapping
 	public ResponseEntity<?> salvaEmpresa(@RequestBody EmpresaModel empresa) {
 		try {
+		
 			empresaService.cadastrarEmpresa(empresa);
 			return ResponseEntity.status(HttpStatus.OK).body("Empresa cadastrada com sucesso");
-		}catch(ServiceException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar empresa!");
+		} catch (NullPointerException n) {
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar empresa!" + n);
+		} catch (ServiceException e) {
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar empresa!" + e);
 		}
 	}
 
@@ -72,7 +77,7 @@ public class EmpresaController {
 
 	@DeleteMapping("/{id}")
 	public void deletarEmpresa(@PathVariable(value = "id") Long id) {
-		empresaRepository.deleteById(id);
+		empresaService.delete(id);
 	}
 
 }

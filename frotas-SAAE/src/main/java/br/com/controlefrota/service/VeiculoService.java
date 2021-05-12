@@ -22,8 +22,8 @@ public class VeiculoService {
 
 	public VeiculoModel criar(VeiculoModel veiculo) throws Exception {
 		VeiculoModel v = veiculoRepository.findByPlaca(veiculo.getPlaca());
-		if (v.getStatus().equals("Ocupado")) {
-			throw new ServiceException("Veículo ja cadastrado e em trabalho.");
+		if (v != null && v.isDeleted() == false) {
+			throw new ServiceException("Veículo ja cadastrado.");
 		}
 		
 		if(v !=  null && v.getPlaca().equals(veiculo.getPlaca())) {
