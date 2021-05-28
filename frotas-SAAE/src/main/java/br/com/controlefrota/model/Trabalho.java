@@ -19,7 +19,7 @@ public class Trabalho {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idTrabalho;
-	private String statusTrabalho = "Em_vigência";
+	private String statusTrabalho = "Em_vigencia";
 	@NotNull
 	@OneToOne
 	@JoinColumn(name = "condutor_id", referencedColumnName="id")

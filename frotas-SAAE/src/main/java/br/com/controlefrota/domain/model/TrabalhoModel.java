@@ -9,6 +9,7 @@ public class TrabalhoModel {
 	private String condutor;
 	private String veiculo;
 	private LocalDate dataInicio;
+	
 	public Long getIdTrabalho() {
 		return idTrabalho;
 	}

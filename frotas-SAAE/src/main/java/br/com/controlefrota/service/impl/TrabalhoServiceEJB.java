@@ -37,8 +37,8 @@ public class TrabalhoServiceEJB implements CadastroDeTrablho {
 			throw new ServiceException("Condutor não encontrado!");
 		}
 
-		if (condutor.getStatus().equals("Em trabalho") || veiculo.getStatus().equals("Ocupado")) {
-			if (condutor.getStatus().equals("Em trabalho")) {
+		if (condutor.getStatus().equals("Em_trabalho") || veiculo.getStatus().equals("Ocupado")) {
+			if (condutor.getStatus().equals("Em_trabalho")) {
 				throw new ServiceException("Condutor em trabalho ativo");
 			} else {
 				throw new ServiceException("Veículo em trabalho ativo");
