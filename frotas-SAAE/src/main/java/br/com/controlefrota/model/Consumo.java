@@ -43,6 +43,7 @@ public class Consumo implements Serializable {
 	private Float litros;
 	private Float valor;
 	private String numNotaFiscal;
+	private Boolean deleted;
 	
 	private LocalDate dataDeCriacao;
 	
@@ -106,6 +107,12 @@ public class Consumo implements Serializable {
 	}
 	public void setDataDeCriacao(LocalDate dataDeCriacao) {
 		this.dataDeCriacao = dataDeCriacao;
+	}
+	public Boolean getDeleted() {
+		return deleted;
+	}
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 

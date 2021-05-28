@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.controlefrota.domain.model.ConsumoModel;
 import br.com.controlefrota.model.Consumo;
 @RestController
 @RequestMapping("/consumos")
 public interface ConsumoController {
 
 	@GetMapping
-	public List<Consumo> listaConsumos();
+	public List<ConsumoModel> listaConsumos();
 	@GetMapping("/{id}")
 	public Optional<Consumo> listaUnicoConsumoPorId(@PathVariable(value="id") Long id);
 	@PostMapping

@@ -2,6 +2,7 @@ package br.com.controlefrota.controller.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.controlefrota.controller.ConsumoController;
+import br.com.controlefrota.domain.model.ConsumoModel;
 import br.com.controlefrota.model.Consumo;
 import br.com.controlefrota.repository.ConsumoRepository;
 import br.com.controlefrota.service.impl.ConsumoServiceEJB;
@@ -23,8 +25,8 @@ public class ConsumoControllerImpl implements ConsumoController{
 	ConsumoServiceEJB consumoService;
 
 	@Override
-	public List<Consumo> listaConsumos() {
-		return consumoRepository.findAll();
+	public List<ConsumoModel> listaConsumos() {
+		return consumoService.findAll().stream().map(this::toDto).collect(Collectors.toList());
 	}
 
 	@Override
@@ -53,4 +55,18 @@ public class ConsumoControllerImpl implements ConsumoController{
 	public void deletarconsumo(@PathVariable Long id) {
 		consumoRepository.deleteById(id);
 	}
+	
+	public ConsumoModel toDto(Consumo entity) {
+        ConsumoModel dto = new ConsumoModel();
+        dto.setIdConsumo(entity.getIdConsumo());
+        dto.setCondutor(entity.getCondutor().getNome());
+        dto.setVeiculo(entity.getVeiculo().getModelo());
+        dto.setCombustivel(entity.getCombustivel().getNome());
+        dto.setLitros(entity.getLitros());
+        dto.setValor(entity.getValor());
+        dto.setNumeroDaNotaFiscal(entity.getNumNotaFiscal());
+        dto.setDataRegistroDaNota(entity.getDataRegistro());
+        dto.setDataDeRegistro(entity.getDataDeCriacao());
+        return dto;
+    }
 }

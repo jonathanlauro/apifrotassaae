@@ -1,7 +1,9 @@
 package br.com.controlefrota.service.impl;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +40,25 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 		consumo.setCondutor(condutor);
 		consumo.setVeiculo(veiculo);
 		consumo.setDataDeCriacao(LocalDate.now());
+		consumo.setDeleted(false);
 
 		consumoRepository.save(consumo);
+	}
+
+	@Override
+	public void deletar(long id) {
+		Consumo consumo = consumoRepository.findById(id);
+		
+		if(consumo == null) {
+			throw new ServiceException("Esse consumo não existe");
+		}
+		consumo.setDeleted(true);
+		
+	}
+
+	@Override
+	public List<Consumo> findAll() {
+	
+		return consumoRepository.findByDeleted(false);
 	}
 }
