@@ -9,6 +9,7 @@ public class VeiculoModel {
 	private String status;
 	private String placa;
 	private String renavam;
+	private String empresa;
 	
 	public VeiculoModel() {
 		
@@ -69,6 +70,12 @@ public class VeiculoModel {
 
 	public void setRenavam(String renavam) {
 		this.renavam = renavam;
+	}
+	public String getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
 	}
 	
 	

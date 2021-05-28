@@ -97,6 +97,7 @@ public class VeiculoControllerImpl implements VeiculoController {
         dto.setPlaca(entity.getPlaca());
         dto.setRenavam(entity.getRenavam());
         dto.setStatus(entity.getStatus());
+        dto.setEmpresa(entity.getEmpresa().getNome());
         return dto;
     }
 
