@@ -112,6 +112,9 @@ public class TrabalhoServiceEJB implements CadastroDeTrablho {
 		if (trabalho.getDeleted()) {
 			throw new ServiceException("Este trabalho ja foi deletado.");
 		}
+		if (trabalho.getStatusTrabalho().equals("Em_vigencia")) {
+			throw new ServiceException("Este trabalho não pode ser deletado pois está em vigência.");
+		}
 		
 		trabalho.setDeleted(true);
 		trabalhoRepository.save(trabalho);
