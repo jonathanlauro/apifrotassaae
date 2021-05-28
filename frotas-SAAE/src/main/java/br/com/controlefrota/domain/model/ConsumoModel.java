@@ -12,7 +12,7 @@ public class ConsumoModel {
 	private Float litros;
 	private Float valor;
 	private String numeroDaNotaFiscal;
-	private LocalDate dataDeRegistro;
+	private LocalDate dataDeRegistro; 
 	
 	public Long getIdConsumo() {
 		return idConsumo;
