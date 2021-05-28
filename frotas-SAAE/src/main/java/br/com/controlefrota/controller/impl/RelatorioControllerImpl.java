@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
 import com.lowagie.text.DocumentException;
 
@@ -21,7 +21,7 @@ import br.com.controlefrota.repository.ConsumoRepository;
 import br.com.controlefrota.service.relatorio.ConsumoPDFExport;
 import br.com.controlefrota.service.relatorio.RelatorioService;
 
-@RestController
+@Controller
 public class RelatorioControllerImpl implements RelatorioController {
 
 	@Autowired
