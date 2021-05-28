@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.controlefrota.domain.model.TrabalhoModel;
 import br.com.controlefrota.model.Trabalho;
 
 @RestController
@@ -19,7 +20,7 @@ import br.com.controlefrota.model.Trabalho;
 public interface TrabalhoController {
 
 	@GetMapping
-	public List<Trabalho> listatrabalhos();
+	public List<TrabalhoModel> listatrabalhos();
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> listaUnicotrabalhoPorId(@PathVariable(value = "id") long id);

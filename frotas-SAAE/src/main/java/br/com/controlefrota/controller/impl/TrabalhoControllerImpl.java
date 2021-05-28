@@ -1,6 +1,7 @@
 package br.com.controlefrota.controller.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.controlefrota.controller.TrabalhoController;
+import br.com.controlefrota.domain.model.TrabalhoModel;
 import br.com.controlefrota.model.Trabalho;
 import br.com.controlefrota.repository.TrabalhoRepository;
 import br.com.controlefrota.service.impl.TrabalhoServiceEJB;
@@ -24,8 +26,8 @@ public class TrabalhoControllerImpl implements TrabalhoController {
 	TrabalhoServiceEJB trabalhoService;
 
 	@Override
-	public List<Trabalho> listatrabalhos() {
-		return trabalhoService.findAll();
+	public List<TrabalhoModel> listatrabalhos() {
+		return trabalhoService.findAll().stream().map(this::toDto).collect(Collectors.toList());
 	}
 
 	@Override
@@ -81,4 +83,14 @@ public class TrabalhoControllerImpl implements TrabalhoController {
 
 		}
 	}
+	
+	public TrabalhoModel toDto(Trabalho entity) {
+        TrabalhoModel dto = new TrabalhoModel();
+        dto.setIdTrabalho(entity.getIdTrabalho());
+        dto.setVeiculo(entity.getVeiculo().getModelo());
+        dto.setCondutor(entity.getCondutor().getNome());
+        dto.setDataInicio(entity.getDataInicioVigencia());
+        dto.setStatusTrabalho(entity.getStatusTrabalho());
+        return dto;
+    }
 }
