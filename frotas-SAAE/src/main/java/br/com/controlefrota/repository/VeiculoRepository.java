@@ -5,17 +5,17 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.controlefrota.model.VeiculoModel;
+import br.com.controlefrota.model.Veiculo;
 
 @Repository
-public interface VeiculoRepository extends JpaRepository<VeiculoModel, Long> {
+public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 
-	VeiculoModel findById(long idVeiculo);
+	Veiculo findById(long idVeiculo);
 
-	VeiculoModel findByPlaca(String placa);
+	Veiculo findByPlaca(String placa);
 
-	VeiculoModel findByRenavam(String renavam);
+	Veiculo findByRenavam(String renavam);
 	
-	List<VeiculoModel>findByDeleted(boolean deleted);
+	List<Veiculo>findByDeleted(boolean deleted);
 
 }

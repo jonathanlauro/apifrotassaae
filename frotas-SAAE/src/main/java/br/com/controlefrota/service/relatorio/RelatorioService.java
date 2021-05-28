@@ -1,11 +1,11 @@
-package br.com.controlefrota.service;
+package br.com.controlefrota.service.relatorio;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.controlefrota.model.ConsumoModel;
+import br.com.controlefrota.model.Consumo;
 import br.com.controlefrota.model.RelatorioConsumosModel;
 import br.com.controlefrota.repository.ConsumoRepository;
 
@@ -23,9 +23,9 @@ public class RelatorioService {
 		
 		RelatorioConsumosModel consumoRel = new RelatorioConsumosModel();
 		
-		List<ConsumoModel> listConsumos = consumoRepository.findAll();
+		List<Consumo> listConsumos = consumoRepository.findAll();
 		
-		for(ConsumoModel con:listConsumos) {
+		for(Consumo con:listConsumos) {
 			this.totalNotas+=1;
 			this.totalLitrosAbastecidos+=con.getLitros();
 			this.totalConsumosEmReais += con.getValor();

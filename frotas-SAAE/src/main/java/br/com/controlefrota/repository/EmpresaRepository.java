@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.controlefrota.model.EmpresaModel;
+import br.com.controlefrota.model.Empresa;
 
 @Repository
-public interface EmpresaRepository extends JpaRepository<EmpresaModel, Long> {
+public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 
-	EmpresaModel findById(long id);
-	EmpresaModel findByCNPJ(String cnpj);
-	List<EmpresaModel> findByDeleted(boolean deleted);
+	Empresa findById(long id);
+	Empresa findByCNPJ(String cnpj);
+	List<Empresa> findByDeleted(boolean deleted);
 
 }

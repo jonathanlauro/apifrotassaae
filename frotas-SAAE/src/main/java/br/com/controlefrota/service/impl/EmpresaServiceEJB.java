@@ -1,4 +1,4 @@
-package br.com.controlefrota.service;
+package br.com.controlefrota.service.impl;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,24 +7,26 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.controlefrota.model.EmpresaModel;
+import br.com.controlefrota.model.Empresa;
 import br.com.controlefrota.repository.EmpresaRepository;
+import br.com.controlefrota.service.CadastroDeEmpresa;
 
 @Service
-public class EmpresaService {
+public class EmpresaServiceEJB implements CadastroDeEmpresa {
 	@Autowired
 	EmpresaRepository empresaRepository;
 
-	public EmpresaModel cadastrarEmpresa(EmpresaModel empresa) {
+	@Override
+	public Empresa cadastrarEmpresa(Empresa empresa) {
 
-		if ( empresa.getCNPJ() == null || empresa.getNome() == null) {
+		if (empresa.getCNPJ() == null || empresa.getNome() == null) {
 			throw new NullPointerException("Preencha todos os campos");
 		}
-		EmpresaModel e = empresaRepository.findByCNPJ(empresa.getCNPJ());
+		Empresa e = empresaRepository.findByCNPJ(empresa.getCNPJ());
 		if (e != null && e.isDeleted() == false) {
 			throw new ServiceException("Empresa já cadastrada");
 		}
-		if (e != null && e.isDeleted() == true){
+		if (e != null && e.isDeleted() == true) {
 			empresa.setId(e.getId());
 			empresa.setDeleted(false);
 			empresa.setDataDeCriacao(LocalDate.now());
@@ -44,36 +46,44 @@ public class EmpresaService {
 			return empresaRepository.save(empresa);
 		}
 	}
-	public List<EmpresaModel> findAll(){
+
+	@Override
+	public List<Empresa> findAll() {
 		return empresaRepository.findByDeleted(false);
 	}
-	public EmpresaModel findById(long id) {
-		EmpresaModel empresa = empresaRepository.findById(id);
-		
-		if(empresa == null) {
+
+	@Override
+	public Empresa findById(long id) {
+		Empresa empresa = empresaRepository.findById(id);
+
+		if (empresa == null) {
 			throw new ServiceException("Empresa não encontrada.");
 		}
-		
+
 		return empresa;
 	}
+
+	@Override
 	public void delete(long id) {
-		EmpresaModel e = empresaRepository.findById(id);
-		
-		if(e == null) {
-			throw  new NullPointerException("Empresa não encontrada!");
-		}else {
+		Empresa e = empresaRepository.findById(id);
+
+		if (e == null) {
+			throw new NullPointerException("Empresa não encontrada!");
+		} else {
 			e.setDeleted(true);
 			empresaRepository.save(e);
 		}
-		
+
 	}
-	public EmpresaModel findByCNPJ(String cnpj) {
-		EmpresaModel empresa = empresaRepository.findByCNPJ(cnpj);
-		
-		if(empresa == null) {
+
+	@Override
+	public Empresa findByCNPJ(String cnpj) {
+		Empresa empresa = empresaRepository.findByCNPJ(cnpj);
+
+		if (empresa == null) {
 			throw new ServiceException("Empresa não encontrada.");
 		}
-		
+
 		return empresa;
 	}
 

@@ -16,7 +16,7 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="TB_CONDUTOR")
-public class CondutorModel implements Serializable{
+public class Condutor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,7 @@ public class CondutorModel implements Serializable{
 	private boolean deleted;
 	
 	@OneToMany(mappedBy = "condutor",cascade = CascadeType.ALL)
-	private List<ConsumoModel> consumo;
+	private List<Consumo> consumo;
 	
 	private LocalDate dataDeCriacao;
 	

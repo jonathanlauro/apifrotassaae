@@ -1,4 +1,4 @@
-package br.com.controlefrota.service;
+package br.com.controlefrota.service.impl;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,21 +7,23 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.controlefrota.model.EmpresaModel;
-import br.com.controlefrota.model.VeiculoModel;
+import br.com.controlefrota.model.Empresa;
+import br.com.controlefrota.model.Veiculo;
 import br.com.controlefrota.repository.EmpresaRepository;
 import br.com.controlefrota.repository.VeiculoRepository;
+import br.com.controlefrota.service.CadastroDeVeiculo;
 
 @Service
-public class VeiculoService {
+public class VeiculoServiceEJB implements CadastroDeVeiculo{
 
 	@Autowired
 	EmpresaRepository empresaRepository;
 	@Autowired
 	VeiculoRepository veiculoRepository;
 
-	public VeiculoModel criar(VeiculoModel veiculo) throws Exception {
-		VeiculoModel v = veiculoRepository.findByPlaca(veiculo.getPlaca());
+	@Override
+	public Veiculo criar(Veiculo veiculo) throws Exception {
+		Veiculo v = veiculoRepository.findByPlaca(veiculo.getPlaca());
 		if (v != null && v.isDeleted() == false) {
 			throw new ServiceException("Veículo ja cadastrado.");
 		}
@@ -36,7 +38,7 @@ public class VeiculoService {
 			return veiculoRepository.save(veiculo);
 		}else {
 			
-			EmpresaModel empresa = empresaRepository.findById(veiculo.getEmpresa().getId())
+			Empresa empresa = empresaRepository.findById(veiculo.getEmpresa().getId())
 					.orElseThrow(() -> new Exception("Empresa nao encontrado"));
 			veiculo.setEmpresa(empresa);
 			veiculo.setStatus("Disponivel");
@@ -60,8 +62,9 @@ public class VeiculoService {
 		
 	}
 
+	@Override
 	public void deletar(long id) {
-		VeiculoModel veiculo = veiculoRepository.findById(id);
+		Veiculo veiculo = veiculoRepository.findById(id);
 
 		if (veiculo == null) {
 			throw new ServiceException("Veículo não encontrado.");
@@ -73,12 +76,15 @@ public class VeiculoService {
 		veiculo.setDeleted(true);
 		veiculoRepository.save(veiculo);
 	}
-	public List<VeiculoModel> findAll(){
+	
+	@Override
+	public List<Veiculo> findAll(){
 		return veiculoRepository.findByDeleted(false);
 	}
 
-	public VeiculoModel findById(long id) {
-		VeiculoModel veiculo = veiculoRepository.findById(id);
+	@Override
+	public Veiculo findById(long id) {
+		Veiculo veiculo = veiculoRepository.findById(id);
 
 		if (veiculo == null) {
 			throw new ServiceException("Veículo não encontrado.");
@@ -86,8 +92,9 @@ public class VeiculoService {
 		return veiculo;
 	}
 
-	public VeiculoModel findByPlaca(String placa) {
-		VeiculoModel veiculo = veiculoRepository.findByPlaca(placa);
+	@Override
+	public Veiculo findByPlaca(String placa) {
+		Veiculo veiculo = veiculoRepository.findByPlaca(placa);
 
 		if (veiculo == null) {
 			throw new ServiceException("Veículo não encontrado.");
@@ -95,8 +102,9 @@ public class VeiculoService {
 		return veiculo;
 	}
 
-	public VeiculoModel findByRenavam(String renavam) {
-		VeiculoModel veiculo = veiculoRepository.findByRenavam(renavam);
+	@Override
+	public Veiculo findByRenavam(String renavam) {
+		Veiculo veiculo = veiculoRepository.findByRenavam(renavam);
 
 		if (veiculo == null) {
 			throw new ServiceException("Veículo não encontrado.");

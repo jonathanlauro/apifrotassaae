@@ -2,9 +2,6 @@ package br.com.controlefrota.controller;
 
 import java.util.List;
 
-import org.hibernate.service.spi.ServiceException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,80 +12,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.controlefrota.model.VeiculoModel;
-import br.com.controlefrota.repository.VeiculoRepository;
-import br.com.controlefrota.service.VeiculoService;
+import br.com.controlefrota.domain.model.VeiculoModel;
+import br.com.controlefrota.model.Veiculo;
 
 @RestController
 @RequestMapping("/veiculos")
-public class VeiculoController {
-
-	@Autowired
-	VeiculoRepository veiculoRepository;
-	
-	@Autowired
-	VeiculoService veiculoService;
+public interface VeiculoController {
 
 	@GetMapping
-	public List<VeiculoModel> listarVeiculos() {
-		return veiculoService.findAll();
-	}
+	public List<VeiculoModel> listarVeiculos();
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> procurarPorId(@PathVariable(value="id") long id) {
-		try {
-			return new ResponseEntity<VeiculoModel>(veiculoService.findById(id), HttpStatus.OK);
-		}catch(ServiceException e){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+ e);
-		}
-	}
+	public ResponseEntity<?> procurarPorId(@PathVariable(value = "id") long id);
 
 	@GetMapping("/{placa}/placa")
-	public ResponseEntity<?> procurarPorPlaca(@PathVariable String placa) {
-		try {
-			return new ResponseEntity<VeiculoModel>(veiculoService.findByPlaca(placa), HttpStatus.OK);
-		}catch(ServiceException e){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+ e);
-		}
-	}
- 
+	public ResponseEntity<?> procurarPorPlaca(@PathVariable String placa);
+
 	@GetMapping("/{renavam}/renavam")
-	public ResponseEntity<?> procurarPorRenavam(@PathVariable String renavam) {
-		try {
-			return new ResponseEntity<VeiculoModel>(veiculoService.findByPlaca(renavam), HttpStatus.OK);
-		}catch(ServiceException e){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found! "+ e);
-		}
-	}
+	public ResponseEntity<?> procurarPorRenavam(@PathVariable String renavam);
 
 	@PatchMapping
-	public ResponseEntity<?> atualizarVeiculo(@RequestBody VeiculoModel veiculo) {
-
-		veiculoRepository.save(veiculo);
-		return ResponseEntity.status(HttpStatus.OK).body("Veículo alterado com sucesso!");
-	}
+	public ResponseEntity<?> atualizarVeiculo(@RequestBody Veiculo veiculo);
 
 	@PostMapping
-	public ResponseEntity<?> cadastrarVeiculo(@RequestBody VeiculoModel veiculo) throws Exception {
-		try {
-			
-			veiculoService.criar(veiculo);
-			return ResponseEntity.status(HttpStatus.OK).body("Veículo cadastrado com sucesso!");
-		}catch(Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar! "+e);
-		}
-	}
+	public ResponseEntity<?> cadastrarVeiculo(@RequestBody Veiculo veiculo) throws Exception;
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletarVeiculo(@PathVariable long id) {
-		
-		try {
-			veiculoService.deletar(id);
-			return ResponseEntity.status(HttpStatus.OK).body("Veículo deletado com sucesso!");
-		}catch(ServiceException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar veículo! "+ e);
-		}
-
-	}
-
+	public ResponseEntity<?> deletarVeiculo(@PathVariable long id);
 }

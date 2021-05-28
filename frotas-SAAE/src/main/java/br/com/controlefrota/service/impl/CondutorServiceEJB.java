@@ -1,4 +1,4 @@
-package br.com.controlefrota.service;
+package br.com.controlefrota.service.impl;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,18 +7,19 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.controlefrota.model.CondutorModel;
+import br.com.controlefrota.model.Condutor;
 import br.com.controlefrota.repository.CondutorRepository;
+import br.com.controlefrota.service.CadastroDeCondutor;
 
 @Service
-public class CondutorService {
+public class CondutorServiceEJB implements CadastroDeCondutor {
 
 	@Autowired
 	CondutorRepository condutorRepository;
-
 	
-	public CondutorModel criar(CondutorModel condutor) {
-		CondutorModel condutorA = condutorRepository.findByCNH(condutor.getCNH());
+	@Override
+	public Condutor criar(Condutor condutor) {
+		Condutor condutorA = condutorRepository.findByCNH(condutor.getCNH());
 		if (condutor.getNome() == null || condutor.getCPF() == null || condutor.getCNH() == null) {
 			throw new ServiceException("Por favor, preencha todos os campos");
 		}
@@ -26,17 +27,14 @@ public class CondutorService {
 			throw new ServiceException("Condutor já cadastrado no sistema!");
 		}
 
-
-		if(condutorA != null && condutorA.getCPF().equals(condutor.getCPF())) {
+		if (condutorA != null && condutorA.getCPF().equals(condutor.getCPF())) {
 			condutor.setId(condutorA.getId());
 			condutor.setDeleted(false);
 			condutor.setDataDeCriacao(LocalDate.now());
 			condutor.setStatus("Disponivel");
 			return condutorRepository.save(condutor);
-		}else {
-			
-		
-		
+		} else {
+
 			if (condutor.getCPF().equals("00000000000") || condutor.getCPF().equals("11111111111")
 					|| condutor.getCPF().equals("22222222222") || condutor.getCPF().equals("33333333333")
 					|| condutor.getCPF().equals("44444444444") || condutor.getCPF().equals("55555555555")
@@ -62,32 +60,36 @@ public class CondutorService {
 		}
 
 	}
-
-	public CondutorModel findById(long id) {
-		CondutorModel condutor = condutorRepository.findById(id);
-
-		if (condutor == null) {
-			throw new ServiceException("condutor não encontrado");
-		}
-		return condutor;
-
-	}
-
-	public CondutorModel findByCnh(String cnh) {
-		CondutorModel condutor = condutorRepository.findByCNH(cnh);
+	
+	@Override
+	public Condutor findById(long id) {
+		Condutor condutor = condutorRepository.findById(id);
 
 		if (condutor == null) {
 			throw new ServiceException("condutor não encontrado");
 		}
 		return condutor;
+
 	}
 	
-	public List<CondutorModel> findAll(){
+	@Override
+	public Condutor findByCnh(String cnh) {
+		Condutor condutor = condutorRepository.findByCNH(cnh);
+
+		if (condutor == null) {
+			throw new ServiceException("condutor não encontrado");
+		}
+		return condutor;
+	}
+
+	@Override
+	public List<Condutor> findAll() {
 		return condutorRepository.findByDeleted(false);
 	}
 
+	@Override
 	public void deletar(long id) {
-		CondutorModel condutor = condutorRepository.findById(id);
+		Condutor condutor = condutorRepository.findById(id);
 
 		if (condutor.getStatus().equals("Em_trabalho")) {
 			throw new ServiceException("Condutor não pode ser excluido pois está em trabalho.");

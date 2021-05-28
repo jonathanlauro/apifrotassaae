@@ -12,7 +12,7 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="TB_COMBUSTIVEL")
-public class CombustivelModel implements Serializable{
+public class Combustivel implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +24,15 @@ public class CombustivelModel implements Serializable{
 	@NotNull
 	private String nome;
 	
+	public Combustivel() {
+	}
+	
+	public Combustivel(Long id, int tipo, String nome) {
+		super();
+		this.id = id;
+		this.tipo = tipo;
+		this.nome = nome;
+	}
 	
 	public Long getId() {
 		return id;

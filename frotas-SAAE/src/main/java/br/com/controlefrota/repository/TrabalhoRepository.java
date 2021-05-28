@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.controlefrota.model.CondutorModel;
-import br.com.controlefrota.model.TrabalhoModel;
-import br.com.controlefrota.model.VeiculoModel;
+import br.com.controlefrota.model.Condutor;
+import br.com.controlefrota.model.Trabalho;
+import br.com.controlefrota.model.Veiculo;
 
 @Repository
-public interface TrabalhoRepository extends JpaRepository<TrabalhoModel, Long>{
+public interface TrabalhoRepository extends JpaRepository<Trabalho, Long>{
 
-	TrabalhoModel findById(long id);
-	TrabalhoModel findByCondutor(CondutorModel condutor);
-	TrabalhoModel findByVeiculo(VeiculoModel veiculo);
-	List<TrabalhoModel> findByStatusTrabalho(String Status);
-
+	Trabalho findById(long id);
+	Trabalho findByCondutor(Condutor condutor);
+	Trabalho findByVeiculo(Veiculo veiculo);
+	List<Trabalho> findByStatusTrabalho(String Status);
+	List<Trabalho>findByDeleted(boolean deleted);
 }

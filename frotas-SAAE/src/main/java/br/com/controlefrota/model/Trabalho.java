@@ -14,7 +14,7 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "TB_TRABALHO")
-public class TrabalhoModel {
+public class Trabalho {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +23,10 @@ public class TrabalhoModel {
 	@NotNull
 	@OneToOne
 	@JoinColumn(name = "condutor_id", referencedColumnName="id")
-	private CondutorModel condutor;
+	private Condutor condutor;
 	@NotNull
 	@OneToOne 
-	private VeiculoModel veiculo;
+	private Veiculo veiculo;
 	@NotNull
 	private String KmInicial;
 	private String kmFinal;
@@ -35,6 +35,17 @@ public class TrabalhoModel {
 	private LocalDate DataFimVigencia;
 	
 	private LocalDate dataDeCriacao;
+	private Boolean deleted;
+	
+	
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	public Long getIdTrabalho() {
 		return idTrabalho; 
@@ -44,19 +55,19 @@ public class TrabalhoModel {
 		this.idTrabalho = idTrabalho;
 	}
 
-	public CondutorModel getCondutor() {
+	public Condutor getCondutor() {
 		return condutor;
 	}
 
-	public void setCondutor(CondutorModel condutor) {
+	public void setCondutor(Condutor condutor) {
 		this.condutor = condutor;
 	}
 
-	public VeiculoModel getVeiculo() {
+	public Veiculo getVeiculo() {
 		return veiculo;
 	}
 
-	public void setVeiculo(VeiculoModel veiculo) {
+	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
 	}
 

@@ -17,7 +17,7 @@ import com.sun.istack.Nullable;
 
 @Entity
 @Table(name = "TB_CONSUMO")
-public class ConsumoModel implements Serializable {
+public class Consumo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,16 +28,16 @@ public class ConsumoModel implements Serializable {
 	@Nullable
 	@ManyToOne
 	@JoinColumn(name="condutor_id")
-	private CondutorModel condutor;
+	private Condutor condutor;
 	
 	@NotNull
 	@OneToOne
 	@JoinColumn(name="idVeiculo",referencedColumnName = "idVeiculo")
-	private VeiculoModel veiculo;
+	private Veiculo veiculo;
 	
 	@OneToOne
 	@JoinColumn(name="Combustivel_id",referencedColumnName = "id")
-	private CombustivelModel combustivel;
+	private Combustivel combustivel;
 	private LocalDate dataRegistro;
 	private Float km;
 	private Float litros;
@@ -53,22 +53,22 @@ public class ConsumoModel implements Serializable {
 		this.idConsumo = idConsumo;
 	}
 
-	public CondutorModel getCondutor() {
+	public Condutor getCondutor() {
 		return condutor;
 	}
-	public void setCondutor(CondutorModel condutor) {
+	public void setCondutor(Condutor condutor) {
 		this.condutor = condutor;
 	}
-	public VeiculoModel getVeiculo() {
+	public Veiculo getVeiculo() {
 		return veiculo;
 	}
-	public void setVeiculo(VeiculoModel veiculo) {
+	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
 	}
-	public CombustivelModel getCombustivel() {
+	public Combustivel getCombustivel() {
 		return combustivel;
 	}
-	public void setCombustivel(CombustivelModel combustivel) {
+	public void setCombustivel(Combustivel combustivel) {
 		this.combustivel = combustivel;
 	}
 	public LocalDate getDataRegistro() {

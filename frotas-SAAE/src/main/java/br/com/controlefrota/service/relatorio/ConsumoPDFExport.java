@@ -1,4 +1,4 @@
-package br.com.controlefrota.service;
+package br.com.controlefrota.service.relatorio;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -19,12 +19,12 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import br.com.controlefrota.model.ConsumoModel;
+import br.com.controlefrota.model.Consumo;
 import br.com.controlefrota.model.RelatorioConsumosModel;
 import br.com.controlefrota.repository.ConsumoRepository;
 public class ConsumoPDFExport {
 
-	private List <ConsumoModel> relatorioConsumos;
+	private List <Consumo> relatorioConsumos;
 	
 	private RelatorioConsumosModel rel;
 	
@@ -38,7 +38,7 @@ public class ConsumoPDFExport {
 	RelatorioService relatorioService;
 	
 	
-	public ConsumoPDFExport(List<ConsumoModel> relatorioConsumos) {
+	public ConsumoPDFExport(List<Consumo> relatorioConsumos) {
 		this.relatorioConsumos = relatorioConsumos;
 	}
 	
@@ -61,7 +61,7 @@ public class ConsumoPDFExport {
 	}
 	private void writeTableData(PdfPTable table) {
 
-		for(ConsumoModel consumo:relatorioConsumos) {
+		for(Consumo consumo:relatorioConsumos) {
 			this.totalNotas += 1;
 			this.totalLitrosAbastecidos += consumo.getLitros();
 			this.totalConsumosEmReais += consumo.getValor();
