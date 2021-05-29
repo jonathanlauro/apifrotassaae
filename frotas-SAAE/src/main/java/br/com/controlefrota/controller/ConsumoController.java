@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -15,18 +16,63 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.controlefrota.domain.model.ConsumoModel;
 import br.com.controlefrota.model.Consumo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("/consumos")
+@Api(value = "API REST Consumo", tags = "Consumos")
+@CrossOrigin(origins = "*")
 public interface ConsumoController {
 
 	@GetMapping
+	@ApiOperation(value = "Retorna uma lista de consumos")
+	@ApiResponses( value = {
+		@ApiResponse(code = 200, message = "SUCCESS", response = ConsumoModel.class),
+		@ApiResponse(code = 401, message = "UNAUTHORIZED"),
+		@ApiResponse(code = 403, message = "FORBIDDEN"),
+		@ApiResponse(code = 404, message = "NOT FOUND"),
+	})
 	public List<ConsumoModel> listaConsumos();
+	
 	@GetMapping("/{id}")
+	@ApiOperation(value = "Retorna um unico consumo")
+	@ApiResponses( value = {
+		@ApiResponse(code = 200, message = "SUCCESS", response = Consumo.class),
+		@ApiResponse(code = 401, message = "UNAUTHORIZED"),
+		@ApiResponse(code = 403, message = "FORBIDDEN"),
+		@ApiResponse(code = 404, message = "NOT FOUND"),
+	})
 	public Optional<Consumo> listaUnicoConsumoPorId(@PathVariable(value="id") Long id);
+	
 	@PostMapping
+	@ApiOperation(value = "Registrar um consumo")
+	@ApiResponses( value = {
+		@ApiResponse(code = 200, message = "SUCCESS", response = ConsumoModel.class),
+		@ApiResponse(code = 401, message = "UNAUTHORIZED"),
+		@ApiResponse(code = 403, message = "FORBIDDEN"),
+		@ApiResponse(code = 404, message = "NOT FOUND"),
+	})
 	public ResponseEntity<?> salvaconsumo(@RequestBody Consumo consumo);
+	
 	@PatchMapping
+	@ApiOperation(value = "Atualizar um unico consumo")
+	@ApiResponses( value = {
+		@ApiResponse(code = 200, message = "SUCCESS", response = ConsumoModel.class),
+		@ApiResponse(code = 401, message = "UNAUTHORIZED"),
+		@ApiResponse(code = 403, message = "FORBIDDEN"),
+		@ApiResponse(code = 404, message = "NOT FOUND"),
+	})
 	public Consumo atualizarConsumo(@RequestBody Consumo consumo);
+	
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Deletar um consumo")
+	@ApiResponses( value = {
+		@ApiResponse(code = 200, message = "SUCCESS", response = ConsumoModel.class),
+		@ApiResponse(code = 401, message = "UNAUTHORIZED"),
+		@ApiResponse(code = 403, message = "FORBIDDEN"),
+		@ApiResponse(code = 404, message = "NOT FOUND"),
+	})
 	public void deletarconsumo(@PathVariable Long id);
 }
