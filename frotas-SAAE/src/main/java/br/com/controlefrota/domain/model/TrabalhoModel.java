@@ -9,6 +9,7 @@ public class TrabalhoModel {
 	private String condutor;
 	private String veiculo;
 	private LocalDate dataInicio;
+	private LocalDate dataFim;
 	
 	public Long getIdTrabalho() {
 		return idTrabalho;
@@ -39,6 +40,12 @@ public class TrabalhoModel {
 	}
 	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
+	}
+	public LocalDate getDataFim() {
+		return dataFim;
+	}
+	public void setDataFim(LocalDate dataFim) {
+		this.dataFim = dataFim;
 	}
 	
 	
