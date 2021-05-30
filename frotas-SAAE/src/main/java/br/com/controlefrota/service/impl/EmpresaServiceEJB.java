@@ -16,6 +16,7 @@ public class EmpresaServiceEJB implements CadastroDeEmpresa {
 	@Autowired
 	EmpresaRepository empresaRepository;
 
+
 	@Override
 	public Empresa cadastrarEmpresa(Empresa empresa) {
 
@@ -67,12 +68,13 @@ public class EmpresaServiceEJB implements CadastroDeEmpresa {
 	public void delete(long id) {
 		Empresa e = empresaRepository.findById(id);
 
+
 		if (e == null) {
 			throw new NullPointerException("Empresa não encontrada!");
-		} else {
+		}
 			e.setDeleted(true);
 			empresaRepository.save(e);
-		}
+		
 
 	}
 

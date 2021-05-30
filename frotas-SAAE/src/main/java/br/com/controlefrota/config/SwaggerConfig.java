@@ -22,7 +22,8 @@ public class SwaggerConfig {
 	
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Controle de frotas")
-				.description("Controle de frotas de carros")
+				.description("Sistema de controle de frotas de veículos, "
+						+ " para suporte entre em contato com jonathanlauro.dev@gmail.com")
 				.version("1.0")
 				.build();
 	}
