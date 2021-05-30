@@ -90,6 +90,8 @@ public class TrabalhoControllerImpl implements TrabalhoController {
         dto.setVeiculo(entity.getVeiculo().getModelo());
         dto.setCondutor(entity.getCondutor().getNome());
         dto.setDataInicio(entity.getDataInicioVigencia());
+        dto.setIdConduto(entity.getCondutor().getId());
+        dto.setPlaca(entity.getVeiculo().getPlaca());
         dto.setDataFim(entity.getDataFimVigencia());
         dto.setStatusTrabalho(entity.getStatusTrabalho());
         return dto;

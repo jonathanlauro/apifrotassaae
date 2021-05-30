@@ -77,7 +77,6 @@ public class TrabalhoServiceEJB implements CadastroDeTrablho {
 			throw new ServiceException("Trabalho já foi encerrado!");
 		}
 		if (trabalho == null) {
-
 			throw new ServiceException("Trabalho não encontrado");
 		}
 		if (condutor == null) {
@@ -107,7 +106,7 @@ public class TrabalhoServiceEJB implements CadastroDeTrablho {
 		Trabalho trabalho = trabalhoRepository.findById(id);
 
 		if (trabalho == null) {
-			throw new ServiceException("Veículo não encontrado.");
+			throw new ServiceException("Trabalho não encontrado.");
 		}
 		if (trabalho.getDeleted()) {
 			throw new ServiceException("Este trabalho ja foi deletado.");

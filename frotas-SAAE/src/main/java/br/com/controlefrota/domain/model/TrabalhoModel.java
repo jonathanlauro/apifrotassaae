@@ -7,7 +7,9 @@ public class TrabalhoModel {
 	private Long idTrabalho;
 	private String statusTrabalho;
 	private String condutor;
+	private Long idConduto;
 	private String veiculo;
+	private String placa;
 	private LocalDate dataInicio;
 	private LocalDate dataFim;
 	
@@ -46,6 +48,18 @@ public class TrabalhoModel {
 	}
 	public void setDataFim(LocalDate dataFim) {
 		this.dataFim = dataFim;
+	}
+	public Long getIdConduto() {
+		return idConduto;
+	}
+	public void setIdConduto(Long idConduto) {
+		this.idConduto = idConduto;
+	}
+	public String getPlaca() {
+		return placa;
+	}
+	public void setPlaca(String placa) {
+		this.placa = placa;
 	}
 	
 	
