@@ -35,7 +35,14 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 		Veiculo veiculo = veiculoRepository.findByPlaca(consumo.getVeiculo().getPlaca());
 		Combustivel combustivel = combustivelRepository
 				.findById(Long.valueOf(consumo.getCombustivel().getId()).longValue());
-
+		
+		if(condutor.getStatus().equals("Disponivel")) {
+			throw new ServiceException("Só pode cadastrar consumo com condutor em status Em_trabalho");
+		}
+		if(veiculo.getStatus().equals("Disponivel")) {
+			throw new ServiceException("Só pode cadastrar consumo com veiculo com status Ocupado");
+		}
+		
 		consumo.setCombustivel(combustivel);
 		consumo.setCondutor(condutor);
 		consumo.setVeiculo(veiculo);

@@ -1,14 +1,21 @@
 package br.com.controlefrota.domain.model;
 
 import br.com.controlefrota.model.Veiculo;
+import io.swagger.annotations.ApiModelProperty;
 
 public class VeiculoModel {
 
+	@ApiModelProperty(value = "Id do veiculo")
 	private Long id;
+	@ApiModelProperty(value = "Modelo do veiculo")
 	private String modelo;
+	@ApiModelProperty(value = "Status do veículo de está em trabalho ou não")
 	private String status;
+	@ApiModelProperty(value = "Placa do veículo")
 	private String placa;
+	@ApiModelProperty(value = "Renavam (Documento do veículo)")
 	private String renavam;
+	@ApiModelProperty(value = "Nome da Empresa")
 	private String empresa;
 	
 	public VeiculoModel() {

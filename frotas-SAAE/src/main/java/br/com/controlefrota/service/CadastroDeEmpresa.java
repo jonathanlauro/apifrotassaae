@@ -15,4 +15,5 @@ public interface CadastroDeEmpresa {
 	public void delete(long id);
 	
 	public Empresa findByCNPJ(String cnpj);
+	
 }
