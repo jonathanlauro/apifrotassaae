@@ -18,6 +18,7 @@ import com.lowagie.text.DocumentException;
 import br.com.controlefrota.controller.RelatorioController;
 import br.com.controlefrota.model.Consumo;
 import br.com.controlefrota.repository.ConsumoRepository;
+import br.com.controlefrota.service.impl.ConsumoServiceEJB;
 import br.com.controlefrota.service.relatorio.ConsumoPDFExport;
 import br.com.controlefrota.service.relatorio.RelatorioService;
 
@@ -28,6 +29,8 @@ public class RelatorioControllerImpl implements RelatorioController {
 	ConsumoRepository consumoRepository;
 	@Autowired
 	RelatorioService relatorioService;
+	@Autowired
+	ConsumoServiceEJB consumoService;
 
 	@Override
 	public ResponseEntity<?> gerarRelatorioMacro(HttpServletResponse response) {
@@ -52,7 +55,7 @@ public class RelatorioControllerImpl implements RelatorioController {
 
 		response.setHeader(headerKey, headerValue);
 
-		List<Consumo> consumos = consumoRepository.findAll();
+		List<Consumo> consumos = consumoService.findAll();
 
 		ConsumoPDFExport consumoExport = new ConsumoPDFExport(consumos);
 		consumoExport.export(response);
