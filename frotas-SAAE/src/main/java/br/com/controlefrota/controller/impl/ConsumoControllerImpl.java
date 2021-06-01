@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.controlefrota.controller.ConsumoController;
 import br.com.controlefrota.domain.model.ConsumoModel;
+import br.com.controlefrota.model.Combustivel;
 import br.com.controlefrota.model.Consumo;
+import br.com.controlefrota.repository.CombustivelRepository;
 import br.com.controlefrota.repository.ConsumoRepository;
 import br.com.controlefrota.service.impl.ConsumoServiceEJB;
 
@@ -23,6 +25,9 @@ public class ConsumoControllerImpl implements ConsumoController{
 	ConsumoRepository consumoRepository;
 	@Autowired
 	ConsumoServiceEJB consumoService;
+	@Autowired
+	CombustivelRepository combustivelRepository;
+
 
 	@Override
 	public List<ConsumoModel> listaConsumos() {
@@ -56,6 +61,13 @@ public class ConsumoControllerImpl implements ConsumoController{
 		consumoRepository.deleteById(id);
 	}
 	
+	@Override
+	public List<ConsumoModel> listaUnicoConsumoPorCombustivel(String nome) {
+		
+		return consumoService.findbyCombustivel(nome);
+		
+	}
+	
 	public ConsumoModel toDto(Consumo entity) {
         ConsumoModel dto = new ConsumoModel();
         dto.setIdConsumo(entity.getIdConsumo());
@@ -69,4 +81,5 @@ public class ConsumoControllerImpl implements ConsumoController{
         dto.setDataDeRegistro(entity.getDataDeCriacao());
         return dto;
     }
+
 }

@@ -9,5 +9,7 @@ import br.com.controlefrota.model.Combustivel;
 public interface CombustivelRepository extends JpaRepository<Combustivel, Long> {
 	
 	Combustivel findById(long id);
+	
+	Combustivel findBynome(String nome);
 
 }

@@ -2,11 +2,13 @@ package br.com.controlefrota.service.impl;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.controlefrota.domain.model.ConsumoModel;
 import br.com.controlefrota.model.Combustivel;
 import br.com.controlefrota.model.Condutor;
 import br.com.controlefrota.model.Consumo;
@@ -68,4 +70,35 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 	
 		return consumoRepository.findByDeleted(false);
 	}
+
+	@Override
+	public List<ConsumoModel> findbyCombustivel(String nome) {
+		Combustivel combustivel = combustivelRepository.findBynome(nome);
+		
+		if(combustivel == null) {
+			throw new ServiceException("Não existe esse combustivel");
+		}
+		
+		List<ConsumoModel> consumos = consumoRepository.findByCombustivel(combustivel).stream().map(this::toDto).collect(Collectors.toList());;
+		
+		if(consumos == null) {
+			throw new ServiceException("Não existe consumos com esse combustivel");
+		}
+			
+		return consumos;
+	}
+	
+	public ConsumoModel toDto(Consumo entity) {
+        ConsumoModel dto = new ConsumoModel();
+        dto.setIdConsumo(entity.getIdConsumo());
+        dto.setCondutor(entity.getCondutor().getNome());
+        dto.setVeiculo(entity.getVeiculo().getModelo());
+        dto.setCombustivel(entity.getCombustivel().getNome());
+        dto.setLitros(entity.getLitros());
+        dto.setValor(entity.getValor());
+        dto.setNumeroDaNotaFiscal(entity.getNumNotaFiscal());
+        dto.setDataRegistroDaNota(entity.getDataRegistro());
+        dto.setDataDeRegistro(entity.getDataDeCriacao());
+        return dto;
+    }
 }

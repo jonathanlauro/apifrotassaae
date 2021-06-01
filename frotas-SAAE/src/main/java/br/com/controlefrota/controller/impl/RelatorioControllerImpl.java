@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import com.lowagie.text.DocumentException;
 
 import br.com.controlefrota.controller.RelatorioController;
+import br.com.controlefrota.domain.model.ConsumoModel;
 import br.com.controlefrota.model.Consumo;
 import br.com.controlefrota.repository.ConsumoRepository;
 import br.com.controlefrota.service.impl.ConsumoServiceEJB;
@@ -56,8 +57,11 @@ public class RelatorioControllerImpl implements RelatorioController {
 		response.setHeader(headerKey, headerValue);
 
 		List<Consumo> consumos = consumoService.findAll();
+		List<ConsumoModel> gasolina = consumoService.findbyCombustivel("GASOLINA");
+		List<ConsumoModel> alcool = consumoService.findbyCombustivel("ALCOOL");
+		List<ConsumoModel> disel = consumoService.findbyCombustivel("DIESEL");
 
-		ConsumoPDFExport consumoExport = new ConsumoPDFExport(consumos);
+		ConsumoPDFExport consumoExport = new ConsumoPDFExport(consumos,gasolina,alcool,disel);
 		consumoExport.export(response);
 
 		return ResponseEntity.status(HttpStatus.OK).body("Relatório de Consumos Gerado com sucesso");

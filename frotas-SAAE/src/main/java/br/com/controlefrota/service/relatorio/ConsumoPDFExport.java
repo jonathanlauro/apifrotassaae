@@ -19,12 +19,16 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
+import br.com.controlefrota.domain.model.ConsumoModel;
 import br.com.controlefrota.model.Consumo;
 import br.com.controlefrota.model.RelatorioConsumosModel;
 import br.com.controlefrota.repository.ConsumoRepository;
 public class ConsumoPDFExport {
 
 	private List <Consumo> relatorioConsumos;
+	private List <ConsumoModel> totalConsumoGasolina;
+	private List <ConsumoModel> totalConsumoAlcool;
+	private List <ConsumoModel> totalConsumoDisel;
 	
 	private RelatorioConsumosModel rel;
 	
@@ -32,14 +36,34 @@ public class ConsumoPDFExport {
 	private float totalConsumosEmReais;
 	private float totalLitrosAbastecidos;
 	
+
+	private int totalNotasGasolina = 0;
+	private float totalConsumosEmReaisGasolina = 0;
+	private float totalLitrosAbastecidosGasolina = 0;
+	
+
+	private int totalNotasAlcool;
+	private float totalConsumosEmReaisAlcool;
+	private float totalLitrosAbastecidosAlcool;
+	
+
+	private int totalNotasDisel;
+	private float totalConsumosEmReaisDisel;
+	private float totalLitrosAbastecidosDisel;
+	
 	@Autowired
 	ConsumoRepository consumoRepository;
 	@Autowired
 	RelatorioService relatorioService;
 	
 	
-	public ConsumoPDFExport(List<Consumo> relatorioConsumos) {
+	public ConsumoPDFExport(List<Consumo> relatorioConsumos,List <ConsumoModel> totalConsumoGasolina,
+			List <ConsumoModel> totalConsumoAlcool, List <ConsumoModel> totalConsumoDisel) {
+		
 		this.relatorioConsumos = relatorioConsumos;
+		this.totalConsumoGasolina = totalConsumoGasolina;
+		this.totalConsumoAlcool = totalConsumoAlcool;
+		this.totalConsumoDisel = totalConsumoDisel;
 	}
 	
 	private void writerTableHeader(PdfPTable table) {
@@ -73,6 +97,49 @@ public class ConsumoPDFExport {
 		table.addCell(String.valueOf(this.totalLitrosAbastecidos));
 		table.addCell("R$ "+String.valueOf(this.totalConsumosEmReais));
 	} 
+	
+	private void writeTableDataGasolina(PdfPTable table) {
+
+		for(ConsumoModel consumoGasolina:totalConsumoGasolina) {
+			this.totalNotasGasolina += 1;
+			this.totalLitrosAbastecidosGasolina += consumoGasolina.getLitros();
+			this.totalConsumosEmReaisGasolina += consumoGasolina.getValor();
+		}
+		
+		
+		
+		table.addCell(String.valueOf(this.totalNotasGasolina));
+		table.addCell(String.valueOf(this.totalLitrosAbastecidosGasolina));
+		table.addCell("R$ "+String.valueOf(this.totalConsumosEmReaisGasolina));
+	}
+	private void writeTableDataAlcool(PdfPTable table) {
+
+		for(ConsumoModel consumoAlcool:totalConsumoGasolina) {
+			this.totalNotasGasolina += 1;
+			this.totalLitrosAbastecidosGasolina += consumoAlcool.getLitros();
+			this.totalConsumosEmReaisGasolina += consumoAlcool.getValor();
+		}
+		
+		
+		
+		table.addCell(String.valueOf(this.totalNotasAlcool));
+		table.addCell(String.valueOf(this.totalLitrosAbastecidosAlcool));
+		table.addCell("R$ "+String.valueOf(this.totalConsumosEmReaisAlcool));
+	}
+	private void writeTableDataDisel(PdfPTable table) {
+
+		for(ConsumoModel consumoDisel:totalConsumoGasolina) {
+			this.totalNotasGasolina += 1;
+			this.totalLitrosAbastecidosGasolina += consumoDisel.getLitros();
+			this.totalConsumosEmReaisGasolina += consumoDisel.getValor();
+		}
+		
+		
+		
+		table.addCell(String.valueOf(this.totalNotasDisel));
+		table.addCell(String.valueOf(this.totalLitrosAbastecidosDisel));
+		table.addCell("R$ "+String.valueOf(this.totalConsumosEmReaisDisel));
+	}
 	public void export(HttpServletResponse response) throws DocumentException, IOException {
 		Document document = new Document(PageSize.A4);
 		
@@ -95,17 +162,38 @@ public class ConsumoPDFExport {
 		
 //		Caso eu precise gerar duas tabelas eu uso o codigo abaixo
 		
-//		document.add(new Paragraph("Totalzinho:",font));
-//		PdfPTable table2 = new PdfPTable(3);
-//		table2.setWidthPercentage(100);
-//		table2.setSpacingBefore(15);
-//		table2.setSpacingAfter(10);
+		document.add(new Paragraph("Total de consumos a GASOLINA:",font));
+		PdfPTable table2 = new PdfPTable(3);
+		table2.setWidthPercentage(100);
+		table2.setSpacingBefore(15);
+		table2.setSpacingAfter(10);
 //		
-//		writerTableHeader(table2);
-//		writeTableData(table2);
+		writerTableHeader(table2);
+		writeTableDataGasolina(table2);
 //		
-//		document.add(table2);
+		document.add(table2);
 		
+		document.add(new Paragraph("Total de consumos a ÁLCOOL:",font));
+		PdfPTable table3 = new PdfPTable(3);
+		table3.setWidthPercentage(100);
+		table3.setSpacingBefore(15);
+		table3.setSpacingAfter(10);
+//		
+		writerTableHeader(table3);
+		writeTableDataAlcool(table3);
+//		
+		document.add(table3);
+		
+		document.add(new Paragraph("Total de consumos a DISEL:",font));
+		PdfPTable table4 = new PdfPTable(3);
+		table4.setWidthPercentage(100);
+		table4.setSpacingBefore(15);
+		table4.setSpacingAfter(10);
+//		
+		writerTableHeader(table4);
+		writeTableDataDisel(table4);
+//		
+		document.add(table4);
 		
 		document.close();
 	}
