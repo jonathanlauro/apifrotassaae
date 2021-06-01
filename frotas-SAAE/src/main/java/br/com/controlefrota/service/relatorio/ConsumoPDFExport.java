@@ -2,6 +2,8 @@ package br.com.controlefrota.service.relatorio;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -146,8 +148,14 @@ public class ConsumoPDFExport {
 		PdfWriter.getInstance(document, response.getOutputStream());
 		
 		document.open();
+		
+		Font font2 = FontFactory.getFont(FontFactory.HELVETICA);
+		font2.setSize(26);
+		document.add(new Paragraph("Relatório de Consumos:",font2));
+		
 		Font font = FontFactory.getFont(FontFactory.HELVETICA);
-		font.setSize(26);
+		font.setSize(18);
+		document.add(new Paragraph("       ",font));
 		document.add(new Paragraph("Total de consumos:",font));
 		
 		PdfPTable table = new PdfPTable(3);
@@ -161,7 +169,8 @@ public class ConsumoPDFExport {
 		
 		
 //		Caso eu precise gerar duas tabelas eu uso o codigo abaixo
-		
+		document.add(new Paragraph("       ",font));
+		document.add(new Paragraph("       ",font));
 		document.add(new Paragraph("Total de consumos a GASOLINA:",font));
 		PdfPTable table2 = new PdfPTable(3);
 		table2.setWidthPercentage(100);
@@ -173,6 +182,8 @@ public class ConsumoPDFExport {
 //		
 		document.add(table2);
 		
+		document.add(new Paragraph("       ",font));
+		document.add(new Paragraph("       ",font));
 		document.add(new Paragraph("Total de consumos a ÁLCOOL:",font));
 		PdfPTable table3 = new PdfPTable(3);
 		table3.setWidthPercentage(100);
@@ -184,7 +195,9 @@ public class ConsumoPDFExport {
 //		
 		document.add(table3);
 		
-		document.add(new Paragraph("Total de consumos a DISEL:",font));
+		document.add(new Paragraph("       ",font));
+		document.add(new Paragraph("       ",font));
+		document.add(new Paragraph("Total de consumos a DIESEL:",font));
 		PdfPTable table4 = new PdfPTable(3);
 		table4.setWidthPercentage(100);
 		table4.setSpacingBefore(15);
@@ -195,6 +208,17 @@ public class ConsumoPDFExport {
 //		
 		document.add(table4);
 		
+		document.add(new Paragraph("       ",font));
+		document.add(new Paragraph("       ",font));
+		document.add(new Paragraph("       ",font));
+		document.add(new Paragraph("       ",font));
+		
+		LocalDate dataAtual = LocalDate.now();
+		
+		DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+	    String text = dataAtual.format(formatters);
+		
+		document.add(new Paragraph("Data: " + text));
 		document.close();
 	}
 }
