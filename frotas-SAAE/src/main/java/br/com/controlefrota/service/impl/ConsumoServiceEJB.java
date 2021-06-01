@@ -1,6 +1,7 @@
 package br.com.controlefrota.service.impl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,13 +80,23 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 			throw new ServiceException("Não existe esse combustivel");
 		}
 		
-		List<ConsumoModel> consumos = consumoRepository.findByCombustivel(combustivel).stream().map(this::toDto).collect(Collectors.toList());;
+		List<Consumo> consumos = consumoRepository.findByCombustivel(combustivel);
+//				.stream().map(this::toDto).collect(Collectors.toList());
 		
-		if(consumos == null) {
+		List<Consumo> consumos2 = new ArrayList<>();
+		
+		for (Consumo consumoModel : consumos) {
+			if(consumoModel.getDeleted() == false) {
+				consumos2.add(consumoModel);
+			}
+		}
+		List<ConsumoModel> listaDeConsumos = consumos2.stream().map(this::toDto).collect(Collectors.toList());
+		
+		if(listaDeConsumos == null) {
 			throw new ServiceException("Não existe consumos com esse combustivel");
 		}
 			
-		return consumos;
+		return listaDeConsumos;
 	}
 	
 	public ConsumoModel toDto(Consumo entity) {
