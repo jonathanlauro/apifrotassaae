@@ -114,10 +114,10 @@ public class ConsumoPDFExport {
 	}
 	private void writeTableDataAlcool(PdfPTable table) {
 
-		for(ConsumoModel consumoAlcool:totalConsumoGasolina) {
-			this.totalNotasGasolina += 1;
-			this.totalLitrosAbastecidosGasolina += consumoAlcool.getLitros();
-			this.totalConsumosEmReaisGasolina += consumoAlcool.getValor();
+		for(ConsumoModel consumoAlcool:totalConsumoAlcool) {
+			this.totalNotasAlcool += 1;
+			this.totalLitrosAbastecidosAlcool += consumoAlcool.getLitros();
+			this.totalConsumosEmReaisAlcool += consumoAlcool.getValor();
 		}
 		
 		
@@ -128,10 +128,10 @@ public class ConsumoPDFExport {
 	}
 	private void writeTableDataDisel(PdfPTable table) {
 
-		for(ConsumoModel consumoDisel:totalConsumoGasolina) {
-			this.totalNotasGasolina += 1;
-			this.totalLitrosAbastecidosGasolina += consumoDisel.getLitros();
-			this.totalConsumosEmReaisGasolina += consumoDisel.getValor();
+		for(ConsumoModel consumoDisel:totalConsumoDisel) {
+			this.totalNotasDisel += 1;
+			this.totalLitrosAbastecidosDisel += consumoDisel.getLitros();
+			this.totalConsumosEmReaisDisel += consumoDisel.getValor();
 		}
 		
 		
