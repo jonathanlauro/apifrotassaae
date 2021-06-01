@@ -8,6 +8,7 @@ public class ConsumoModel {
 	private String condutor;
 	private String veiculo;
 	private String combustivel;
+	private String placa;
 	private LocalDate dataRegistroDaNota;
 	private Float litros;
 	private Float valor;
@@ -67,6 +68,12 @@ public class ConsumoModel {
 	}
 	public void setDataDeRegistro(LocalDate dataDeRegistro) {
 		this.dataDeRegistro = dataDeRegistro;
+	}
+	public String getPlaca() {
+		return placa;
+	}
+	public void setPlaca(String placa) {
+		this.placa = placa;
 	}
 	
 	

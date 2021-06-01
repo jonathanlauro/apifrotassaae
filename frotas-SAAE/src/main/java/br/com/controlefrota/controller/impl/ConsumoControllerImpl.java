@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.controlefrota.controller.ConsumoController;
 import br.com.controlefrota.domain.model.ConsumoModel;
-import br.com.controlefrota.model.Combustivel;
 import br.com.controlefrota.model.Consumo;
 import br.com.controlefrota.repository.CombustivelRepository;
 import br.com.controlefrota.repository.ConsumoRepository;
@@ -73,6 +72,7 @@ public class ConsumoControllerImpl implements ConsumoController{
         dto.setIdConsumo(entity.getIdConsumo());
         dto.setCondutor(entity.getCondutor().getNome());
         dto.setVeiculo(entity.getVeiculo().getModelo());
+        dto.setPlaca(entity.getVeiculo().getPlaca());
         dto.setCombustivel(entity.getCombustivel().getNome());
         dto.setLitros(entity.getLitros());
         dto.setValor(entity.getValor());
