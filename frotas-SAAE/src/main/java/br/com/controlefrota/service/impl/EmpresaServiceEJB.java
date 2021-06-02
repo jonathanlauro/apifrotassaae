@@ -3,6 +3,7 @@ package br.com.controlefrota.service.impl;
 import java.time.LocalDate;
 import java.util.List;
 
+import br.com.controlefrota.model.Cep;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.controlefrota.model.Empresa;
 import br.com.controlefrota.repository.EmpresaRepository;
 import br.com.controlefrota.service.CadastroDeEmpresa;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class EmpresaServiceEJB implements CadastroDeEmpresa {
@@ -24,13 +26,28 @@ public class EmpresaServiceEJB implements CadastroDeEmpresa {
 			throw new NullPointerException("Preencha todos os campos");
 		}
 		Empresa e = empresaRepository.findByCNPJ(empresa.getCNPJ());
-		if (e != null && e.isDeleted() == false) {
+
+		if (e != null && e.getDeleted() == null) {
 			throw new ServiceException("Empresa já cadastrada");
 		}
-		if (e != null && e.isDeleted() == true) {
+
+		String url = "http://viacep.com.br/ws/"+empresa.getCep()+"/json/";
+		RestTemplate restTemplate = new RestTemplate();
+		Cep cepResponse = restTemplate.getForObject(url,Cep.class);
+
+		if(cepResponse.isErro()) {
+			throw new ServiceException("Informe um CEP válido");
+		}
+
+		if (e != null && e.getDeleted() != null) {
+
 			empresa.setId(e.getId());
-			empresa.setDeleted(false);
+			empresa.setDeleted(null);
 			empresa.setDataDeCriacao(LocalDate.now());
+			empresa.setCidade(cepResponse.getLocalidade());
+			empresa.setEstado(cepResponse.getUf());
+			empresa.setBairro(cepResponse.getBairro());
+			empresa.setLogradouro(cepResponse.getLogradouro());
 			return empresaRepository.save(empresa);
 		} else {
 			if (empresa.getCNPJ().equals("00000000000000") || empresa.getCNPJ().equals("11111111111111")
@@ -43,14 +60,17 @@ public class EmpresaServiceEJB implements CadastroDeEmpresa {
 				throw new ServiceException("CNPJ inválido");
 			}
 			empresa.setDataDeCriacao(LocalDate.now());
-			empresa.setDeleted(false);
+			empresa.setCidade(cepResponse.getLocalidade());
+			empresa.setEstado(cepResponse.getUf());
+			empresa.setBairro(cepResponse.getBairro());
+			empresa.setLogradouro(cepResponse.getLogradouro());
 			return empresaRepository.save(empresa);
 		}
 	}
 
 	@Override
 	public List<Empresa> findAll() {
-		return empresaRepository.findByDeleted(false);
+		return empresaRepository.findByDeleted(null);
 	}
 
 	@Override
@@ -72,7 +92,7 @@ public class EmpresaServiceEJB implements CadastroDeEmpresa {
 		if (e == null) {
 			throw new NullPointerException("Empresa não encontrada!");
 		}
-			e.setDeleted(true);
+			e.setDeleted(LocalDate.now());
 			empresaRepository.save(e);
 		
 

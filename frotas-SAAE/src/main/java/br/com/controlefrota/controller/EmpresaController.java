@@ -2,6 +2,7 @@ package br.com.controlefrota.controller;
 
 import java.util.List;
 
+import br.com.controlefrota.domain.model.EmpresaModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +34,7 @@ public interface EmpresaController {
 		@ApiResponse(code = 401, message = "Toke Inválido", response = ErroModelo.class),
 		@ApiResponse(code = 500, message = "Erro interno no sistema", response = ErroModelo.class),
 	})
-	public List<Empresa> listaEmpresas();
+	public List<EmpresaModel> listaEmpresas();
 	
 	@GetMapping("/{id}")
 	@ApiOperation(value = "Retorna uma unica empresa")

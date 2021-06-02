@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
 
 @Entity
 @Table(name = "TB_EMPRESA")
@@ -24,11 +25,27 @@ public class Empresa {
 	private String CNPJ;
 	@NotNull
 	private String nome;
+
+	private String cep;
+
+	private String logradouro;
+
+	private String cidade;
+
+	private String estado;
+
+	private String bairro;
+
+	private String email;
+
+	private String telefone;
+
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "empresa")
 	private List<Veiculo> Veiculos;
 
 	private LocalDate dataDeCriacao;
-	private boolean deleted = false;
+	@Nullable
+	private LocalDate deleted;
 
 	public Long getId() {
 		return id;
@@ -62,14 +79,67 @@ public class Empresa {
 		this.dataDeCriacao = dataDeCriacao;
 	}
 
-	public boolean isDeleted() {
+	public LocalDate getDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(boolean deleted) {
+	public void setDeleted(LocalDate deleted) {
 		this.deleted = deleted;
 	}
-	
 
+	public String getCep() {
+		return cep;
+	}
 
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
 }

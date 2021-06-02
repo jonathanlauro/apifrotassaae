@@ -1,5 +1,6 @@
 package br.com.controlefrota.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,6 @@ public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 
 	Empresa findById(long id);
 	Empresa findByCNPJ(String cnpj);
-	List<Empresa> findByDeleted(boolean deleted);
+	List<Empresa> findByDeleted(LocalDate data);
 
 }

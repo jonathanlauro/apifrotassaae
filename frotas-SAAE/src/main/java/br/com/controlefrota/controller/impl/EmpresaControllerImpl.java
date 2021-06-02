@@ -1,7 +1,9 @@
 package br.com.controlefrota.controller.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.com.controlefrota.domain.model.EmpresaModel;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,8 +27,8 @@ public class EmpresaControllerImpl implements EmpresaController{
 	EmpresaServiceEJB empresaService;
 
 	@Override
-	public List<Empresa> listaEmpresas() {
-		return empresaService.findAll();
+	public List<EmpresaModel> listaEmpresas() {
+		return empresaService.findAll().stream().map(this::toDto).collect(Collectors.toList());
 	}
 
 	@Override
@@ -73,6 +75,21 @@ public class EmpresaControllerImpl implements EmpresaController{
 	@Override
 	public void deletarEmpresa(@PathVariable(value = "id") Long id) {
 		empresaService.delete(id);
+	}
+
+	public EmpresaModel toDto(Empresa entity) {
+		EmpresaModel dto = new EmpresaModel();
+		dto.setId(entity.getId());
+		dto.setNome(entity.getNome());
+		dto.setCNPJ(entity.getCNPJ());
+		dto.setEmail(entity.getEmail());
+		dto.setTelefone(entity.getTelefone());
+		dto.setLogradouro(entity.getLogradouro());
+		dto.setEstado(entity.getEstado());
+		dto.setCidade(entity.getCidade());
+		dto.setBairro(entity.getBairro());
+		dto.setCep(entity.getCep());
+		return dto;
 	}
 
 }
