@@ -35,9 +35,6 @@ public class EmpresaServiceEJB implements CadastroDeEmpresa {
 		RestTemplate restTemplate = new RestTemplate();
 		Cep cepResponse = restTemplate.getForObject(url,Cep.class);
 
-		if(cepResponse.isErro()) {
-			throw new ServiceException("Informe um CEP válido");
-		}
 
 		if (e != null && e.getDeleted() != null) {
 

@@ -16,6 +16,7 @@ import br.com.controlefrota.controller.EmpresaController;
 import br.com.controlefrota.model.Empresa;
 import br.com.controlefrota.repository.EmpresaRepository;
 import br.com.controlefrota.service.impl.EmpresaServiceEJB;
+import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
 public class EmpresaControllerImpl implements EmpresaController{
@@ -55,6 +56,9 @@ public class EmpresaControllerImpl implements EmpresaController{
 		
 			empresaService.cadastrarEmpresa(empresa);
 			return ResponseEntity.status(HttpStatus.OK).body("Empresa cadastrada com sucesso");
+		}catch(HttpClientErrorException a){
+
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Por favor Insira um CEP válido!");
 		} catch (NullPointerException n) {
 			
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar empresa!" + n);
