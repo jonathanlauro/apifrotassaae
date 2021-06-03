@@ -56,8 +56,14 @@ public class ConsumoControllerImpl implements ConsumoController{
 	}
 
 	@Override
-	public void deletarconsumo(@PathVariable Long id) {
-		consumoService.deletar(id);
+	public ResponseEntity<?> deletarconsumo(@PathVariable Long id) {
+
+		try{
+			consumoService.deletar(id);
+			return ResponseEntity.status(HttpStatus.OK).body("deletado com sucesso!");
+		}catch( Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! "+e);
+		}
 	}
 	
 	@Override

@@ -85,5 +85,5 @@ public interface ConsumoController {
 		@ApiResponse(code = 404, message = "Consumo não encontrado", response = ErroModelo.class),
 		@ApiResponse(code = 500, message = "Erro interno no sistema", response = ErroModelo.class),
 	})
-	public void deletarconsumo(@PathVariable Long id);
+	public ResponseEntity<?> deletarconsumo(@PathVariable Long id);
 }
