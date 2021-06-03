@@ -26,9 +26,9 @@ public class Condutor implements Serializable{
 	@NotNull
 	private String nome;
 	@NotNull
-	private String CNH;
+	private String cnh;
 	@NotNull
-	private String CPF;
+	private String cpf;
 	@NotNull
 	private String status = "Disponivel";
 	@NotNull
@@ -57,17 +57,17 @@ public class Condutor implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCNH() {
-		return CNH;
+	public String getCnh() {
+		return cnh;
 	}
-	public void setCNH(String cNH) {
-		CNH = cNH;
+	public void setCnh(String cNH) {
+		cnh = cNH;
 	}
-	public String getCPF() {
-		return CPF;
+	public String getCpf() {
+		return cpf;
 	}
-	public void setCPF(String cPF) {
-		CPF = cPF;
+	public void setCpf(String cPF) {
+		cpf = cPF;
 	}
 	public LocalDate getDataDeCriacao() {
 		return dataDeCriacao;

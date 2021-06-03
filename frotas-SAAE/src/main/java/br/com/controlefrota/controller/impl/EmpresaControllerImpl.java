@@ -88,10 +88,7 @@ public class EmpresaControllerImpl implements EmpresaController{
 		dto.setCNPJ(entity.getCNPJ());
 		dto.setEmail(entity.getEmail());
 		dto.setTelefone(entity.getTelefone());
-		dto.setLogradouro(entity.getLogradouro());
-		dto.setEstado(entity.getEstado());
-		dto.setCidade(entity.getCidade());
-		dto.setBairro(entity.getBairro());
+
 		dto.setCep(entity.getCep());
 		return dto;
 	}

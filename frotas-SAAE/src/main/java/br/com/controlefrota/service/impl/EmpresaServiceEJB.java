@@ -1,17 +1,14 @@
 package br.com.controlefrota.service.impl;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import br.com.controlefrota.model.Cep;
+import br.com.controlefrota.model.Empresa;
+import br.com.controlefrota.repository.EmpresaRepository;
+import br.com.controlefrota.service.CadastroDeEmpresa;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.controlefrota.model.Empresa;
-import br.com.controlefrota.repository.EmpresaRepository;
-import br.com.controlefrota.service.CadastroDeEmpresa;
-import org.springframework.web.client.RestTemplate;
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class EmpresaServiceEJB implements CadastroDeEmpresa {
@@ -31,20 +28,11 @@ public class EmpresaServiceEJB implements CadastroDeEmpresa {
 			throw new ServiceException("Empresa já cadastrada");
 		}
 
-		String url = "http://viacep.com.br/ws/"+empresa.getCep()+"/json/";
-		RestTemplate restTemplate = new RestTemplate();
-		Cep cepResponse = restTemplate.getForObject(url,Cep.class);
-
-
 		if (e != null && e.getDeleted() != null) {
 
 			empresa.setId(e.getId());
 			empresa.setDeleted(null);
 			empresa.setDataDeCriacao(LocalDate.now());
-			empresa.setCidade(cepResponse.getLocalidade());
-			empresa.setEstado(cepResponse.getUf());
-			empresa.setBairro(cepResponse.getBairro());
-			empresa.setLogradouro(cepResponse.getLogradouro());
 			return empresaRepository.save(empresa);
 		} else {
 			if (empresa.getCNPJ().equals("00000000000000") || empresa.getCNPJ().equals("11111111111111")
@@ -57,10 +45,6 @@ public class EmpresaServiceEJB implements CadastroDeEmpresa {
 				throw new ServiceException("CNPJ inválido");
 			}
 			empresa.setDataDeCriacao(LocalDate.now());
-			empresa.setCidade(cepResponse.getLocalidade());
-			empresa.setEstado(cepResponse.getUf());
-			empresa.setBairro(cepResponse.getBairro());
-			empresa.setLogradouro(cepResponse.getLogradouro());
 			return empresaRepository.save(empresa);
 		}
 	}

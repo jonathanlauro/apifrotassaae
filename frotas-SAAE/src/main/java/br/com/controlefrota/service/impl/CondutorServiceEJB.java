@@ -19,15 +19,15 @@ public class CondutorServiceEJB implements CadastroDeCondutor {
 	
 	@Override
 	public Condutor criar(Condutor condutor) {
-		Condutor condutorA = condutorRepository.findByCNH(condutor.getCNH());
-		if (condutor.getNome() == null || condutor.getCPF() == null || condutor.getCNH() == null) {
+		Condutor condutorA = condutorRepository.findByCNH(condutor.getCnh());
+		if (condutor.getNome() == null || condutor.getCpf() == null || condutor.getCnh() == null) {
 			throw new ServiceException("Por favor, preencha todos os campos");
 		}
 		if (condutorA != null && condutorA.isDeleted() == false) {
 			throw new ServiceException("Condutor já cadastrado no sistema!");
 		}
 
-		if (condutorA != null && condutorA.getCPF().equals(condutor.getCPF())) {
+		if (condutorA != null && condutorA.getCpf().equals(condutor.getCpf())) {
 			condutor.setId(condutorA.getId());
 			condutor.setDeleted(false);
 			condutor.setDataDeCriacao(LocalDate.now());
@@ -35,22 +35,22 @@ public class CondutorServiceEJB implements CadastroDeCondutor {
 			return condutorRepository.save(condutor);
 		} else {
 
-			if (condutor.getCPF().equals("00000000000") || condutor.getCPF().equals("11111111111")
-					|| condutor.getCPF().equals("22222222222") || condutor.getCPF().equals("33333333333")
-					|| condutor.getCPF().equals("44444444444") || condutor.getCPF().equals("55555555555")
-					|| condutor.getCPF().equals("66666666666") || condutor.getCPF().equals("77777777777")
-					|| condutor.getCPF().equals("88888888888") || condutor.getCPF().equals("99999999999")
-					|| condutor.getCPF().length() != 11) {
+			if (condutor.getCpf().equals("00000000000") || condutor.getCpf().equals("11111111111")
+					|| condutor.getCpf().equals("22222222222") || condutor.getCpf().equals("33333333333")
+					|| condutor.getCpf().equals("44444444444") || condutor.getCpf().equals("55555555555")
+					|| condutor.getCpf().equals("66666666666") || condutor.getCpf().equals("77777777777")
+					|| condutor.getCpf().equals("88888888888") || condutor.getCpf().equals("99999999999")
+					|| condutor.getCpf().length() != 11) {
 
 				throw new ServiceException("CPF inválido");
 			}
 
-			if (condutor.getCNH().equals("00000000000") || condutor.getCNH().equals("11111111111")
-					|| condutor.getCNH().equals("22222222222") || condutor.getCNH().equals("33333333333")
-					|| condutor.getCNH().equals("44444444444") || condutor.getCNH().equals("55555555555")
-					|| condutor.getCNH().equals("66666666666") || condutor.getCNH().equals("77777777777")
-					|| condutor.getCNH().equals("88888888888") || condutor.getCNH().equals("99999999999")
-					|| condutor.getCNH().length() != 11) {
+			if (condutor.getCnh().equals("00000000000") || condutor.getCnh().equals("11111111111")
+					|| condutor.getCnh().equals("22222222222") || condutor.getCnh().equals("33333333333")
+					|| condutor.getCnh().equals("44444444444") || condutor.getCnh().equals("55555555555")
+					|| condutor.getCnh().equals("66666666666") || condutor.getCnh().equals("77777777777")
+					|| condutor.getCnh().equals("88888888888") || condutor.getCnh().equals("99999999999")
+					|| condutor.getCnh().length() != 11) {
 
 				throw new ServiceException("CNH inválido");
 			}

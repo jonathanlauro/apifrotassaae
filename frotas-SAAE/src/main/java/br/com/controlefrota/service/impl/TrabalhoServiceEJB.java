@@ -27,7 +27,7 @@ public class TrabalhoServiceEJB implements CadastroDeTrablho {
 
 	@Override
 	public Trabalho criar(Trabalho trabalho) {
-		Condutor condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCNH());
+		Condutor condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCnh());
 		Veiculo veiculo = veiculoRepository.findByPlaca(trabalho.getVeiculo().getPlaca());
 
 		if (veiculo == null) {
@@ -70,7 +70,7 @@ public class TrabalhoServiceEJB implements CadastroDeTrablho {
 	@Override
 	public void encerrarTrabalho(long idTrabalho, String KmFinal) {
 		Trabalho trabalho = trabalhoRepository.findById(idTrabalho);
-		Condutor condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCNH());
+		Condutor condutor = condutorRepository.findByCNH(trabalho.getCondutor().getCnh());
 		Veiculo veiculo = veiculoRepository.findByPlaca(trabalho.getVeiculo().getPlaca());
 
 		if (trabalho.getStatusTrabalho().equals("Encerrado")) {

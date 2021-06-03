@@ -12,7 +12,7 @@ public interface CondutorRepository extends JpaRepository<Condutor, Long> {
 
 	Condutor findById(long id);
 
-	Condutor findByCNH(String CNH);
+	Condutor findByCNH(String cnh);
 	
 	List<Condutor> findByDeleted(boolean deleted);
 }

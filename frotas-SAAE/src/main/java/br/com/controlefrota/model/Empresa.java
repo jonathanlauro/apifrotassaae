@@ -28,13 +28,9 @@ public class Empresa {
 
 	private String cep;
 
-	private String logradouro;
+	private String complemento;
 
-	private String cidade;
-
-	private String estado;
-
-	private String bairro;
+	private Integer numero;
 
 	private String email;
 
@@ -111,35 +107,19 @@ public class Empresa {
 		this.telefone = telefone;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public String getComplemento() {
+		return complemento;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
 	}
 
-	public String getEstado() {
-		return estado;
+	public Integer getNumero() {
+		return numero;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getLogradouro() {
-		return logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+	public void setNumero(Integer numero) {
+		this.numero = numero;
 	}
 }
