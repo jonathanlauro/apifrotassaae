@@ -33,6 +33,8 @@ public class Veiculo {
 	@NotNull
 	private String placa;
 
+	private String apelido;
+
 	@NotNull
 	private String chassi;
 	@NotNull
@@ -262,5 +264,13 @@ public class Veiculo {
 
 	public void setDeleted(LocalDate deleted) {
 		this.deleted = deleted;
+	}
+
+	public String getApelido() {
+		return apelido;
+	}
+
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
 	}
 }

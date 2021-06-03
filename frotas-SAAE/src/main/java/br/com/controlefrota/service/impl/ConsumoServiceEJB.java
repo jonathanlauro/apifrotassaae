@@ -43,7 +43,7 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 			throw new ServiceException("Só pode cadastrar consumo com condutor em status Em_trabalho");
 		}
 		if(veiculo.getStatus().equals("Disponivel")) {
-			throw new ServiceException("Só pode cadastrar consumo com veiculo com status Ocupado");
+			throw new ServiceException("Só pode cadastrar consumo co m veiculo com status Ocupado");
 		}
 		
 		consumo.setCombustivel(combustivel);

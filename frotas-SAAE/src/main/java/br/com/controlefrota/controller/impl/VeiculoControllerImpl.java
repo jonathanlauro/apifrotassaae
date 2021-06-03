@@ -94,6 +94,7 @@ public class VeiculoControllerImpl implements VeiculoController {
         VeiculoModel dto = new VeiculoModel();
         dto.setId(entity.getIdVeiculo());
         dto.setModelo(entity.getModelo());
+		dto.setApelido(entity.getApelido());
         dto.setPlaca(entity.getPlaca());
         dto.setRenavam(entity.getRenavam());
         dto.setStatus(entity.getStatus());

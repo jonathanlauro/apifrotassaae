@@ -9,6 +9,8 @@ public class VeiculoModel {
 	private Long id;
 	@ApiModelProperty(value = "Modelo do veiculo")
 	private String modelo;
+	@ApiModelProperty(value = "Apelido do veículo")
+	private String apelido;
 	@ApiModelProperty(value = "Status do veículo de está em trabalho ou não")
 	private String status;
 	@ApiModelProperty(value = "Placa do veículo")
@@ -24,6 +26,7 @@ public class VeiculoModel {
 	public VeiculoModel(Veiculo veiculo) {
 		this.id = veiculo.getIdVeiculo();
 		this.modelo = veiculo.getModelo();
+		this.apelido = veiculo.getApelido();
 		this.status = veiculo.getStatus();
 		this.placa = veiculo.getPlaca();
 		this.renavam = veiculo.getRenavam();
@@ -84,8 +87,13 @@ public class VeiculoModel {
 	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
-	
-	
-	
-	
+
+
+	public String getApelido() {
+		return apelido;
+	}
+
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
+	}
 }
