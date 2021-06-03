@@ -77,7 +77,7 @@ public class VeiculoServiceEJB implements CadastroDeVeiculo{
 	
 	@Override
 	public List<Veiculo> findAll(){
-		return veiculoRepository.findByDeleted(false);
+		return veiculoRepository.findByDeleted(null);
 	}
 
 	@Override

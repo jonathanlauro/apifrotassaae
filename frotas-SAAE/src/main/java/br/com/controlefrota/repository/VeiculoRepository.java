@@ -1,5 +1,6 @@
 package br.com.controlefrota.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +17,6 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 
 	Veiculo findByRenavam(String renavam);
 	
-	List<Veiculo>findByDeleted(boolean deleted);
+	List<Veiculo>findByDeleted(LocalDate date);
 
 }
