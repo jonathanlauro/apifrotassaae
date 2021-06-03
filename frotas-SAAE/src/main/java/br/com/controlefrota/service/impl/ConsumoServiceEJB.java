@@ -62,7 +62,8 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 			throw new ServiceException("Esse consumo não existe");
 		}
 		consumo.setDeleted(LocalDate.now());
-		
+
+		consumoRepository.save(consumo);
 	}
 
 	@Override
