@@ -23,13 +23,12 @@ public class CondutorServiceEJB implements CadastroDeCondutor {
 		if (condutor.getNome() == null || condutor.getCpf() == null || condutor.getCnh() == null) {
 			throw new ServiceException("Por favor, preencha todos os campos");
 		}
-		if (condutorA != null && condutorA.isDeleted() == false) {
+		if (condutorA != null && condutorA.getDeleted() != null ) {
 			throw new ServiceException("Condutor já cadastrado no sistema!");
 		}
 
 		if (condutorA != null && condutorA.getCpf().equals(condutor.getCpf())) {
 			condutor.setId(condutorA.getId());
-			condutor.setDeleted(false);
 			condutor.setDataDeCriacao(LocalDate.now());
 			condutor.setStatus("Disponivel");
 			return condutorRepository.save(condutor);
@@ -54,7 +53,6 @@ public class CondutorServiceEJB implements CadastroDeCondutor {
 
 				throw new ServiceException("CNH inválido");
 			}
-			condutor.setDeleted(false);
 			condutor.setDataDeCriacao(LocalDate.now());
 			return condutorRepository.save(condutor);
 		}
@@ -84,7 +82,7 @@ public class CondutorServiceEJB implements CadastroDeCondutor {
 
 	@Override
 	public List<Condutor> findAll() {
-		return condutorRepository.findByDeleted(false);
+		return condutorRepository.findByDeleted(null);
 	}
 
 	@Override
@@ -94,7 +92,7 @@ public class CondutorServiceEJB implements CadastroDeCondutor {
 		if (condutor.getStatus().equals("Em_trabalho")) {
 			throw new ServiceException("Condutor não pode ser excluido pois está em trabalho.");
 		} else {
-			condutor.setDeleted(true);
+			condutor.setDeleted(LocalDate.now());
 			condutorRepository.save(condutor);
 		}
 	}

@@ -35,15 +35,15 @@ public class Trabalho {
 	private LocalDate DataFimVigencia;
 	
 	private LocalDate dataDeCriacao;
-	private Boolean deleted;
+	private LocalDate deleted;
 	
 	
 
-	public Boolean getDeleted() {
+	public LocalDate getDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(LocalDate deleted) {
 		this.deleted = deleted;
 	}
 

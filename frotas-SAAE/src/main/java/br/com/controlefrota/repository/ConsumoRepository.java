@@ -1,5 +1,6 @@
 package br.com.controlefrota.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +16,5 @@ public interface ConsumoRepository extends JpaRepository<Consumo, Long>{
 	
 	List<Consumo> findByCombustivel(Combustivel combustivel);
 	
-	List<Consumo>findByDeleted(boolean deleted);
+	List<Consumo>findByDeleted(LocalDate date);
 }

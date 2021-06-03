@@ -50,7 +50,6 @@ public class TrabalhoServiceEJB implements CadastroDeTrablho {
 		trabalho.setVeiculo(veiculo);
 		trabalho.setDataInicioVigencia(LocalDate.now());
 		trabalho.setDataDeCriacao(LocalDate.now());
-		trabalho.setDeleted(false);
 		veiculo.setStatus("Ocupado");
 		condutor.setStatus("Em_trabalho");
 
@@ -108,20 +107,20 @@ public class TrabalhoServiceEJB implements CadastroDeTrablho {
 		if (trabalho == null) {
 			throw new ServiceException("Trabalho não encontrado.");
 		}
-		if (trabalho.getDeleted()) {
+		if (trabalho.getDeleted() == null) {
 			throw new ServiceException("Este trabalho ja foi deletado.");
 		}
 		if (trabalho.getStatusTrabalho().equals("Em_vigencia")) {
 			throw new ServiceException("Este trabalho não pode ser deletado pois está em vigência.");
 		}
 		
-		trabalho.setDeleted(true);
+		trabalho.setDeleted(LocalDate.now());
 		trabalhoRepository.save(trabalho);
 	}
 
 	@Override
 	public List<Trabalho> findAll() {
-		return trabalhoRepository.findByDeleted(false);
+		return trabalhoRepository.findByDeleted(null);
 	}
 
 }

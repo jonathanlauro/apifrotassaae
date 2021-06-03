@@ -1,5 +1,6 @@
 package br.com.controlefrota.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,5 @@ public interface CondutorRepository extends JpaRepository<Condutor, Long> {
 
 	Condutor findBycnh(String cnh);
 	
-	List<Condutor> findByDeleted(boolean deleted);
+	List<Condutor> findByDeleted(LocalDate date);
 }

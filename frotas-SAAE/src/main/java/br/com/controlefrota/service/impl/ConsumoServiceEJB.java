@@ -50,7 +50,6 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 		consumo.setCondutor(condutor);
 		consumo.setVeiculo(veiculo);
 		consumo.setDataDeCriacao(LocalDate.now());
-		consumo.setDeleted(false);
 
 		consumoRepository.save(consumo);
 	}
@@ -62,14 +61,14 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 		if(consumo == null) {
 			throw new ServiceException("Esse consumo não existe");
 		}
-		consumo.setDeleted(true);
+		consumo.setDeleted(LocalDate.now());
 		
 	}
 
 	@Override
 	public List<Consumo> findAll() {
 	
-		return consumoRepository.findByDeleted(false);
+		return consumoRepository.findByDeleted(null);
 	}
 
 	@Override
@@ -86,7 +85,7 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 		List<Consumo> consumos2 = new ArrayList<>();
 		
 		for (Consumo consumoModel : consumos) {
-			if(consumoModel.getDeleted() == false) {
+			if(consumoModel.getDeleted() == null) {
 				consumos2.add(consumoModel);
 			}
 		}

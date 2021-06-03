@@ -32,7 +32,7 @@ public class Condutor implements Serializable{
 	@NotNull
 	private String status = "Disponivel";
 	@NotNull
-	private boolean deleted;
+	private LocalDate deleted;
 	
 	@OneToMany(mappedBy = "condutor",cascade = CascadeType.ALL)
 	private List<Consumo> consumo;
@@ -75,12 +75,12 @@ public class Condutor implements Serializable{
 	public void setDataDeCriacao(LocalDate dataDeCriacao) {
 		this.dataDeCriacao = dataDeCriacao;
 	}
-	public boolean isDeleted() {
+
+	public LocalDate getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(boolean deleted) {
+
+	public void setDeleted(LocalDate deleted) {
 		this.deleted = deleted;
 	}
-	
-	
 }

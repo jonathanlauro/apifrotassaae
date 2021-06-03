@@ -1,5 +1,6 @@
 package br.com.controlefrota.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,5 +17,5 @@ public interface TrabalhoRepository extends JpaRepository<Trabalho, Long>{
 	Trabalho findByCondutor(Condutor condutor);
 	Trabalho findByVeiculo(Veiculo veiculo);
 	List<Trabalho> findByStatusTrabalho(String Status);
-	List<Trabalho>findByDeleted(boolean deleted);
+	List<Trabalho>findByDeleted(LocalDate date);
 }

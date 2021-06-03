@@ -24,14 +24,13 @@ public class VeiculoServiceEJB implements CadastroDeVeiculo{
 	@Override
 	public Veiculo criar(Veiculo veiculo) throws Exception {
 		Veiculo v = veiculoRepository.findByPlaca(veiculo.getPlaca());
-		if (v != null && v.isDeleted() == false) {
+		if (v != null && v.getDeleted() == null) {
 			throw new ServiceException("Veículo ja cadastrado.");
 		}
 		
 		if(v !=  null && v.getPlaca().equals(veiculo.getPlaca())) {
 			veiculo.setIdVeiculo(v.getIdVeiculo());
 			veiculo.setStatus("Disponivel");
-			veiculo.setDeleted(false);
 			veiculo.setDataCriacao(v.getDataCriacao());
 			veiculo.setDataInicioVigencia(LocalDate.now());
 			
@@ -42,7 +41,6 @@ public class VeiculoServiceEJB implements CadastroDeVeiculo{
 					.orElseThrow(() -> new Exception("Empresa nao encontrado"));
 			veiculo.setEmpresa(empresa);
 			veiculo.setStatus("Disponivel");
-			veiculo.setDeleted(false);
 			veiculo.setDataCriacao(LocalDate.now());
 			veiculo.setDataInicioVigencia(LocalDate.now());
 			
@@ -73,7 +71,7 @@ public class VeiculoServiceEJB implements CadastroDeVeiculo{
 			throw new ServiceException("Veículo em trabalho.");
 		}
 		veiculo.setDataFimVigencia(LocalDate.now());
-		veiculo.setDeleted(true);
+		veiculo.setDeleted(LocalDate.now());
 		veiculoRepository.save(veiculo);
 	}
 	

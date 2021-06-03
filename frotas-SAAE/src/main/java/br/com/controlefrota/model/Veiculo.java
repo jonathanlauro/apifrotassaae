@@ -60,7 +60,7 @@ public class Veiculo {
 	@NotNull
 	private String anoUltimoLicenciamento;
 	@NotNull
-	private boolean deleted;
+	private LocalDate deleted;
 
 	@NotNull
 	private LocalDate dataInicioVigencia;
@@ -256,13 +256,11 @@ public class Veiculo {
 		this.anoUltimoLicenciamento = anoUltimoLicenciamento;
 	}
 
-	public boolean isDeleted() {
+	public LocalDate getDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(boolean deleted) {
+	public void setDeleted(LocalDate deleted) {
 		this.deleted = deleted;
 	}
-	
-
 }
