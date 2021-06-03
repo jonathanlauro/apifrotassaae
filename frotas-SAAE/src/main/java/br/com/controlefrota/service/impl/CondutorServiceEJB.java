@@ -19,7 +19,7 @@ public class CondutorServiceEJB implements CadastroDeCondutor {
 	
 	@Override
 	public Condutor criar(Condutor condutor) {
-		Condutor condutorA = condutorRepository.findByCNH(condutor.getCnh());
+		Condutor condutorA = condutorRepository.findBycnh(condutor.getCnh());
 		if (condutor.getNome() == null || condutor.getCpf() == null || condutor.getCnh() == null) {
 			throw new ServiceException("Por favor, preencha todos os campos");
 		}
@@ -74,7 +74,7 @@ public class CondutorServiceEJB implements CadastroDeCondutor {
 	
 	@Override
 	public Condutor findByCnh(String cnh) {
-		Condutor condutor = condutorRepository.findByCNH(cnh);
+		Condutor condutor = condutorRepository.findBycnh(cnh);
 
 		if (condutor == null) {
 			throw new ServiceException("condutor não encontrado");
