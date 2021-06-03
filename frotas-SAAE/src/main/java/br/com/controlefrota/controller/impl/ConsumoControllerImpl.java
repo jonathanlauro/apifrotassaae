@@ -57,7 +57,7 @@ public class ConsumoControllerImpl implements ConsumoController{
 
 	@Override
 	public void deletarconsumo(@PathVariable Long id) {
-		consumoRepository.deleteById(id);
+		consumoService.deletar(id);
 	}
 	
 	@Override
