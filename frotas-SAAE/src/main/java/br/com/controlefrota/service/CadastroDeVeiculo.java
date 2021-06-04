@@ -3,10 +3,11 @@ package br.com.controlefrota.service;
 import java.util.List;
 
 import br.com.controlefrota.model.Veiculo;
+import org.hibernate.service.spi.ServiceException;
 
 public interface CadastroDeVeiculo {
 
-	public Veiculo criar(Veiculo veiculo) throws Exception;
+	public Veiculo criar(Veiculo veiculo) throws ServiceException;
 	
 	public void deletar(long id);
 	

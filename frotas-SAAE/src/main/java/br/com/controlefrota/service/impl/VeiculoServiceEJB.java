@@ -22,7 +22,7 @@ public class VeiculoServiceEJB implements CadastroDeVeiculo{
 	VeiculoRepository veiculoRepository;
 
 	@Override
-	public Veiculo criar(Veiculo veiculo) throws Exception {
+	public Veiculo criar(Veiculo veiculo) throws ServiceException {
 		Veiculo v = veiculoRepository.findByPlaca(veiculo.getPlaca());
 		if (v != null && v.getDeleted() == null) {
 			throw new ServiceException("Veículo ja cadastrado.");
@@ -38,7 +38,7 @@ public class VeiculoServiceEJB implements CadastroDeVeiculo{
 		}else {
 			
 			Empresa empresa = empresaRepository.findById(veiculo.getEmpresa().getId())
-					.orElseThrow(() -> new Exception("Empresa nao encontrado"));
+					.orElseThrow(() -> new ServiceException("Empresa nao encontrado"));
 			veiculo.setEmpresa(empresa);
 			veiculo.setStatus("Disponivel");
 			veiculo.setDataCriacao(LocalDate.now());

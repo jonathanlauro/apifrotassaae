@@ -28,7 +28,7 @@ public class FiltroConsumoServiceEJB implements FiltroConsumo {
             listaFiltrada = consumoService.findAll();
         }
 
-        if(busca.getNome() != null && busca.getNome().size() > 0 ){
+        if(busca.getNome() != null && !busca.getNome().isEmpty() ){
 
             while(i < busca.getNome().size()){
                 List<Consumo> result= consumoService.findByNomeCondutor(busca.getNome().get(i));
