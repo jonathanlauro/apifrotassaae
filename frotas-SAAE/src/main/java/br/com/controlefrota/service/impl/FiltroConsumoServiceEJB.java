@@ -21,6 +21,7 @@ public class FiltroConsumoServiceEJB implements FiltroConsumo {
     public List<Consumo> filtrar(BuscaDeConsumo busca) {
 
         List<Consumo> listaFiltrada = new ArrayList<>();
+
         int i = 0;
 
         if(busca.getNome() == null){
@@ -40,7 +41,16 @@ public class FiltroConsumoServiceEJB implements FiltroConsumo {
             }
         }
 
+        if(busca.getDataDeInicio() != null && busca.getDataFim() != null){
+            List<Consumo> buscaComNomeEData = new ArrayList<>();
 
+            for (Consumo con : listaFiltrada) {
+                if(busca.getDataDeInicio().isBefore(con.getDataRegistro()) && busca.getDataFim().isAfter(con.getDataRegistro())){
+                    buscaComNomeEData.add(con);
+                }
+            }
+            return buscaComNomeEData;
+        }
         
         return listaFiltrada;
     }

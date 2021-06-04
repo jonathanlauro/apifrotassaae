@@ -7,7 +7,9 @@ public class BuscaDeConsumo {
 
     private List<String> nome;
 
-//    private LocalDate dataInicio;
+    private LocalDate dataDeInicio;
+    private LocalDate dataFim;
+
 //    private String cnpjEmpresa;
 //    private String combustivelNome;
 //    private String placaVeiculo;
@@ -20,35 +22,19 @@ public class BuscaDeConsumo {
         this.nome = nome;
     }
 
-//    public LocalDate getDataInicio() {
-//        return dataInicio;
-//    }
-//
-//    public void setDataInicio(LocalDate dataInicio) {
-//        this.dataInicio = dataInicio;
-//    }
+    public LocalDate getDataDeInicio() {
+        return dataDeInicio;
+    }
 
-//    public String getCnpjEmpresa() {
-//        return cnpjEmpresa;
-//    }
-//
-//    public void setCnpjEmpresa(String cnpjEmpresa) {
-//        this.cnpjEmpresa = cnpjEmpresa;
-//    }
-//
-//    public String getCombustivelNome() {
-//        return combustivelNome;
-//    }
-//
-//    public void setCombustivelNome(String combustivelNome) {
-//        this.combustivelNome = combustivelNome;
-//    }
-//
-//    public String getPlacaVeiculo() {
-//        return placaVeiculo;
-//    }
-//
-//    public void setPlacaVeiculo(String placaVeiculo) {
-//        this.placaVeiculo = placaVeiculo;
-//    }
+    public void setDataDeInicio(LocalDate dataDeInicio) {
+        this.dataDeInicio = dataDeInicio;
+    }
+
+    public LocalDate getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(LocalDate dataFim) {
+        this.dataFim = dataFim;
+    }
 }
