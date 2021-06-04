@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import br.com.controlefrota.model.BuscaDeConsumo;
+import br.com.controlefrota.service.impl.FiltroConsumoServiceEJB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ public class ConsumoControllerImpl implements ConsumoController{
 	ConsumoServiceEJB consumoService;
 	@Autowired
 	CombustivelRepository combustivelRepository;
+	@Autowired
+	FiltroConsumoServiceEJB filtroConsumoServiceEJB;
 
 
 	@Override
@@ -36,6 +40,12 @@ public class ConsumoControllerImpl implements ConsumoController{
 	@Override
 	public Optional<Consumo> listaUnicoConsumoPorId(@PathVariable(value="id") Long id) {
 		return consumoRepository.findById(id);
+	}
+
+	@Override
+	public List<Consumo> listaFiltroDeConsumos(BuscaDeConsumo buscaDeConsumo) {
+
+		return filtroConsumoServiceEJB.filtrar(buscaDeConsumo);
 	}
 
 	@Override

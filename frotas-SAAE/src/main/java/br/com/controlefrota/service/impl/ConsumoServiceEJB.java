@@ -32,6 +32,7 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 	@Autowired
 	CombustivelRepository combustivelRepository;
 
+
 	@Override
 	public void criar(Consumo consumo) {
 		Condutor condutor = condutorRepository.findById(Long.valueOf(consumo.getCondutor().getId()).longValue());
@@ -81,7 +82,6 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 		}
 		
 		List<Consumo> consumos = consumoRepository.findByCombustivel(combustivel);
-//				.stream().map(this::toDto).collect(Collectors.toList());
 		
 		List<Consumo> consumos2 = new ArrayList<>();
 		
@@ -98,7 +98,16 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 			
 		return listaDeConsumos;
 	}
-	
+
+	@Override
+	public Consumo findByNomeCondutor(String nome) {
+		Condutor condut = condutorRepository.findByNome(nome);
+		Consumo resp = consumoRepository.findByCondutor(condut);
+
+		return resp;
+	}
+
+
 	public ConsumoModel toDto(Consumo entity) {
         ConsumoModel dto = new ConsumoModel();
         dto.setIdConsumo(entity.getIdConsumo());

@@ -16,4 +16,6 @@ public interface CondutorRepository extends JpaRepository<Condutor, Long> {
 	Condutor findBycnh(String cnh);
 	
 	List<Condutor> findByDeleted(LocalDate date);
+
+	Condutor findByNome(String nome);
 }

@@ -3,6 +3,7 @@ package br.com.controlefrota.controller;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.controlefrota.model.BuscaDeConsumo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.controlefrota.domain.model.ConsumoModel;
 import br.com.controlefrota.domain.model.ErroModelo;
-import br.com.controlefrota.model.Combustivel;
 import br.com.controlefrota.model.Consumo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -46,6 +46,16 @@ public interface ConsumoController {
 		@ApiResponse(code = 500, message = "Erro interno no sistema", response = ErroModelo.class),
 	})
 	public Optional<Consumo> listaUnicoConsumoPorId(@PathVariable(value="id") Long id);
+
+	@PostMapping("/filtrarconsumos")
+	@ApiOperation(value = "Retorna uma lista de consumos filtrada")
+	@ApiResponses( value = {
+			@ApiResponse(code = 200, message = "Consumo", response = Consumo.class),
+			@ApiResponse(code = 401, message = "Toke Inválido", response = ErroModelo.class),
+			@ApiResponse(code = 404, message = "Consumos não encontrado", response = ErroModelo.class),
+			@ApiResponse(code = 500, message = "Erro interno no sistema", response = ErroModelo.class),
+	})
+	public List<Consumo> listaFiltroDeConsumos(@RequestBody BuscaDeConsumo buscaDeConsumo);
 	
 	@GetMapping("/{NomeCombustivel}/COMBUSTIVEL")
 	@ApiOperation(value = "Retorna um unico consumo")
