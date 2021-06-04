@@ -44,6 +44,8 @@ public class EmpresaServiceEJB implements CadastroDeEmpresa {
 
 				throw new ServiceException("CNPJ inválido");
 			}
+			empresa.setComplemento(empresa.getComplemento());
+			empresa.setNumero(empresa.getNumero());
 			empresa.setDataDeCriacao(LocalDate.now());
 			return empresaRepository.save(empresa);
 		}
