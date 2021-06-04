@@ -23,13 +23,23 @@ public class FiltroConsumoServiceEJB implements FiltroConsumo {
         List<Consumo> listaFiltrada = new ArrayList<>();
         int i = 0;
 
-        while(i < busca.getNome().size()){
-            List<Consumo> result= consumoService.findByNomeCondutor(busca.getNome().get(i));
-            for (int j = 0; j < result.size(); j++) {
-                listaFiltrada.add(result.get(j));
-            }
-            i++;
+        if(busca.getNome() == null){
+
+            listaFiltrada = consumoService.findAll();
         }
+
+        if(busca.getNome() != null && busca.getNome().size() > 0 ){
+
+            while(i < busca.getNome().size()){
+                List<Consumo> result= consumoService.findByNomeCondutor(busca.getNome().get(i));
+
+                for (int j = 0; j < result.size(); j++) {
+                    listaFiltrada.add(result.get(j));
+                }
+                i++;
+            }
+        }
+
 
         
         return listaFiltrada;
