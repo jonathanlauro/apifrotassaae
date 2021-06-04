@@ -15,5 +15,5 @@ public interface CadastroDeConsumo {
 	
 	public List<ConsumoModel> findbyCombustivel(String nome);
 
-	public Consumo findByNomeCondutor(String nome);
+	public List<Consumo> findByNomeCondutor(String nome);
 }

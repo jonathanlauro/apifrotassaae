@@ -18,5 +18,5 @@ public interface ConsumoRepository extends JpaRepository<Consumo, Long>{
 	
 	List<Consumo>findByDeleted(LocalDate date);
 
-	Consumo findByCondutor(Condutor condutor);
+	List<Consumo> findByCondutor(Condutor condutor);
 }
