@@ -9,9 +9,9 @@ public class BuscaDeConsumo {
 
     private LocalDate dataDeInicio;
     private LocalDate dataFim;
+    private String combustivelNome;
 
 //    private String cnpjEmpresa;
-//    private String combustivelNome;
 //    private String placaVeiculo;
 
     public List<String> getNome() {
@@ -36,5 +36,13 @@ public class BuscaDeConsumo {
 
     public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public String getCombustivelNome() {
+        return combustivelNome;
+    }
+
+    public void setCombustivelNome(String combustivelNome) {
+        this.combustivelNome = combustivelNome;
     }
 }

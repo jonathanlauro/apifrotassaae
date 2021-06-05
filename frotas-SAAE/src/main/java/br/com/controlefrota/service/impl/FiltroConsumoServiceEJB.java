@@ -51,6 +51,16 @@ public class FiltroConsumoServiceEJB implements FiltroConsumo {
             }
             return buscaComNomeEData;
         }
+
+        if(busca.getCombustivelNome() != null){
+            List<Consumo> buscaPorCombustivel = new ArrayList<>();
+            for (Consumo con : listaFiltrada) {
+                if(con.getCombustivel().getNome().equals(busca.getCombustivelNome())){
+                    buscaPorCombustivel.add(con);
+                }
+            }
+            return buscaPorCombustivel;
+        }
         
         return listaFiltrada;
     }
