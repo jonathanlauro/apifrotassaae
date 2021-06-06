@@ -86,6 +86,15 @@ public class CondutorServiceEJB implements CadastroDeCondutor {
 	}
 
 	@Override
+	public List<Condutor> findByNome(String nome) {
+//		Condutor condut = condutorRepository.findByNome(nome);
+
+
+
+		return null;
+	}
+
+	@Override
 	public void deletar(long id) {
 		Condutor condutor = condutorRepository.findById(id);
 

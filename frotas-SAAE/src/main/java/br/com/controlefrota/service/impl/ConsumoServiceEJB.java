@@ -101,8 +101,14 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 
 	@Override
 	public List<Consumo> findByNomeCondutor(String nome) {
-		Condutor condut = condutorRepository.findByNome(nome);
-		List<Consumo> resp = consumoRepository.findByCondutor(condut);
+		List<Condutor> condut = condutorRepository.findByNome(nome);
+		Condutor con = new Condutor();
+		for (Condutor cond : condut) {
+			if(cond.getDeleted() == null){
+				con = cond;
+			}
+		}
+		List<Consumo> resp = consumoRepository.findByCondutor(con);
 
 		return resp;
 	}
