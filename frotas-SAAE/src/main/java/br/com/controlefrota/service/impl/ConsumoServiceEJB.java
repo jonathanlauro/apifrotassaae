@@ -2,6 +2,7 @@ package br.com.controlefrota.service.impl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,8 +70,11 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 
 	@Override
 	public List<Consumo> findAll() {
-	
-		return consumoRepository.findByDeleted(null);
+		List<Consumo> listaDeConsumos = consumoRepository.findByDeleted(null);
+
+		Collections.sort(listaDeConsumos);
+
+		return listaDeConsumos;
 	}
 
 	@Override

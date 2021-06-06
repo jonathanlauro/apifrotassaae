@@ -17,7 +17,7 @@ import com.sun.istack.Nullable;
 
 @Entity
 @Table(name = "TB_CONSUMO")
-public class Consumo implements Serializable {
+public class Consumo implements Serializable,Comparable<Consumo> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -113,5 +113,17 @@ public class Consumo implements Serializable {
 	}
 	public void setDeleted(LocalDate deleted) {
 		this.deleted = deleted;
+	}
+
+	@Override
+	public int compareTo(Consumo consumo) {
+		if(this.getDataDeCriacao().isAfter(consumo.getDataDeCriacao())){
+			return -1;
+		}else{
+
+			return 1;
+		}
+
+
 	}
 }

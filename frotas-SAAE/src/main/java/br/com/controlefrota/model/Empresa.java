@@ -1,5 +1,6 @@
 package br.com.controlefrota.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,7 +17,9 @@ import com.sun.istack.Nullable;
 
 @Entity
 @Table(name = "TB_EMPRESA")
-public class Empresa {
+public class Empresa implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
