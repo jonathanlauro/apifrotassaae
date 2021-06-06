@@ -1,6 +1,7 @@
 package br.com.controlefrota.service.impl;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.service.spi.ServiceException;
@@ -120,7 +121,11 @@ public class TrabalhoServiceEJB implements CadastroDeTrablho {
 
 	@Override
 	public List<Trabalho> findAll() {
-		return trabalhoRepository.findByDeleted(null);
+		List<Trabalho> listaDeTrabalhos = trabalhoRepository.findByDeleted(null);
+
+		Collections.sort(listaDeTrabalhos);
+
+		return listaDeTrabalhos;
 	}
 
 }

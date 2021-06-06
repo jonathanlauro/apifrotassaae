@@ -14,7 +14,7 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "TB_TRABALHO")
-public class Trabalho {
+public class Trabalho implements Comparable<Trabalho> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -118,6 +118,15 @@ public class Trabalho {
 	public void setDataDeCriacao(LocalDate dataDeCriacao) {
 		this.dataDeCriacao = dataDeCriacao;
 	}
-	
-	
+
+
+	@Override
+	public int compareTo(Trabalho trabalho) {
+		if(this.dataDeCriacao.isAfter(trabalho.getDataDeCriacao())){
+			return -1;
+		}else{
+			return 1;
+		}
+
+	}
 }

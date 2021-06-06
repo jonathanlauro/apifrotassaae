@@ -14,7 +14,5 @@ public interface CadastroDeCondutor {
 
 	public List<Condutor> findAll();
 
-	public List<Condutor> findByNome(String nome);
-
 	public void deletar(long id);
 }
