@@ -34,7 +34,7 @@ public class CondutorControllerImpl implements CondutorController{
 	public ResponseEntity<?> listaUnicoCondutorPorId(@PathVariable(value = "id") long id) {
 		try {
 			
-			return new ResponseEntity<Condutor>( condutorService.findById(id), HttpStatus.OK);
+			return new ResponseEntity<>( condutorService.findById(id), HttpStatus.OK);
 		}catch(ServiceException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found! Condutor não encontrado ");
 		}
@@ -44,7 +44,7 @@ public class CondutorControllerImpl implements CondutorController{
 	public ResponseEntity<?> listaUnicoCondutorPorCNH(@PathVariable(value = "cnh") String cnh) {
 	try {
 			
-			return new ResponseEntity<Condutor>( condutorService.findByCnh(cnh), HttpStatus.OK);
+			return new ResponseEntity<>( condutorService.findByCnh(cnh), HttpStatus.OK);
 		}catch(ServiceException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found! Condutor não encontrado ");
 		}

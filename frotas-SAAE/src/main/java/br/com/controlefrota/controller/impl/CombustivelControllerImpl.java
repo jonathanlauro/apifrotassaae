@@ -31,7 +31,7 @@ public class CombustivelControllerImpl implements CombustivelController{
 	public ResponseEntity<?> listaUnicoCombustivel(@PathVariable(value="id") long id ){
 
 		try {
-			return new ResponseEntity<Combustivel>(combustivelService.findById(id),HttpStatus.OK);
+			return new ResponseEntity<>(combustivelService.findById(id),HttpStatus.OK);
 		}catch(ServiceException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found! "+e);
 		}

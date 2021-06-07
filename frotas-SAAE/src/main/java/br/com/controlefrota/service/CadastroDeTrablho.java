@@ -15,5 +15,5 @@ public interface CadastroDeTrablho {
 	
 	public List<TrabalhoModel> findAll();
 	
-	public void encerrarTrabalho(long idTrabalho, String KmFinal);
+	public void encerrarTrabalho(long idTrabalho, String kmFinal);
 }

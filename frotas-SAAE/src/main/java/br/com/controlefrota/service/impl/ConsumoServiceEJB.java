@@ -79,7 +79,7 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 	}
 
 	@Override
-	public List<ConsumoModel> ListaDeConsumos() {
+	public List<ConsumoModel> listaDeConsumos() {
 		List<ConsumoModel> listaDeConsumos = consumoRepository.findByDeleted(null).stream().map(this::toDto).collect(Collectors.toList());;
 
 		Collections.sort(listaDeConsumos);

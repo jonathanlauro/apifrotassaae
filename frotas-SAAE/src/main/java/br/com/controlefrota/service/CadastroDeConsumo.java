@@ -13,7 +13,7 @@ public interface CadastroDeConsumo {
 	
 	public List<Consumo> findAll();
 
-	public List<ConsumoModel> ListaDeConsumos();
+	public List<ConsumoModel> listaDeConsumos();
 	
 	public List<ConsumoModel> findbyCombustivel(String nome);
 

@@ -1,10 +1,12 @@
 package br.com.controlefrota.controller.impl;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import br.com.controlefrota.controller.ConsumoController;
+import br.com.controlefrota.domain.model.ConsumoModel;
 import br.com.controlefrota.model.BuscaDeConsumo;
+import br.com.controlefrota.model.Consumo;
+import br.com.controlefrota.repository.CombustivelRepository;
+import br.com.controlefrota.repository.ConsumoRepository;
+import br.com.controlefrota.service.impl.ConsumoServiceEJB;
 import br.com.controlefrota.service.impl.FiltroConsumoServiceEJB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,12 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.controlefrota.controller.ConsumoController;
-import br.com.controlefrota.domain.model.ConsumoModel;
-import br.com.controlefrota.model.Consumo;
-import br.com.controlefrota.repository.CombustivelRepository;
-import br.com.controlefrota.repository.ConsumoRepository;
-import br.com.controlefrota.service.impl.ConsumoServiceEJB;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ConsumoControllerImpl implements ConsumoController{
@@ -34,7 +32,7 @@ public class ConsumoControllerImpl implements ConsumoController{
 
 	@Override
 	public List<ConsumoModel> listaConsumos() {
-		return consumoService.ListaDeConsumos();
+		return consumoService.listaDeConsumos();
 	}
 
 	@Override
