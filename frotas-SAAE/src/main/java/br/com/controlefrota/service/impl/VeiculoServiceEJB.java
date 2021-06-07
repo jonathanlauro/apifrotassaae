@@ -2,7 +2,9 @@ package br.com.controlefrota.service.impl;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.com.controlefrota.domain.model.VeiculoModel;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,8 +78,8 @@ public class VeiculoServiceEJB implements CadastroDeVeiculo{
 	}
 	
 	@Override
-	public List<Veiculo> findAll(){
-		return veiculoRepository.findByDeleted(null);
+	public List<VeiculoModel> findAll(){
+		return veiculoRepository.findByDeleted(null).stream().map(this::toDto).collect(Collectors.toList());
 	}
 
 	@Override
@@ -108,6 +110,17 @@ public class VeiculoServiceEJB implements CadastroDeVeiculo{
 			throw new ServiceException("Veículo não encontrado.");
 		}
 		return veiculo;
+	}
+	public VeiculoModel toDto(Veiculo entity) {
+		VeiculoModel dto = new VeiculoModel();
+		dto.setId(entity.getIdVeiculo());
+		dto.setModelo(entity.getModelo());
+		dto.setApelido(entity.getApelido());
+		dto.setPlaca(entity.getPlaca());
+		dto.setRenavam(entity.getRenavam());
+		dto.setStatus(entity.getStatus());
+		dto.setEmpresa(entity.getEmpresa().getNome());
+		return dto;
 	}
 
 }

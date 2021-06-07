@@ -1,6 +1,7 @@
 package br.com.controlefrota.service.impl;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -78,6 +79,16 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 	}
 
 	@Override
+	public List<ConsumoModel> ListaDeConsumos() {
+		List<ConsumoModel> listaDeConsumos = consumoRepository.findByDeleted(null).stream().map(this::toDto).collect(Collectors.toList());;
+
+		Collections.sort(listaDeConsumos);
+
+		return listaDeConsumos;
+	}
+
+
+	@Override
 	public List<ConsumoModel> findbyCombustivel(String nome) {
 		Combustivel combustivel = combustivelRepository.findBynome(nome);
 		
@@ -117,6 +128,17 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 		return resp;
 	}
 
+	@Override
+	public void realizarReembolso(long id) {
+		Consumo consumo = consumoRepository.findById(id);
+
+		if(consumo == null ){
+			throw new NullPointerException("Consumo não encontrado!");
+		}
+		consumo.setReembolso(LocalDateTime.now());
+		consumoRepository.save(consumo);
+	}
+
 
 	public ConsumoModel toDto(Consumo entity) {
         ConsumoModel dto = new ConsumoModel();
@@ -129,6 +151,7 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
         dto.setNumeroDaNotaFiscal(entity.getNumNotaFiscal());
         dto.setDataRegistroDaNota(entity.getDataRegistro());
         dto.setDataDeRegistro(entity.getDataDeCriacao());
+        dto.setReembolso(entity.getReembolso());
         return dto;
     }
 }

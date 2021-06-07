@@ -29,7 +29,7 @@ public class EmpresaControllerImpl implements EmpresaController{
 
 	@Override
 	public List<EmpresaModel> listaEmpresas() {
-		return empresaService.findAll().stream().map(this::toDto).collect(Collectors.toList());
+		return empresaService.findAll();
 	}
 
 	@Override
@@ -79,19 +79,6 @@ public class EmpresaControllerImpl implements EmpresaController{
 	@Override
 	public void deletarEmpresa(@PathVariable(value = "id") Long id) {
 		empresaService.delete(id);
-	}
-
-	public EmpresaModel toDto(Empresa entity) {
-		EmpresaModel dto = new EmpresaModel();
-		dto.setId(entity.getId());
-		dto.setNome(entity.getNome());
-		dto.setCNPJ(entity.getCNPJ());
-		dto.setEmail(entity.getEmail());
-		dto.setTelefone(entity.getTelefone());
-		dto.setComplemento(entity.getComplemento());
-		dto.setNumero(entity.getNumero());
-		dto.setCep(entity.getCep());
-		return dto;
 	}
 
 }

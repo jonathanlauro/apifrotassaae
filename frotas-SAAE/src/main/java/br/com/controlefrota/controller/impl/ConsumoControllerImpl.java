@@ -34,7 +34,7 @@ public class ConsumoControllerImpl implements ConsumoController{
 
 	@Override
 	public List<ConsumoModel> listaConsumos() {
-		return consumoService.findAll().stream().map(this::toDto).collect(Collectors.toList());
+		return consumoService.ListaDeConsumos();
 	}
 
 	@Override
@@ -75,27 +75,22 @@ public class ConsumoControllerImpl implements ConsumoController{
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! "+e);
 		}
 	}
-	
+
+	@Override
+	public ResponseEntity<?> reembolsoDeConsumo(Long id) {
+		try{
+			consumoService.realizarReembolso(id);
+			return ResponseEntity.status(HttpStatus.OK).body("Reembolso com sucesso!");
+		}catch( Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! "+e);
+		}
+	}
+
 	@Override
 	public List<ConsumoModel> listaUnicoConsumoPorCombustivel(String nome) {
 		
 		return consumoService.findbyCombustivel(nome);
 		
 	}
-	
-	public ConsumoModel toDto(Consumo entity) {
-        ConsumoModel dto = new ConsumoModel();
-        dto.setIdConsumo(entity.getIdConsumo());
-        dto.setCondutor(entity.getCondutor().getNome());
-        dto.setVeiculo(entity.getVeiculo().getModelo());
-        dto.setPlaca(entity.getVeiculo().getPlaca());
-        dto.setCombustivel(entity.getCombustivel().getNome());
-        dto.setLitros(entity.getLitros());
-        dto.setValor(entity.getValor());
-        dto.setNumeroDaNotaFiscal(entity.getNumNotaFiscal());
-        dto.setDataRegistroDaNota(entity.getDataRegistro());
-        dto.setDataDeRegistro(entity.getDataDeCriacao());
-        return dto;
-    }
 
 }

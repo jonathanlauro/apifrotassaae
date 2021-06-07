@@ -2,9 +2,11 @@ package br.com.controlefrota.domain.model;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public class TrabalhoModel {
+public class TrabalhoModel implements Comparable<TrabalhoModel> {
 
     @ApiModelProperty(value = "Id do trabalho")
     private Long idTrabalho;
@@ -32,6 +34,8 @@ public class TrabalhoModel {
 
     @ApiModelProperty(value = "Data fim da vigencia do trabalho")
     private LocalDate dataFim;
+
+    private LocalDate dataDeCriacao;
 
     public Long getIdTrabalho() {
         return idTrabalho;
@@ -103,5 +107,22 @@ public class TrabalhoModel {
 
     public void setApelidoVeiculo(String apelidoVeiculo) {
         this.apelidoVeiculo = apelidoVeiculo;
+    }
+
+    public LocalDate getDataDeCriacao() {
+        return dataDeCriacao;
+    }
+
+    public void setDataDeCriacao(LocalDate dataDeCriacao) {
+        this.dataDeCriacao = dataDeCriacao;
+    }
+
+    @Override
+    public int compareTo(TrabalhoModel trabalho) {
+        if(this.dataDeCriacao.isAfter(trabalho.getDataDeCriacao())){
+            return -1;
+        }else{
+            return 1;
+        }
     }
 }

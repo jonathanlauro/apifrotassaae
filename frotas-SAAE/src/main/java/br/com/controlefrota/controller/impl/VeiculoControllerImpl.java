@@ -30,7 +30,7 @@ public class VeiculoControllerImpl implements VeiculoController {
 
 	@Override
 	public List<VeiculoModel> listarVeiculos() {
-		return veiculoService.findAll().stream().map(this::toDto).collect(Collectors.toList());
+		return veiculoService.findAll();
 	}
 
 	@Override

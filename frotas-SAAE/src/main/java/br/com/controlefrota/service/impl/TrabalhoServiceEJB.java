@@ -3,7 +3,9 @@ package br.com.controlefrota.service.impl;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.com.controlefrota.domain.model.TrabalhoModel;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -120,12 +122,27 @@ public class TrabalhoServiceEJB implements CadastroDeTrablho {
 	}
 
 	@Override
-	public List<Trabalho> findAll() {
-		List<Trabalho> listaDeTrabalhos = trabalhoRepository.findByDeleted(null);
+	public List<TrabalhoModel> findAll() {
+		List<TrabalhoModel> listaDeTrabalhos = trabalhoRepository.findByDeleted(null).stream().map(this::toDto).collect(Collectors.toList());
 
 		Collections.sort(listaDeTrabalhos);
 
 		return listaDeTrabalhos;
+	}
+
+	public TrabalhoModel toDto(Trabalho entity) {
+		TrabalhoModel dto = new TrabalhoModel();
+		dto.setIdTrabalho(entity.getIdTrabalho());
+		dto.setVeiculo(entity.getVeiculo().getModelo());
+		dto.setCondutor(entity.getCondutor().getNome());
+		dto.setDataInicio(entity.getDataInicioVigencia());
+		dto.setIdConduto(entity.getCondutor().getId());
+		dto.setPlaca(entity.getVeiculo().getPlaca());
+		dto.setDataFim(entity.getDataFimVigencia());
+		dto.setApelidoVeiculo(entity.getVeiculo().getApelido());
+		dto.setStatusTrabalho(entity.getStatusTrabalho());
+		dto.setDataDeCriacao(entity.getDataDeCriacao());
+		return dto;
 	}
 
 }

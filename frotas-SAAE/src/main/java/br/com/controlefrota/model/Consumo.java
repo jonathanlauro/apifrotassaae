@@ -2,6 +2,7 @@ package br.com.controlefrota.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,6 +44,7 @@ public class Consumo implements Serializable,Comparable<Consumo> {
 	private Float litros;
 	private Float valor;
 	private String numNotaFiscal;
+	private LocalDateTime reembolso;
 	private LocalDate deleted;
 	
 	private LocalDate dataDeCriacao;
@@ -113,6 +115,14 @@ public class Consumo implements Serializable,Comparable<Consumo> {
 	}
 	public void setDeleted(LocalDate deleted) {
 		this.deleted = deleted;
+	}
+
+	public LocalDateTime getReembolso() {
+		return reembolso;
+	}
+
+	public void setReembolso(LocalDateTime reembolso) {
+		this.reembolso = reembolso;
 	}
 
 	@Override

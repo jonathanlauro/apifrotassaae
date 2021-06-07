@@ -2,6 +2,7 @@ package br.com.controlefrota.service;
 
 import java.util.List;
 
+import br.com.controlefrota.domain.model.VeiculoModel;
 import br.com.controlefrota.model.Veiculo;
 import org.hibernate.service.spi.ServiceException;
 
@@ -11,7 +12,7 @@ public interface CadastroDeVeiculo {
 	
 	public void deletar(long id);
 	
-	public List<Veiculo> findAll();
+	public List<VeiculoModel> findAll();
 	
 	public Veiculo findById(long id);
 	

@@ -12,8 +12,12 @@ public interface CadastroDeConsumo {
 	public void deletar(long id);
 	
 	public List<Consumo> findAll();
+
+	public List<ConsumoModel> ListaDeConsumos();
 	
 	public List<ConsumoModel> findbyCombustivel(String nome);
 
 	public List<Consumo> findByNomeCondutor(String nome);
+
+	public void realizarReembolso(long id);
 }

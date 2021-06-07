@@ -1,8 +1,9 @@
 package br.com.controlefrota.domain.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public class ConsumoModel {
+public class ConsumoModel implements Comparable<ConsumoModel>{
 
 	private Long idConsumo;
 	private String condutor;
@@ -13,6 +14,7 @@ public class ConsumoModel {
 	private Float litros;
 	private Float valor;
 	private String numeroDaNotaFiscal;
+	private LocalDateTime reembolso;
 	private LocalDate dataDeRegistro; 
 	
 	public Long getIdConsumo() {
@@ -75,7 +77,22 @@ public class ConsumoModel {
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
-	
-	
-	
+
+	public LocalDateTime getReembolso() {
+		return reembolso;
+	}
+
+	public void setReembolso(LocalDateTime reembolso) {
+		this.reembolso = reembolso;
+	}
+
+	@Override
+	public int compareTo(ConsumoModel consumo) {
+		if(this.getDataDeRegistro().isAfter(consumo.getDataDeRegistro())){
+			return -1;
+		}else{
+
+			return 1;
+		}
+	}
 }

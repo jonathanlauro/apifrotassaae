@@ -1,5 +1,6 @@
 package br.com.controlefrota.service.impl;
 
+import br.com.controlefrota.domain.model.EmpresaModel;
 import br.com.controlefrota.model.Empresa;
 import br.com.controlefrota.repository.EmpresaRepository;
 import br.com.controlefrota.service.CadastroDeEmpresa;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EmpresaServiceEJB implements CadastroDeEmpresa {
@@ -52,8 +54,8 @@ public class EmpresaServiceEJB implements CadastroDeEmpresa {
 	}
 
 	@Override
-	public List<Empresa> findAll() {
-		return empresaRepository.findByDeleted(null);
+	public List<EmpresaModel> findAll() {
+		return empresaRepository.findByDeleted(null).stream().map(this::toDto).collect(Collectors.toList());
 	}
 
 	@Override
@@ -90,6 +92,19 @@ public class EmpresaServiceEJB implements CadastroDeEmpresa {
 		}
 
 		return empresa;
+	}
+
+	public EmpresaModel toDto(Empresa entity) {
+		EmpresaModel dto = new EmpresaModel();
+		dto.setId(entity.getId());
+		dto.setNome(entity.getNome());
+		dto.setCNPJ(entity.getCNPJ());
+		dto.setEmail(entity.getEmail());
+		dto.setTelefone(entity.getTelefone());
+		dto.setComplemento(entity.getComplemento());
+		dto.setNumero(entity.getNumero());
+		dto.setCep(entity.getCep());
+		return dto;
 	}
 
 }

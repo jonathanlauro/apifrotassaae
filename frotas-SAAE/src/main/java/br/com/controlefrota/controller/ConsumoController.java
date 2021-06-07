@@ -96,4 +96,14 @@ public interface ConsumoController {
 		@ApiResponse(code = 500, message = "Erro interno no sistema", response = ErroModelo.class),
 	})
 	public ResponseEntity<?> deletarconsumo(@PathVariable Long id);
+
+	@GetMapping("/{id}/reembolso")
+	@ApiOperation(value = "Deletar um consumo")
+	@ApiResponses( value = {
+			@ApiResponse(code = 200, message = "Reembolso Realizado com sucesso!", response = ConsumoModel.class),
+			@ApiResponse(code = 401, message = "Toke Inválido", response = ErroModelo.class),
+			@ApiResponse(code = 404, message = "Consumo não encontrado", response = ErroModelo.class),
+			@ApiResponse(code = 500, message = "Erro interno no sistema", response = ErroModelo.class),
+	})
+	public ResponseEntity<?> reembolsoDeConsumo(@PathVariable Long id);
 }

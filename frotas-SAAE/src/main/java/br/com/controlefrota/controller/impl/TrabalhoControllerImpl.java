@@ -27,7 +27,7 @@ public class TrabalhoControllerImpl implements TrabalhoController {
 
 	@Override
 	public List<TrabalhoModel> listatrabalhos() {
-		return trabalhoService.findAll().stream().map(this::toDto).collect(Collectors.toList());
+		return trabalhoService.findAll();
 	}
 
 	@Override
@@ -84,17 +84,5 @@ public class TrabalhoControllerImpl implements TrabalhoController {
 		}
 	}
 	
-	public TrabalhoModel toDto(Trabalho entity) {
-        TrabalhoModel dto = new TrabalhoModel();
-        dto.setIdTrabalho(entity.getIdTrabalho());
-        dto.setVeiculo(entity.getVeiculo().getModelo());
-        dto.setCondutor(entity.getCondutor().getNome());
-        dto.setDataInicio(entity.getDataInicioVigencia());
-        dto.setIdConduto(entity.getCondutor().getId());
-        dto.setPlaca(entity.getVeiculo().getPlaca());
-        dto.setDataFim(entity.getDataFimVigencia());
-        dto.setApelidoVeiculo(entity.getVeiculo().getApelido());
-        dto.setStatusTrabalho(entity.getStatusTrabalho());
-        return dto;
-    }
+
 }
