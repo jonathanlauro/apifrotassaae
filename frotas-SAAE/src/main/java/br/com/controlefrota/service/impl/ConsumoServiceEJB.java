@@ -115,6 +115,32 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 	}
 
 	@Override
+	public List<Consumo> findbyCombustivelCompleta(String nome) {
+		Combustivel combustivel = combustivelRepository.findBynome(nome);
+
+		if(combustivel == null) {
+			throw new ServiceException("Não existe esse combustivel");
+		}
+
+		List<Consumo> consumos = consumoRepository.findByCombustivel(combustivel);
+
+		List<Consumo> consumos2 = new ArrayList<>();
+
+		for (Consumo consumoModel : consumos) {
+			if(consumoModel.getDeleted() == null) {
+				consumos2.add(consumoModel);
+			}
+		}
+		List<Consumo> listaDeConsumos = consumos2;
+
+		if(listaDeConsumos == null) {
+			throw new ServiceException("Não existe consumos com esse combustivel");
+		}
+
+		return listaDeConsumos;
+	}
+
+	@Override
 	public List<Consumo> findByNomeCondutor(String nome) {
 		List<Condutor> condut = condutorRepository.findByNome(nome);
 		Condutor con = new Condutor();

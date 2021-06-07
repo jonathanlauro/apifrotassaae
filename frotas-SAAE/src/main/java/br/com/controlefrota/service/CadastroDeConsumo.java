@@ -17,6 +17,8 @@ public interface CadastroDeConsumo {
 	
 	public List<ConsumoModel> findbyCombustivel(String nome);
 
+	public List<Consumo> findbyCombustivelCompleta(String nome);
+
 	public List<Consumo> findByNomeCondutor(String nome);
 
 	public void realizarReembolso(long id);

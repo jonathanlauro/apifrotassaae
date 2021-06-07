@@ -1,8 +1,9 @@
 package br.com.controlefrota.service.impl;
 
+import br.com.controlefrota.domain.model.ConsumoModel;
 import br.com.controlefrota.model.BuscaDeConsumo;
+import br.com.controlefrota.model.Combustivel;
 import br.com.controlefrota.model.Consumo;
-import br.com.controlefrota.repository.ConsumoRepository;
 import br.com.controlefrota.service.FiltroConsumo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,13 +53,18 @@ public class FiltroConsumoServiceEJB implements FiltroConsumo {
             return buscaComNomeEData;
         }
 
-        if(busca.getCombustivelNome() != null){
+        if(busca.getCombustivelNome() != null && !busca.getCombustivelNome().isEmpty()){
+            int a = 0, l;
             List<Consumo> buscaPorCombustivel = new ArrayList<>();
-            for (Consumo con : listaFiltrada) {
-                if(con.getCombustivel().getNome().equals(busca.getCombustivelNome())){
-                    buscaPorCombustivel.add(con);
+
+            while(a < busca.getCombustivelNome().size()){
+                List<Consumo> resultadoBusca = consumoService.findbyCombustivelCompleta(busca.getCombustivelNome().get(a));
+                for (l = 0; l < resultadoBusca.size(); l++) {
+                    buscaPorCombustivel.add(resultadoBusca.get(l));
                 }
+                a++;
             }
+
             return buscaPorCombustivel;
         }
         
