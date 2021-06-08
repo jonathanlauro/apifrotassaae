@@ -17,7 +17,7 @@ public class JavaMail {
         props.put("email.host","smtp.gmail.com");
         props.put("email.smtp.auth","true");
         props.put("email.smtp.port","465");
-        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.port", "587");
         props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("email.smtp.user",remetente);
