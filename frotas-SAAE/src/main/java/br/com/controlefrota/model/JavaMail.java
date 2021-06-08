@@ -16,7 +16,7 @@ public class JavaMail {
         props.put("email.smtp.user",remetente);
         props.put("email.smtp.protocol","smtp");
         props.put("email.smtp.host","smtp.gmail.com");
-        props.put("email.smtp.port","25");
+        props.put("email.smtp.port","587");
         props.put("email.smtp.auth","true");
         props.put("email.smtp.starttls.enable","true");
 
