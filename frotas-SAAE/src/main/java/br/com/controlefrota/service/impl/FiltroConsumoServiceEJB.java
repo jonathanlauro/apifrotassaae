@@ -30,7 +30,7 @@ public class FiltroConsumoServiceEJB implements FiltroConsumo {
             listaFiltrada = consumoService.findAll();
         }
 
-        if(busca.getNome() != null && !busca.getNome().isEmpty() ){
+        if(busca.getNome() != null || !busca.getNome().isEmpty() ){
 
             while(i < busca.getNome().size()){
                 List<Consumo> result= consumoService.findByNomeCondutor(busca.getNome().get(i));
@@ -42,7 +42,7 @@ public class FiltroConsumoServiceEJB implements FiltroConsumo {
             }
         }
 
-        if(busca.getDataDeInicio() != null && busca.getDataFim() != null){
+        if(busca.getDataDeInicio() != null || busca.getDataFim() != null){
             List<Consumo> buscaComNomeEData = new ArrayList<>();
 
             for (Consumo con : listaFiltrada) {
@@ -53,7 +53,7 @@ public class FiltroConsumoServiceEJB implements FiltroConsumo {
             return buscaComNomeEData;
         }
 
-        if(busca.getCombustivelNome() != null && !busca.getCombustivelNome().isEmpty()){
+        if(busca.getCombustivelNome() != null || !busca.getCombustivelNome().isEmpty()){
             int a = 0, l;
             List<Consumo> buscaPorCombustivel = new ArrayList<>();
 
@@ -67,7 +67,7 @@ public class FiltroConsumoServiceEJB implements FiltroConsumo {
 
             return buscaPorCombustivel;
         }
-        if(busca.getPlacaVeiculo() != null && !busca.getPlacaVeiculo().isEmpty()){
+        if(busca.getPlacaVeiculo() != null || !busca.getPlacaVeiculo().isEmpty()){
             List<Consumo> consumosVeiculo = new ArrayList<>();
             int x = 0,d;
 
