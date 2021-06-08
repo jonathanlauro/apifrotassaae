@@ -5,6 +5,8 @@ import java.util.List;
 import br.com.controlefrota.domain.model.ConsumoModel;
 import br.com.controlefrota.model.Consumo;
 
+import javax.mail.MessagingException;
+
 public interface CadastroDeConsumo {
 
 	public void criar(Consumo consumo);
@@ -23,5 +25,5 @@ public interface CadastroDeConsumo {
 
 	public List<Consumo> findByVeiculo(String placa);
 
-	public void realizarReembolso(long id);
+	public void realizarReembolso(long id) throws MessagingException;
 }

@@ -7,20 +7,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.com.controlefrota.model.*;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.controlefrota.domain.model.ConsumoModel;
-import br.com.controlefrota.model.Combustivel;
-import br.com.controlefrota.model.Condutor;
-import br.com.controlefrota.model.Consumo;
-import br.com.controlefrota.model.Veiculo;
 import br.com.controlefrota.repository.CombustivelRepository;
 import br.com.controlefrota.repository.CondutorRepository;
 import br.com.controlefrota.repository.ConsumoRepository;
 import br.com.controlefrota.repository.VeiculoRepository;
 import br.com.controlefrota.service.CadastroDeConsumo;
+
+import javax.mail.MessagingException;
 
 @Service
 public class ConsumoServiceEJB implements CadastroDeConsumo {
@@ -171,13 +170,18 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 	}
 
 	@Override
-	public void realizarReembolso(long id) {
+	public void realizarReembolso(long id) throws MessagingException {
 		Consumo consumo = consumoRepository.findById(id);
 
 		if(consumo == null ){
 			throw new NullPointerException("Consumo não encontrado!");
 		}
 		consumo.setReembolso(LocalDateTime.now());
+
+		JavaMail email = new JavaMail();
+
+		email.enviarEmail("jonathanlauro.dev@gmail.com","Reembolso de Nota Fiscal de abastecimento", "Voce foi reembolsado na data: " + consumo.getReembolso());
+
 		consumoRepository.save(consumo);
 	}
 
