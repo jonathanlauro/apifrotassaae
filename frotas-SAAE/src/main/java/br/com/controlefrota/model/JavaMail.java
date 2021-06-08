@@ -37,7 +37,7 @@ public class JavaMail {
             msg.setSubject(assunto);
             msg.setText(corpo);
 
-            Transport t = session.getTransport();
+            Transport t = session.getTransport("SMTP");
             t.connect("smtp.gmail.com","frotassaaesistem@gmail.com","!@#$1234");
             t.sendMessage(msg, msg.getAllRecipients());
             t.close();
