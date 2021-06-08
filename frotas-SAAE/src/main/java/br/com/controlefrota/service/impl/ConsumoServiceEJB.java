@@ -171,6 +171,7 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
         dto.setIdConsumo(entity.getIdConsumo());
         dto.setCondutor(entity.getCondutor().getNome());
         dto.setVeiculo(entity.getVeiculo().getModelo());
+        dto.setPlaca(entity.getVeiculo().getPlaca());
         dto.setCombustivel(entity.getCombustivel().getNome());
         dto.setLitros(entity.getLitros());
         dto.setValor(entity.getValor());
