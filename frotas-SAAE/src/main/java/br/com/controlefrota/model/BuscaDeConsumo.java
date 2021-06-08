@@ -12,7 +12,7 @@ public class BuscaDeConsumo {
     private List<String> combustivelNome;
 
 //    private String cnpjEmpresa;
-//    private String placaVeiculo;
+    private List<String> placaVeiculo;
 
     public List<String> getNome() {
         return nome;
@@ -44,5 +44,13 @@ public class BuscaDeConsumo {
 
     public void setCombustivelNome(List<String> combustivelNome) {
         this.combustivelNome = combustivelNome;
+    }
+
+    public List<String> getPlacaVeiculo() {
+        return placaVeiculo;
+    }
+
+    public void setPlacaVeiculo(List<String> placaVeiculo) {
+        this.placaVeiculo = placaVeiculo;
     }
 }

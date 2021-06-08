@@ -67,6 +67,20 @@ public class FiltroConsumoServiceEJB implements FiltroConsumo {
 
             return buscaPorCombustivel;
         }
+        if(busca.getPlacaVeiculo() != null && !busca.getPlacaVeiculo().isEmpty()){
+            List<Consumo> consumosVeiculo = new ArrayList<>();
+            int x = 0,d;
+
+            while(x < busca.getPlacaVeiculo().size()){
+
+                List<Consumo> resultadoBuscaVeiculos = consumoService.findByVeiculo(busca.getPlacaVeiculo().get(x));
+                for(d = 0; d < resultadoBuscaVeiculos.size(); d++){
+                    consumosVeiculo.add(resultadoBuscaVeiculos.get(d));
+                }
+                x++;
+            }
+            return consumosVeiculo;
+        }
         
         return listaFiltrada;
     }

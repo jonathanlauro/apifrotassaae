@@ -1,5 +1,11 @@
 package br.com.controlefrota.domain.model;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel(
+        value = "empresa",
+        description = "Empresas que prestam serviço de locação de veículos."
+)
 public class EmpresaModel {
 
     private Long id;

@@ -21,5 +21,7 @@ public interface CadastroDeConsumo {
 
 	public List<Consumo> findByNomeCondutor(String nome);
 
+	public List<Consumo> findByVeiculo(String placa);
+
 	public void realizarReembolso(long id);
 }

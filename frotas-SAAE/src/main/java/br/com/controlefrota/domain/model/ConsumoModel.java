@@ -1,8 +1,14 @@
 package br.com.controlefrota.domain.model;
 
+import io.swagger.annotations.ApiModel;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@ApiModel(
+		value = "consumos",
+		description = "Consumos de veiculos"
+)
 public class ConsumoModel implements Comparable<ConsumoModel>{
 
 	private Long idConsumo;

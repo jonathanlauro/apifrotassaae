@@ -155,6 +155,22 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 	}
 
 	@Override
+	public List<Consumo> findByVeiculo(String placa) {
+		Veiculo veiculo = veiculoRepository.findByPlaca(placa);
+		if(veiculo == null){
+			throw new NullPointerException("Veículo não encontrado! ");
+		}
+		List<Consumo> consumoBusca = consumoRepository.findByVeiculo(veiculo);
+		List<Consumo> consumosVeiculos = new ArrayList<>();
+		for (Consumo con:consumoBusca){
+			if(con.getDeleted() == null){
+				consumosVeiculos.add(con);
+			}
+		}
+		return consumosVeiculos;
+	}
+
+	@Override
 	public void realizarReembolso(long id) {
 		Consumo consumo = consumoRepository.findById(id);
 

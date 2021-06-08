@@ -1,8 +1,13 @@
 package br.com.controlefrota.domain.model;
 
 import br.com.controlefrota.model.Veiculo;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(
+		value = "veiculo",
+		description = "Veiculos locados"
+)
 public class VeiculoModel {
 
 	@ApiModelProperty(value = "Id do veiculo")

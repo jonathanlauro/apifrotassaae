@@ -1,11 +1,16 @@
 package br.com.controlefrota.domain.model;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@ApiModel(
+        value = "trabalho",
+        description = "Trabalhos, indicam a retirada do veículo para trabalho."
+)
 public class TrabalhoModel implements Comparable<TrabalhoModel> {
 
     @ApiModelProperty(value = "Id do trabalho")
