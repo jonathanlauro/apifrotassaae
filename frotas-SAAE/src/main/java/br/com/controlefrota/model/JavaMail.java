@@ -9,8 +9,8 @@ public class JavaMail {
 
 
     public void enviarEmail(String destinatario, String assunto, String corpo) throws MessagingException {
-        String remetente = "speedFoodsoficial@gmail.com";
-        String senha = "@Speed_3001";
+        String remetente = "frotassaaesistem@gmail.com";
+        String senha = "!@#$1234";
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -35,14 +35,14 @@ public class JavaMail {
             msg.setSubject(assunto);
             msg.setText(corpo);
 
-//            Transport t = session.getTransport("smtp");
-//            t.connect("smtp.gmail.com","frotassaaesistem@gmail.com","!@#$1234");
-//            t.sendMessage(msg, msg.getAllRecipients());
-//            t.close();
+            Transport t = session.getTransport("smtp");
+            t.connect("smtp.gmail.com","frotassaaesistem@gmail.com","!@#$1234");
+            t.sendMessage(msg, msg.getAllRecipients());
+            t.close();
 
 
 
-            Transport.send(msg);
+//            Transport.send(msg);
         }catch(MessagingException e){
             e.printStackTrace();
         }
