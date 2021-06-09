@@ -9,8 +9,8 @@ public class JavaMail {
 
 
     public void enviarEmail(String destinatario, String assunto, String corpo) throws MessagingException {
-        String remetente = "frotassaaesistem@gmail.com";
-        String senha = "!@#$1234";
+        String remetente = "speedFoodsoficial@gmail.com";
+        String senha = "@Speed_3001";
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
