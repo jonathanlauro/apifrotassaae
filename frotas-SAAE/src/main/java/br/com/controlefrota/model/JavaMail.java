@@ -14,7 +14,7 @@ public class JavaMail {
 
         Properties props = new Properties();
         props.put("email.smtp.protocol","smtp");
-        props.put("email.host","smtp.gmail.com");
+        props.put("email.host","ssl://smtp.gmail.com");
         props.put("email.smtp.auth","true");
         props.put("email.smtp.port","465");
         props.put("email.smtp.secure","ssl");
