@@ -13,7 +13,7 @@ public class JavaMail {
         String senha = "!@#$1234";
 
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smpt.starttls.enable",true);
