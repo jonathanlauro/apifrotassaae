@@ -180,7 +180,7 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 
 		JavaMail email = new JavaMail();
 
-		email.enviarEmail("jonathanlauro.dev@gmail.com","Reembolso de Nota Fiscal de abastecimento", "Voce foi reembolsado na data: " + consumo.getReembolso());
+//		email.enviarEmail("jonathanlauro.dev@gmail.com","Reembolso de Nota Fiscal de abastecimento", "Voce foi reembolsado na data: " + consumo.getReembolso());
 
 		consumoRepository.save(consumo);
 	}
