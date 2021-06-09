@@ -17,6 +17,7 @@ public class JavaMail {
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smpt.starttls.enable",true);
+        props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.auth", true);
