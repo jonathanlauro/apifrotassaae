@@ -20,6 +20,9 @@ public class JavaMail {
         props.put("email.smtp.secure","ssl");
         props.put("email.smtp.user",remetente);
         props.put("email.smtp.starttls.enable","true");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.fallback", "false");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
         Session session = Session.getInstance(props, new Authenticator() {
             @Override
