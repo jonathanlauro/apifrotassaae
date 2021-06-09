@@ -1,5 +1,7 @@
 package br.com.controlefrota.model;
 
+import com.sun.mail.pop3.POP3SSLStore;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -7,28 +9,33 @@ import java.util.Properties;
 
 public class JavaMail {
 
+    private Session session = null;
+    private Store store = null;
 
     public void enviarEmail(String destinatario, String assunto, String corpo) throws MessagingException {
         String remetente = "frotassaaesistem@gmail.com";
         String senha = "!@#$1234";
 
         Properties props = new Properties();
-        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-        props.put("mail.smtp.socketFactory.port", "587");
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smpt.starttls.enable",true);
-        props.put("mail.smtp.ssl.enable", true);
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.socketFactory.fallback", false);
-        props.put("mail.smtp.auth", true);
-        props.put("mail.smtp.port", "587");
+        props.put("mail.pop3.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+        props.put("mail.pop3.socketFactory.fallback", "false");
+        props.put("mail.pop3.port",  "995");
+        props.put("mail.pop3.socketFactory.port", "995");
 
-        Session session = Session.getInstance(props, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(remetente,senha);
+        URLName url = new URLName("pop3", "pop.gmail.com", 995, "",
+                remetente, senha);
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication()
+            {
+                return new PasswordAuthentication("frotassaaesistem@gmail.com", "!@#$1234");
             }
         });
+        session.setDebug(true);
+        store = new POP3SSLStore(session, url);
+        store.connect();
+
+
         try{
 
             MimeMessage msg = new MimeMessage(session);
@@ -37,14 +44,14 @@ public class JavaMail {
             msg.setSubject(assunto);
             msg.setText(corpo);
 
-            Transport t = session.getTransport("smtp");
-            t.connect("smtp.gmail.com",587,"frotassaaesistem@gmail.com","!@#$1234");
-            t.sendMessage(msg, msg.getAllRecipients());
-            t.close();
+//            Transport t = session.getTransport("smtp");
+//            t.connect("smtp.gmail.com",587,"frotassaaesistem@gmail.com","!@#$1234");
+//            t.sendMessage(msg, msg.getAllRecipients());
+//            t.close();
 
 
 
-//            Transport.send(msg);
+            Transport.send(msg);
         }catch(MessagingException e){
             e.printStackTrace();
         }
