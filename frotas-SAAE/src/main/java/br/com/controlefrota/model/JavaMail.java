@@ -17,6 +17,9 @@ public class JavaMail {
         String senha = "!@#$1234";
 
         Properties props = new Properties();
+        props.put("mail.store.protocol", "pop3s");
+        props.put("mail.pop3.host", "pop.gmail.com");
+        props.put("mail.pop3.user", "frotassaaesistemgmail.com");
         props.put("mail.pop3.socketFactory.class","javax.net.ssl.SSLSocketFactory");
         props.put("mail.pop3.socketFactory.fallback", "false");
         props.put("mail.pop3.port",  "995");
