@@ -170,7 +170,7 @@ public class ConsumoServiceEJB implements CadastroDeConsumo {
 	}
 
 	@Override
-	public void realizarReembolso(long id) throws MessagingException {
+	public void realizarReembolso(long id) throws Exception {
 		Consumo consumo = consumoRepository.findById(id);
 
 		if(consumo == null ){

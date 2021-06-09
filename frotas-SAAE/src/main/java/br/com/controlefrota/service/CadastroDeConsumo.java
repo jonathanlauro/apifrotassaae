@@ -25,5 +25,5 @@ public interface CadastroDeConsumo {
 
 	public List<Consumo> findByVeiculo(String placa);
 
-	public void realizarReembolso(long id) throws MessagingException;
+	public void realizarReembolso(long id) throws Exception;
 }

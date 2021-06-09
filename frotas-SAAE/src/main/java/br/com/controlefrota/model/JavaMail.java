@@ -12,51 +12,38 @@ public class JavaMail {
     private Session session = null;
     private Store store = null;
 
-    public void enviarEmail(String destinatario, String assunto, String corpo) throws MessagingException {
+    public void enviarEmail(String destinatario, String assunto, String corpo) throws Exception {
+        Properties props = new Properties();
+
+        props.put("mail.smtp.auth","true");
+        props.put("mail.smtp.starttls.enable","true");
+        props.put("mail.smtp.host","smtp.gmail.com");
+        props.put("mail.smtp.port","587");
+
         String remetente = "frotassaaesistem@gmail.com";
         String senha = "!@#$1234";
 
-        Properties props = new Properties();
-        props.put("mail.store.protocol", "pop3s");
-        props.put("mail.pop3.host", "pop.gmail.com");
-        props.put("mail.pop3.user", "frotassaaesistemgmail.com");
-        props.put("mail.pop3.socketFactory.class","javax.net.ssl.SSLSocketFactory");
-        props.put("mail.pop3.socketFactory.fallback", "false");
-        props.put("mail.pop3.port",  "995");
-        props.put("mail.pop3.socketFactory.port", "995");
-
-        URLName url = new URLName("pop3", "pop.gmail.com", 995, "",
-                remetente, senha);
-
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication()
-            {
-                return new PasswordAuthentication("frotassaaesistem@gmail.com", "!@#$1234");
+        Session session = Session.getInstance(props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(remetente,senha);
             }
         });
-        session.setDebug(true);
-        store = new POP3SSLStore(session, url);
-        store.connect();
 
-
-        try{
-
-            MimeMessage msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(remetente));
-            msg.setRecipients(Message.RecipientType.TO, destinatario);
-            msg.setSubject(assunto);
-            msg.setText(corpo);
-
-//            Transport t = session.getTransport("smtp");
-//            t.connect("smtp.gmail.com",587,"frotassaaesistem@gmail.com","!@#$1234");
-//            t.sendMessage(msg, msg.getAllRecipients());
-//            t.close();
-
-
-
-            Transport.send(msg);
-        }catch(MessagingException e){
+        Message message = prepareMessage(session, remetente, destinatario);
+        Transport.send(message);
+    }
+    private static Message prepareMessage(Session session,String myAccountEmail, String recipient){
+        Message message = new MimeMessage(session);
+        try {
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.setRecipient(Message.RecipientType.TO,new InternetAddress(recipient));
+            message.setSubject("Reembolso aqui!");
+            message.setText("voce foi reembolsado");
+            return message;
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 }
