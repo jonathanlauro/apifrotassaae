@@ -42,6 +42,7 @@ public class Consumo implements Serializable,Comparable<Consumo> {
 	private LocalDate dataRegistro;
 	private Float km;
 	private Float litros;
+	private Boolean temReembolso;
 	private Float valor;
 	private String numNotaFiscal;
 	private LocalDateTime reembolso;
@@ -115,6 +116,14 @@ public class Consumo implements Serializable,Comparable<Consumo> {
 	}
 	public void setDeleted(LocalDate deleted) {
 		this.deleted = deleted;
+	}
+
+	public Boolean getTemReembolso() {
+		return temReembolso;
+	}
+
+	public void setTemReembolso(Boolean temReembolso) {
+		this.temReembolso = temReembolso;
 	}
 
 	public LocalDateTime getReembolso() {

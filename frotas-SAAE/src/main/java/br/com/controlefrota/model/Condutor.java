@@ -31,6 +31,9 @@ public class Condutor implements Serializable{
 	private String cpf;
 	@NotNull
 	private String status = "Disponivel";
+
+	private String email;
+
 	@NotNull
 	private LocalDate deleted;
 	
@@ -74,6 +77,14 @@ public class Condutor implements Serializable{
 	}
 	public void setDataDeCriacao(LocalDate dataDeCriacao) {
 		this.dataDeCriacao = dataDeCriacao;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public LocalDate getDeleted() {

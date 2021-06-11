@@ -16,6 +16,7 @@ public class ConsumoModel implements Comparable<ConsumoModel>{
 	private String veiculo;
 	private String combustivel;
 	private String placa;
+	private Boolean temReembolso;
 	private LocalDate dataRegistroDaNota;
 	private Float litros;
 	private Float valor;
@@ -82,6 +83,14 @@ public class ConsumoModel implements Comparable<ConsumoModel>{
 	}
 	public void setPlaca(String placa) {
 		this.placa = placa;
+	}
+
+	public Boolean getTemReembolso() {
+		return temReembolso;
+	}
+
+	public void setTemReembolso(Boolean temReembolso) {
+		this.temReembolso = temReembolso;
 	}
 
 	public LocalDateTime getReembolso() {
